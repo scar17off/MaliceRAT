@@ -1,4 +1,5 @@
 # MaliceRAT - Remote Access Trojan
+![MaliceRAT](https://i.imgur.com/xusW6mz.png)
 
 ## Overview
 MaliceRAT is a powerful remote access tool designed for covert surveillance and remote control. This tool is intended for educational and research purposes only, and should not be used for illegal activities.
