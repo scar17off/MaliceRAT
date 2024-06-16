@@ -10,7 +10,7 @@ namespace MaliceRAT
 {
     public partial class Main : Form
     {
-        Server server = new Server();
+        readonly Server server = new Server();
 
         public Main()
         {
@@ -60,6 +60,7 @@ namespace MaliceRAT
                 {
                     errorMessage += $"\nLine {error.Line}, Column {error.Column}: {error.ErrorText}";
                 }
+                Console.WriteLine(errorMessage);
                 MessageBox.Show(errorMessage);
                 return null;
             }

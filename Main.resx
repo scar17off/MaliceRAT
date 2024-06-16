@@ -27511,6 +27511,17 @@
         AABJRU5ErkJggg==
 </value>
   </data>
+  <data name="gunaTextBox1.Text" xml:space="preserve">
+    <value>This is THE FIRST RELEASE of MaliceRAT. 
+
+MaliceRAT is a REMOTE ACCESS TOOL (RAT) that enables attackers to gain unauthorized access to a victim's computer. It can be used to steal sensitive information, install malware, and carry out malicious activities. 
+
+It is IMPORTANT to TAKE PRECAUTIONS to PROTECT yourself from RATs like MaliceRAT. This includes keeping your software up to date, using strong passwords, and being cautious of suspicious emails and websites. 
+
+If you suspect that your computer has been infected with MaliceRAT or any other RAT, it is IMPORTANT to SEEK HELP from a cybersecurity professional to remove the malware and secure your system. 
+
+Stay SAFE online and BE VIGILANT against cyber threats like MaliceRAT.</value>
+  </data>
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
