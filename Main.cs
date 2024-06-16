@@ -49,7 +49,17 @@ namespace MaliceRAT
                 GenerateExecutable = true,
                 OutputAssembly = Path.Combine(Application.StartupPath, "client.exe"),
                 CompilerOptions = "/optimize",
-                ReferencedAssemblies = { "System.dll", "System.Net.Sockets.dll" }
+                ReferencedAssemblies = {
+                    "System.dll",
+                    "System.Core.dll",
+                    "System.Net.Sockets.dll",
+                    "Newtonsoft.Json.dll",
+                    "mscorlib.dll",
+                    "System.Memory.dll",
+                    "Microsoft.CSharp.dll",
+                    "System.Runtime.dll",
+                    "System.Runtime.CompilerServices.Unsafe.dll"
+                }
             };
 
             CompilerResults results = provider.CompileAssemblyFromSource(parameters, sourceCode);

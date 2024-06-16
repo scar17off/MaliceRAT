@@ -3,6 +3,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
+using Newtonsoft.Json;
 
 namespace MaliceRAT.RatClient
 {
@@ -11,6 +12,11 @@ namespace MaliceRAT.RatClient
         public event EventHandler<string> MessageReceived;
         private TcpListener server;
         private const int BufferSize = 1024;
+
+        public Server()
+        {
+            MessageReceived += LogMessage;
+        }
 
         public void StartServer()
         {
@@ -41,10 +47,20 @@ namespace MaliceRAT.RatClient
                 while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) != 0)
                 {
                     string receivedMessage = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                    OnMessageReceived(receivedMessage);
+                    dynamic jsonMessage = JsonConvert.DeserializeObject(receivedMessage);
+                    if (jsonMessage.type == "message")
+                    {
+                        OnMessageReceived(jsonMessage.text.ToString());
+                    }
 
                     // Send hello back to the client
-                    byte[] helloBytes = Encoding.UTF8.GetBytes("Hello from the server");
+                    var response = new
+                    {
+                        type = "message",
+                        text = "Hello from the server"
+                    };
+                    string jsonResponse = JsonConvert.SerializeObject(response);
+                    byte[] helloBytes = Encoding.UTF8.GetBytes(jsonResponse);
                     await stream.WriteAsync(helloBytes, 0, helloBytes.Length);
                 }
             }
@@ -53,6 +69,11 @@ namespace MaliceRAT.RatClient
         protected virtual void OnMessageReceived(string message)
         {
             MessageReceived?.Invoke(this, message);
+        }
+
+        private void LogMessage(object sender, string message)
+        {
+            Console.WriteLine("Received message: " + message);
         }
     }
 }
