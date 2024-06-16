@@ -41,6 +41,13 @@
             this.gunaTextBox1 = new Guna.UI.WinForms.GunaTextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.guna2DataGridView1 = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Flag = new System.Windows.Forms.DataGridViewImageColumn();
+            this.IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.User = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.gunaForwardedPorts = new Guna.UI.WinForms.GunaCheckBox();
             this.gunaOpenFolder = new Guna.UI.WinForms.GunaCheckBox();
@@ -50,13 +57,7 @@
             this.buildButton = new Guna.UI.WinForms.GunaButton();
             this.gunaCopyStartUp = new Guna.UI.WinForms.GunaCheckBox();
             this.gunaColorTransition1 = new Guna.UI.WinForms.GunaColorTransition(this.components);
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LastActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Flag = new System.Windows.Forms.DataGridViewImageColumn();
-            this.IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.User = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gunaHideConsole = new Guna.UI.WinForms.GunaCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.guna2TabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -244,9 +245,54 @@
             this.guna2DataGridView1.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
             this.guna2DataGridView1.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.SystemColors.Control;
             // 
+            // ID
+            // 
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            // 
+            // LastActive
+            // 
+            this.LastActive.HeaderText = "Last Active";
+            this.LastActive.Name = "LastActive";
+            this.LastActive.ReadOnly = true;
+            // 
+            // Flag
+            // 
+            this.Flag.HeaderText = "Flag";
+            this.Flag.Name = "Flag";
+            this.Flag.ReadOnly = true;
+            this.Flag.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Flag.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // IP
+            // 
+            this.IP.HeaderText = "IP";
+            this.IP.Name = "IP";
+            this.IP.ReadOnly = true;
+            // 
+            // OS
+            // 
+            this.OS.HeaderText = "OS";
+            this.OS.Name = "OS";
+            this.OS.ReadOnly = true;
+            // 
+            // User
+            // 
+            this.User.HeaderText = "User";
+            this.User.Name = "User";
+            this.User.ReadOnly = true;
+            // 
+            // PC
+            // 
+            this.PC.HeaderText = "PC";
+            this.PC.Name = "PC";
+            this.PC.ReadOnly = true;
+            // 
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(19)))), ((int)(((byte)(21)))));
+            this.tabPage3.Controls.Add(this.gunaHideConsole);
             this.tabPage3.Controls.Add(this.gunaForwardedPorts);
             this.tabPage3.Controls.Add(this.gunaOpenFolder);
             this.tabPage3.Controls.Add(this.gunaButton1);
@@ -352,7 +398,7 @@
             this.buildButton.ForeColor = System.Drawing.Color.White;
             this.buildButton.Image = null;
             this.buildButton.ImageSize = new System.Drawing.Size(20, 20);
-            this.buildButton.Location = new System.Drawing.Point(8, 107);
+            this.buildButton.Location = new System.Drawing.Point(9, 133);
             this.buildButton.Name = "buildButton";
             this.buildButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
             this.buildButton.OnHoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
@@ -387,49 +433,18 @@
             this.gunaColorTransition1.EndColor = System.Drawing.Color.Blue;
             this.gunaColorTransition1.StartColor = System.Drawing.Color.Red;
             // 
-            // ID
+            // gunaHideConsole
             // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            // 
-            // LastActive
-            // 
-            this.LastActive.HeaderText = "Last Active";
-            this.LastActive.Name = "LastActive";
-            this.LastActive.ReadOnly = true;
-            // 
-            // Flag
-            // 
-            this.Flag.HeaderText = "Flag";
-            this.Flag.Name = "Flag";
-            this.Flag.ReadOnly = true;
-            this.Flag.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Flag.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // IP
-            // 
-            this.IP.HeaderText = "IP";
-            this.IP.Name = "IP";
-            this.IP.ReadOnly = true;
-            // 
-            // OS
-            // 
-            this.OS.HeaderText = "OS";
-            this.OS.Name = "OS";
-            this.OS.ReadOnly = true;
-            // 
-            // User
-            // 
-            this.User.HeaderText = "User";
-            this.User.Name = "User";
-            this.User.ReadOnly = true;
-            // 
-            // PC
-            // 
-            this.PC.HeaderText = "PC";
-            this.PC.Name = "PC";
-            this.PC.ReadOnly = true;
+            this.gunaHideConsole.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
+            this.gunaHideConsole.CheckedOffColor = System.Drawing.Color.Gray;
+            this.gunaHideConsole.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.gunaHideConsole.FillColor = System.Drawing.Color.White;
+            this.gunaHideConsole.ForeColor = System.Drawing.SystemColors.Control;
+            this.gunaHideConsole.Location = new System.Drawing.Point(8, 107);
+            this.gunaHideConsole.Name = "gunaHideConsole";
+            this.gunaHideConsole.Size = new System.Drawing.Size(95, 20);
+            this.gunaHideConsole.TabIndex = 8;
+            this.gunaHideConsole.Text = "Hide console";
             // 
             // Main
             // 
@@ -477,6 +492,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn OS;
         private System.Windows.Forms.DataGridViewTextBoxColumn User;
         private System.Windows.Forms.DataGridViewTextBoxColumn PC;
+        private Guna.UI.WinForms.GunaCheckBox gunaHideConsole;
     }
 }
 

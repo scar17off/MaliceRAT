@@ -9,7 +9,7 @@ class Program
     static NetworkStream stream;
     static readonly string Server = "127.0.0.1";
     static readonly int Port = 6666;
-
+    
     static void Main(string[] args)
     {
         string server = Server;
