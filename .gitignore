@@ -2,3 +2,4 @@
 bin/
 obj/
 .cursorignore
+packages/
