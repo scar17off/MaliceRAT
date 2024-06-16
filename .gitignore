@@ -1,5 +1,9 @@
 .vs/
-bin/
 obj/
 .cursorignore
 packages/
+# bin/
+bin/*
+!bin/Debug/
+bin/Debug/*
+!bin/Debug/flags/
