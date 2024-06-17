@@ -53,8 +53,8 @@
             this.gunaForwardedPorts = new Guna.UI.WinForms.GunaCheckBox();
             this.gunaOpenFolder = new Guna.UI.WinForms.GunaCheckBox();
             this.gunaButton1 = new Guna.UI.WinForms.GunaButton();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.gunaCheckBox2 = new Guna.UI.WinForms.GunaCheckBox();
+            this.combinedFilePath = new System.Windows.Forms.TextBox();
+            this.gunaCombineFile = new Guna.UI.WinForms.GunaCheckBox();
             this.buildButton = new Guna.UI.WinForms.GunaButton();
             this.gunaCopyStartUp = new Guna.UI.WinForms.GunaCheckBox();
             this.gunaDragControl = new Guna.UI.WinForms.GunaDragControl(this.components);
@@ -296,8 +296,8 @@
             this.tabPage3.Controls.Add(this.gunaForwardedPorts);
             this.tabPage3.Controls.Add(this.gunaOpenFolder);
             this.tabPage3.Controls.Add(this.gunaButton1);
-            this.tabPage3.Controls.Add(this.textBox1);
-            this.tabPage3.Controls.Add(this.gunaCheckBox2);
+            this.tabPage3.Controls.Add(this.combinedFilePath);
+            this.tabPage3.Controls.Add(this.gunaCombineFile);
             this.tabPage3.Controls.Add(this.buildButton);
             this.tabPage3.Controls.Add(this.gunaCopyStartUp);
             this.tabPage3.Location = new System.Drawing.Point(4, 34);
@@ -373,29 +373,29 @@
             this.gunaButton1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.gunaButton1.Click += new System.EventHandler(this.gunaButton1_Click);
             // 
-            // textBox1
+            // combinedFilePath
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.ForeColor = System.Drawing.SystemColors.Control;
-            this.textBox1.Location = new System.Drawing.Point(34, 55);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.ShortcutsEnabled = false;
-            this.textBox1.Size = new System.Drawing.Size(127, 20);
-            this.textBox1.TabIndex = 4;
+            this.combinedFilePath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
+            this.combinedFilePath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.combinedFilePath.ForeColor = System.Drawing.SystemColors.Control;
+            this.combinedFilePath.Location = new System.Drawing.Point(34, 55);
+            this.combinedFilePath.Name = "combinedFilePath";
+            this.combinedFilePath.ReadOnly = true;
+            this.combinedFilePath.ShortcutsEnabled = false;
+            this.combinedFilePath.Size = new System.Drawing.Size(127, 20);
+            this.combinedFilePath.TabIndex = 4;
             // 
-            // gunaCheckBox2
+            // gunaCombineFile
             // 
-            this.gunaCheckBox2.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
-            this.gunaCheckBox2.CheckedOffColor = System.Drawing.Color.Gray;
-            this.gunaCheckBox2.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.gunaCheckBox2.FillColor = System.Drawing.Color.White;
-            this.gunaCheckBox2.ForeColor = System.Drawing.SystemColors.Control;
-            this.gunaCheckBox2.Location = new System.Drawing.Point(8, 55);
-            this.gunaCheckBox2.Name = "gunaCheckBox2";
-            this.gunaCheckBox2.Size = new System.Drawing.Size(20, 20);
-            this.gunaCheckBox2.TabIndex = 2;
+            this.gunaCombineFile.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
+            this.gunaCombineFile.CheckedOffColor = System.Drawing.Color.Gray;
+            this.gunaCombineFile.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.gunaCombineFile.FillColor = System.Drawing.Color.White;
+            this.gunaCombineFile.ForeColor = System.Drawing.SystemColors.Control;
+            this.gunaCombineFile.Location = new System.Drawing.Point(8, 55);
+            this.gunaCombineFile.Name = "gunaCombineFile";
+            this.gunaCombineFile.Size = new System.Drawing.Size(20, 20);
+            this.gunaCombineFile.TabIndex = 2;
             // 
             // buildButton
             // 
@@ -473,9 +473,9 @@
         private Guna.UI2.WinForms.Guna2DataGridView gunaVictimsTable;
         private Guna.UI.WinForms.GunaCheckBox gunaCopyStartUp;
         private Guna.UI.WinForms.GunaButton buildButton;
-        private Guna.UI.WinForms.GunaCheckBox gunaCheckBox2;
+        private Guna.UI.WinForms.GunaCheckBox gunaCombineFile;
         private Guna.UI.WinForms.GunaButton gunaButton1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox combinedFilePath;
         private Guna.UI.WinForms.GunaCheckBox gunaOpenFolder;
         private Guna.UI.WinForms.GunaTextBox gunaTextBox1;
         private Guna.UI.WinForms.GunaCheckBox gunaForwardedPorts;

