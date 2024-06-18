@@ -7,6 +7,7 @@ namespace MaliceRAT.RatServer.Features
 {
     public class Heartbeat
     {
+        #region Variables
         private double interval;
         private Timer heartbeatTimer;
         private Server server;
@@ -18,7 +19,9 @@ namespace MaliceRAT.RatServer.Features
             this.server = server;
             heartbeatTimer = new Timer(interval);
         }
+        #endregion
 
+        #region Methods
         public void StartHeartbeat(NetworkStream stream, Victim client)
         {
             heartbeatTimer.Elapsed += async (sender, e) =>
@@ -52,5 +55,6 @@ namespace MaliceRAT.RatServer.Features
             byte[] data = System.Text.Encoding.UTF8.GetBytes(heartbeatMessage);
             await stream.WriteAsync(data, 0, data.Length);
         }
+        #endregion
     }
 }

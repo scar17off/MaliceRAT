@@ -15,6 +15,32 @@ namespace MaliceRAT
 {
     public static class Utilities
     {
+        #region IP
+        public static string GetLanIp()
+        {
+            foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (ni.OperationalStatus == OperationalStatus.Up &&
+                    (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet))
+                {
+                    var gatewayAddresses = ni.GetIPProperties().GatewayAddresses;
+                    if (gatewayAddresses.Count > 0)
+                    {
+                        var gatewayAddress = gatewayAddresses[0];
+                        foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
+                        {
+                            if (ip.Address.AddressFamily == AddressFamily.InterNetwork && ip.AddressPreferredLifetime != UInt32.MaxValue)
+                            {
+                                return ip.Address.ToString();
+                            }
+                        }
+                    }
+                }
+            }
+
+            return "N/A";
+        }
+
         public static async Task<string> GetPublicIPAddress()
         {
             using (var client = new HttpClient())
@@ -31,23 +57,9 @@ namespace MaliceRAT
                 }
             }
         }
+        #endregion
 
-        public static void SaveImage(string imageUrl, string filename, ImageFormat format)
-        {    
-            WebClient client = new WebClient();
-            Stream stream = client.OpenRead(imageUrl);
-            Bitmap bitmap;  bitmap = new Bitmap(stream);
-
-            if (bitmap != null)
-            {
-                bitmap.Save(filename, format);
-            }
-                
-            stream.Flush();
-            stream.Close();
-            client.Dispose();
-        }
-
+        #region Flag
         public static async Task<string> GetCountryCodeFromIP(string ip)
         {
             using (var client = new HttpClient())
@@ -93,30 +105,6 @@ namespace MaliceRAT
             }
             return flagImage;
         }
-
-        public static string GetLanIp()
-        {
-            foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
-            {
-                if (ni.OperationalStatus == OperationalStatus.Up &&
-                    (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet))
-                {
-                    var gatewayAddresses = ni.GetIPProperties().GatewayAddresses;
-                    if (gatewayAddresses.Count > 0)
-                    {
-                        var gatewayAddress = gatewayAddresses[0];
-                        foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
-                        {
-                            if (ip.Address.AddressFamily == AddressFamily.InterNetwork && ip.AddressPreferredLifetime != UInt32.MaxValue)
-                            {
-                                return ip.Address.ToString();
-                            }
-                        }
-                    }
-                }
-            }
-
-            return "N/A";
-        }
+        #endregion
     }
 }

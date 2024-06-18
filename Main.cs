@@ -1,9 +1,6 @@
 ﻿using System;
-using System.CodeDom.Compiler;
 using System.IO;
 using System.Windows.Forms;
-using System.Reflection;
-using Microsoft.CSharp;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Collections.Generic;

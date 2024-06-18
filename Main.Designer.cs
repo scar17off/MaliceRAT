@@ -543,7 +543,7 @@
             this.gunaHideConsole.ForeColor = System.Drawing.SystemColors.Control;
             this.gunaHideConsole.Location = new System.Drawing.Point(11, 145);
             this.gunaHideConsole.Name = "gunaHideConsole";
-            this.gunaHideConsole.Size = new System.Drawing.Size(95, 20);
+            this.gunaHideConsole.Size = new System.Drawing.Size(101, 20);
             this.gunaHideConsole.TabIndex = 8;
             this.gunaHideConsole.Text = "Hide console";
             // 
@@ -557,7 +557,7 @@
             this.gunaForwardedPorts.ForeColor = System.Drawing.SystemColors.Control;
             this.gunaForwardedPorts.Location = new System.Drawing.Point(11, 119);
             this.gunaForwardedPorts.Name = "gunaForwardedPorts";
-            this.gunaForwardedPorts.Size = new System.Drawing.Size(112, 20);
+            this.gunaForwardedPorts.Size = new System.Drawing.Size(122, 20);
             this.gunaForwardedPorts.TabIndex = 7;
             this.gunaForwardedPorts.Text = "Forwarded ports";
             // 
@@ -571,7 +571,7 @@
             this.gunaOpenFolder.ForeColor = System.Drawing.SystemColors.Control;
             this.gunaOpenFolder.Location = new System.Drawing.Point(11, 93);
             this.gunaOpenFolder.Name = "gunaOpenFolder";
-            this.gunaOpenFolder.Size = new System.Drawing.Size(194, 20);
+            this.gunaOpenFolder.Size = new System.Drawing.Size(220, 20);
             this.gunaOpenFolder.TabIndex = 6;
             this.gunaOpenFolder.Text = "Open the folder after compilation";
             // 
@@ -612,7 +612,7 @@
             this.gunaCopyStartUp.ForeColor = System.Drawing.SystemColors.Control;
             this.gunaCopyStartUp.Location = new System.Drawing.Point(11, 67);
             this.gunaCopyStartUp.Name = "gunaCopyStartUp";
-            this.gunaCopyStartUp.Size = new System.Drawing.Size(110, 20);
+            this.gunaCopyStartUp.Size = new System.Drawing.Size(122, 20);
             this.gunaCopyStartUp.TabIndex = 0;
             this.gunaCopyStartUp.Text = "Copy to StartUp";
             // 

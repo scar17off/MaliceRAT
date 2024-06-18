@@ -6,10 +6,13 @@ namespace MaliceRAT.RatServer
 {
     public class ScreenViewer
     {
+        #region Variables
         private JavaScriptSerializer serializer = new JavaScriptSerializer();
         private StringBuilder screenshotBuilder = new StringBuilder();
         public event Action<byte[]> ScreenshotReceived;
+        #endregion
 
+        #region Methods
         public void HandleScreenshotChunk(string data, bool final)
         {
             screenshotBuilder.Append(data);
@@ -44,5 +47,6 @@ namespace MaliceRAT.RatServer
             byte[] data = Encoding.UTF8.GetBytes(message);
             client.TcpClient.GetStream().Write(data, 0, data.Length);
         }
+        #endregion
     }
 }

