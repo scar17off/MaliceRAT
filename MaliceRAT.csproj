@@ -157,6 +157,12 @@
     <Compile Include="RatServer\Victim.cs" />
     <Compile Include="RatServer\Server.cs" />
     <Compile Include="RatServer\Utilities.cs" />
+    <Compile Include="RatUI\KeyLoggerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RatUI\KeyLoggerForm.Designer.cs">
+      <DependentUpon>KeyLoggerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="RatUI\ScreenViewForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -176,7 +182,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="RatClient\Client.cs" />
+    <EmbeddedResource Include="RatUI\KeyLoggerForm.resx">
+      <DependentUpon>KeyLoggerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RatUI\ScreenViewForm.resx">
       <DependentUpon>ScreenViewForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -211,6 +219,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

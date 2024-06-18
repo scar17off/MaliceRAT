@@ -5,10 +5,11 @@
 MaliceRAT is a powerful remote access tool designed for covert surveillance and remote control. This tool is intended for educational and research purposes only, and should not be used for illegal activities.
 
 ## Features
-<!-- - Remote execution of commands
-- Stealth mode for undetectable operation
-- Easy to use server-client architecture
-- Real-time data exfiltration -->
+- [x] Real-time data transfer
+- [x] Screen viewer
+- [ ] Keylogger
+- [ ] File upload and download
+- [ ] Command execution
 
 ## Usage
 1. Start the server on a control machine.

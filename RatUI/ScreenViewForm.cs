@@ -15,6 +15,7 @@ namespace MaliceRAT.RatUI
             InitializeComponent();
             this.clientId = clientId;
             this.server = server;
+            
             server.ScreenshotReceived += UpdateScreenImage;
 
             Victim victim = server.GetVictimById(clientId);

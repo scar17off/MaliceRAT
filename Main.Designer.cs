@@ -49,12 +49,21 @@
             this.User = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.buildDownloadProgressBar = new System.Windows.Forms.ProgressBar();
+            this.gunaGetMSBuild = new Guna.UI.WinForms.GunaButton();
+            this.gunaHostPort = new Guna.UI.WinForms.GunaTextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.gunaHostIP = new Guna.UI.WinForms.GunaTextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.gunaFindProj = new Guna.UI.WinForms.GunaButton();
+            this.gunaProjPath = new Guna.UI.WinForms.GunaTextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.gunaBuildPath = new Guna.UI.WinForms.GunaTextBox();
+            this.gunaFindBuild = new Guna.UI.WinForms.GunaButton();
+            this.label2 = new System.Windows.Forms.Label();
             this.gunaHideConsole = new Guna.UI.WinForms.GunaCheckBox();
             this.gunaForwardedPorts = new Guna.UI.WinForms.GunaCheckBox();
             this.gunaOpenFolder = new Guna.UI.WinForms.GunaCheckBox();
-            this.gunaButton1 = new Guna.UI.WinForms.GunaButton();
-            this.combinedFilePath = new System.Windows.Forms.TextBox();
-            this.gunaCombineFile = new Guna.UI.WinForms.GunaCheckBox();
             this.buildButton = new Guna.UI.WinForms.GunaButton();
             this.gunaCopyStartUp = new Guna.UI.WinForms.GunaCheckBox();
             this.gunaDragControl = new Guna.UI.WinForms.GunaDragControl(this.components);
@@ -292,12 +301,21 @@
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(19)))), ((int)(((byte)(21)))));
+            this.tabPage3.Controls.Add(this.buildDownloadProgressBar);
+            this.tabPage3.Controls.Add(this.gunaGetMSBuild);
+            this.tabPage3.Controls.Add(this.gunaHostPort);
+            this.tabPage3.Controls.Add(this.label5);
+            this.tabPage3.Controls.Add(this.gunaHostIP);
+            this.tabPage3.Controls.Add(this.label4);
+            this.tabPage3.Controls.Add(this.gunaFindProj);
+            this.tabPage3.Controls.Add(this.gunaProjPath);
+            this.tabPage3.Controls.Add(this.label3);
+            this.tabPage3.Controls.Add(this.gunaBuildPath);
+            this.tabPage3.Controls.Add(this.gunaFindBuild);
+            this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Controls.Add(this.gunaHideConsole);
             this.tabPage3.Controls.Add(this.gunaForwardedPorts);
             this.tabPage3.Controls.Add(this.gunaOpenFolder);
-            this.tabPage3.Controls.Add(this.gunaButton1);
-            this.tabPage3.Controls.Add(this.combinedFilePath);
-            this.tabPage3.Controls.Add(this.gunaCombineFile);
             this.tabPage3.Controls.Add(this.buildButton);
             this.tabPage3.Controls.Add(this.gunaCopyStartUp);
             this.tabPage3.Location = new System.Drawing.Point(4, 34);
@@ -306,6 +324,211 @@
             this.tabPage3.TabIndex = 3;
             this.tabPage3.Text = "Build";
             // 
+            // buildDownloadProgressBar
+            // 
+            this.buildDownloadProgressBar.Location = new System.Drawing.Point(353, 166);
+            this.buildDownloadProgressBar.Name = "buildDownloadProgressBar";
+            this.buildDownloadProgressBar.Size = new System.Drawing.Size(200, 23);
+            this.buildDownloadProgressBar.TabIndex = 23;
+            this.buildDownloadProgressBar.Visible = false;
+            // 
+            // gunaGetMSBuild
+            // 
+            this.gunaGetMSBuild.Animated = true;
+            this.gunaGetMSBuild.AnimationHoverSpeed = 0.07F;
+            this.gunaGetMSBuild.AnimationSpeed = 0.03F;
+            this.gunaGetMSBuild.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
+            this.gunaGetMSBuild.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.gunaGetMSBuild.BorderSize = 1;
+            this.gunaGetMSBuild.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.gunaGetMSBuild.FocusedColor = System.Drawing.Color.Empty;
+            this.gunaGetMSBuild.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.gunaGetMSBuild.ForeColor = System.Drawing.SystemColors.Control;
+            this.gunaGetMSBuild.Image = null;
+            this.gunaGetMSBuild.ImageSize = new System.Drawing.Size(20, 20);
+            this.gunaGetMSBuild.Location = new System.Drawing.Point(322, 166);
+            this.gunaGetMSBuild.Name = "gunaGetMSBuild";
+            this.gunaGetMSBuild.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
+            this.gunaGetMSBuild.OnHoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.gunaGetMSBuild.OnHoverForeColor = System.Drawing.Color.White;
+            this.gunaGetMSBuild.OnHoverImage = null;
+            this.gunaGetMSBuild.OnPressedColor = System.Drawing.Color.Black;
+            this.gunaGetMSBuild.Size = new System.Drawing.Size(25, 26);
+            this.gunaGetMSBuild.TabIndex = 22;
+            this.gunaGetMSBuild.Text = "Get";
+            this.gunaGetMSBuild.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.gunaGetMSBuild.Click += new System.EventHandler(this.gunaGetMSBuild_Click);
+            // 
+            // gunaHostPort
+            // 
+            this.gunaHostPort.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
+            this.gunaHostPort.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.gunaHostPort.BorderSize = 1;
+            this.gunaHostPort.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.gunaHostPort.FocusedBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
+            this.gunaHostPort.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.gunaHostPort.FocusedForeColor = System.Drawing.SystemColors.Control;
+            this.gunaHostPort.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.gunaHostPort.ForeColor = System.Drawing.SystemColors.Control;
+            this.gunaHostPort.Location = new System.Drawing.Point(110, 35);
+            this.gunaHostPort.Name = "gunaHostPort";
+            this.gunaHostPort.PasswordChar = '\0';
+            this.gunaHostPort.SelectedText = "";
+            this.gunaHostPort.Size = new System.Drawing.Size(175, 26);
+            this.gunaHostPort.TabIndex = 21;
+            this.gunaHostPort.Text = "6666";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.SystemColors.Control;
+            this.label5.Location = new System.Drawing.Point(11, 42);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 13);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "Host PORT:";
+            // 
+            // gunaHostIP
+            // 
+            this.gunaHostIP.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
+            this.gunaHostIP.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.gunaHostIP.BorderSize = 1;
+            this.gunaHostIP.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.gunaHostIP.FocusedBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
+            this.gunaHostIP.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.gunaHostIP.FocusedForeColor = System.Drawing.SystemColors.Control;
+            this.gunaHostIP.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.gunaHostIP.ForeColor = System.Drawing.SystemColors.Control;
+            this.gunaHostIP.Location = new System.Drawing.Point(110, 3);
+            this.gunaHostIP.Name = "gunaHostIP";
+            this.gunaHostIP.PasswordChar = '\0';
+            this.gunaHostIP.SelectedText = "";
+            this.gunaHostIP.Size = new System.Drawing.Size(175, 26);
+            this.gunaHostIP.TabIndex = 19;
+            this.gunaHostIP.Text = "0.0.0.0";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.SystemColors.Control;
+            this.label4.Location = new System.Drawing.Point(11, 10);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(45, 13);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "Host IP:";
+            // 
+            // gunaFindProj
+            // 
+            this.gunaFindProj.Animated = true;
+            this.gunaFindProj.AnimationHoverSpeed = 0.07F;
+            this.gunaFindProj.AnimationSpeed = 0.03F;
+            this.gunaFindProj.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
+            this.gunaFindProj.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.gunaFindProj.BorderSize = 1;
+            this.gunaFindProj.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.gunaFindProj.FocusedColor = System.Drawing.Color.Empty;
+            this.gunaFindProj.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.gunaFindProj.ForeColor = System.Drawing.SystemColors.Control;
+            this.gunaFindProj.Image = null;
+            this.gunaFindProj.ImageSize = new System.Drawing.Size(20, 20);
+            this.gunaFindProj.Location = new System.Drawing.Point(291, 198);
+            this.gunaFindProj.Name = "gunaFindProj";
+            this.gunaFindProj.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
+            this.gunaFindProj.OnHoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.gunaFindProj.OnHoverForeColor = System.Drawing.Color.White;
+            this.gunaFindProj.OnHoverImage = null;
+            this.gunaFindProj.OnPressedColor = System.Drawing.Color.Black;
+            this.gunaFindProj.Size = new System.Drawing.Size(25, 26);
+            this.gunaFindProj.TabIndex = 17;
+            this.gunaFindProj.Text = "...";
+            this.gunaFindProj.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.gunaFindProj.Click += new System.EventHandler(this.gunaFindProj_Click);
+            // 
+            // gunaProjPath
+            // 
+            this.gunaProjPath.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
+            this.gunaProjPath.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.gunaProjPath.BorderSize = 1;
+            this.gunaProjPath.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.gunaProjPath.FocusedBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
+            this.gunaProjPath.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.gunaProjPath.FocusedForeColor = System.Drawing.SystemColors.Control;
+            this.gunaProjPath.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.gunaProjPath.ForeColor = System.Drawing.SystemColors.Control;
+            this.gunaProjPath.Location = new System.Drawing.Point(110, 198);
+            this.gunaProjPath.Name = "gunaProjPath";
+            this.gunaProjPath.PasswordChar = '\0';
+            this.gunaProjPath.ReadOnly = true;
+            this.gunaProjPath.SelectedText = "";
+            this.gunaProjPath.Size = new System.Drawing.Size(175, 26);
+            this.gunaProjPath.TabIndex = 16;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.SystemColors.Control;
+            this.label3.Location = new System.Drawing.Point(11, 205);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(81, 13);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "CSProject path:";
+            // 
+            // gunaBuildPath
+            // 
+            this.gunaBuildPath.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
+            this.gunaBuildPath.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.gunaBuildPath.BorderSize = 1;
+            this.gunaBuildPath.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.gunaBuildPath.FocusedBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
+            this.gunaBuildPath.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.gunaBuildPath.FocusedForeColor = System.Drawing.SystemColors.Control;
+            this.gunaBuildPath.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.gunaBuildPath.ForeColor = System.Drawing.SystemColors.Control;
+            this.gunaBuildPath.Location = new System.Drawing.Point(110, 166);
+            this.gunaBuildPath.Name = "gunaBuildPath";
+            this.gunaBuildPath.PasswordChar = '\0';
+            this.gunaBuildPath.ReadOnly = true;
+            this.gunaBuildPath.SelectedText = "";
+            this.gunaBuildPath.Size = new System.Drawing.Size(175, 26);
+            this.gunaBuildPath.TabIndex = 14;
+            // 
+            // gunaFindBuild
+            // 
+            this.gunaFindBuild.Animated = true;
+            this.gunaFindBuild.AnimationHoverSpeed = 0.07F;
+            this.gunaFindBuild.AnimationSpeed = 0.03F;
+            this.gunaFindBuild.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
+            this.gunaFindBuild.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.gunaFindBuild.BorderSize = 1;
+            this.gunaFindBuild.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.gunaFindBuild.FocusedColor = System.Drawing.Color.Empty;
+            this.gunaFindBuild.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.gunaFindBuild.ForeColor = System.Drawing.SystemColors.Control;
+            this.gunaFindBuild.Image = null;
+            this.gunaFindBuild.ImageSize = new System.Drawing.Size(20, 20);
+            this.gunaFindBuild.Location = new System.Drawing.Point(291, 166);
+            this.gunaFindBuild.Name = "gunaFindBuild";
+            this.gunaFindBuild.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
+            this.gunaFindBuild.OnHoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.gunaFindBuild.OnHoverForeColor = System.Drawing.Color.White;
+            this.gunaFindBuild.OnHoverImage = null;
+            this.gunaFindBuild.OnPressedColor = System.Drawing.Color.Black;
+            this.gunaFindBuild.Size = new System.Drawing.Size(25, 26);
+            this.gunaFindBuild.TabIndex = 13;
+            this.gunaFindBuild.Text = "...";
+            this.gunaFindBuild.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.gunaFindBuild.Click += new System.EventHandler(this.gunaFindBuild_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.SystemColors.Control;
+            this.label2.Location = new System.Drawing.Point(11, 173);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(93, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "MSBuild.exe path:";
+            // 
             // gunaHideConsole
             // 
             this.gunaHideConsole.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
@@ -313,7 +536,7 @@
             this.gunaHideConsole.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.gunaHideConsole.FillColor = System.Drawing.Color.White;
             this.gunaHideConsole.ForeColor = System.Drawing.SystemColors.Control;
-            this.gunaHideConsole.Location = new System.Drawing.Point(8, 107);
+            this.gunaHideConsole.Location = new System.Drawing.Point(11, 145);
             this.gunaHideConsole.Name = "gunaHideConsole";
             this.gunaHideConsole.Size = new System.Drawing.Size(95, 20);
             this.gunaHideConsole.TabIndex = 8;
@@ -326,7 +549,7 @@
             this.gunaForwardedPorts.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.gunaForwardedPorts.FillColor = System.Drawing.Color.White;
             this.gunaForwardedPorts.ForeColor = System.Drawing.SystemColors.Control;
-            this.gunaForwardedPorts.Location = new System.Drawing.Point(8, 81);
+            this.gunaForwardedPorts.Location = new System.Drawing.Point(11, 119);
             this.gunaForwardedPorts.Name = "gunaForwardedPorts";
             this.gunaForwardedPorts.Size = new System.Drawing.Size(112, 20);
             this.gunaForwardedPorts.TabIndex = 7;
@@ -339,63 +562,11 @@
             this.gunaOpenFolder.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.gunaOpenFolder.FillColor = System.Drawing.Color.White;
             this.gunaOpenFolder.ForeColor = System.Drawing.SystemColors.Control;
-            this.gunaOpenFolder.Location = new System.Drawing.Point(8, 29);
+            this.gunaOpenFolder.Location = new System.Drawing.Point(11, 93);
             this.gunaOpenFolder.Name = "gunaOpenFolder";
             this.gunaOpenFolder.Size = new System.Drawing.Size(194, 20);
             this.gunaOpenFolder.TabIndex = 6;
             this.gunaOpenFolder.Text = "Open the folder after compilation";
-            // 
-            // gunaButton1
-            // 
-            this.gunaButton1.Animated = true;
-            this.gunaButton1.AnimationHoverSpeed = 0.07F;
-            this.gunaButton1.AnimationSpeed = 0.03F;
-            this.gunaButton1.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
-            this.gunaButton1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.gunaButton1.BorderSize = 1;
-            this.gunaButton1.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.gunaButton1.FocusedColor = System.Drawing.Color.Empty;
-            this.gunaButton1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.gunaButton1.ForeColor = System.Drawing.Color.White;
-            this.gunaButton1.Image = null;
-            this.gunaButton1.ImageOffsetX = -5;
-            this.gunaButton1.ImageSize = new System.Drawing.Size(32, 32);
-            this.gunaButton1.Location = new System.Drawing.Point(167, 52);
-            this.gunaButton1.Name = "gunaButton1";
-            this.gunaButton1.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
-            this.gunaButton1.OnHoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.gunaButton1.OnHoverForeColor = System.Drawing.Color.White;
-            this.gunaButton1.OnHoverImage = null;
-            this.gunaButton1.OnPressedColor = System.Drawing.Color.Black;
-            this.gunaButton1.Size = new System.Drawing.Size(38, 27);
-            this.gunaButton1.TabIndex = 5;
-            this.gunaButton1.Text = "hitme";
-            this.gunaButton1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.gunaButton1.Click += new System.EventHandler(this.gunaButton1_Click);
-            // 
-            // combinedFilePath
-            // 
-            this.combinedFilePath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
-            this.combinedFilePath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.combinedFilePath.ForeColor = System.Drawing.SystemColors.Control;
-            this.combinedFilePath.Location = new System.Drawing.Point(34, 55);
-            this.combinedFilePath.Name = "combinedFilePath";
-            this.combinedFilePath.ReadOnly = true;
-            this.combinedFilePath.ShortcutsEnabled = false;
-            this.combinedFilePath.Size = new System.Drawing.Size(127, 20);
-            this.combinedFilePath.TabIndex = 4;
-            // 
-            // gunaCombineFile
-            // 
-            this.gunaCombineFile.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
-            this.gunaCombineFile.CheckedOffColor = System.Drawing.Color.Gray;
-            this.gunaCombineFile.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.gunaCombineFile.FillColor = System.Drawing.Color.White;
-            this.gunaCombineFile.ForeColor = System.Drawing.SystemColors.Control;
-            this.gunaCombineFile.Location = new System.Drawing.Point(8, 55);
-            this.gunaCombineFile.Name = "gunaCombineFile";
-            this.gunaCombineFile.Size = new System.Drawing.Size(20, 20);
-            this.gunaCombineFile.TabIndex = 2;
             // 
             // buildButton
             // 
@@ -408,17 +579,17 @@
             this.buildButton.DialogResult = System.Windows.Forms.DialogResult.None;
             this.buildButton.FocusedColor = System.Drawing.Color.Empty;
             this.buildButton.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.buildButton.ForeColor = System.Drawing.Color.White;
+            this.buildButton.ForeColor = System.Drawing.SystemColors.Control;
             this.buildButton.Image = null;
             this.buildButton.ImageSize = new System.Drawing.Size(20, 20);
-            this.buildButton.Location = new System.Drawing.Point(9, 133);
+            this.buildButton.Location = new System.Drawing.Point(14, 230);
             this.buildButton.Name = "buildButton";
             this.buildButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
             this.buildButton.OnHoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.buildButton.OnHoverForeColor = System.Drawing.Color.White;
             this.buildButton.OnHoverImage = null;
             this.buildButton.OnPressedColor = System.Drawing.Color.Black;
-            this.buildButton.Size = new System.Drawing.Size(152, 28);
+            this.buildButton.Size = new System.Drawing.Size(271, 28);
             this.buildButton.TabIndex = 1;
             this.buildButton.Text = "Build";
             this.buildButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -431,7 +602,7 @@
             this.gunaCopyStartUp.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.gunaCopyStartUp.FillColor = System.Drawing.Color.White;
             this.gunaCopyStartUp.ForeColor = System.Drawing.SystemColors.Control;
-            this.gunaCopyStartUp.Location = new System.Drawing.Point(8, 3);
+            this.gunaCopyStartUp.Location = new System.Drawing.Point(11, 67);
             this.gunaCopyStartUp.Name = "gunaCopyStartUp";
             this.gunaCopyStartUp.Size = new System.Drawing.Size(110, 20);
             this.gunaCopyStartUp.TabIndex = 0;
@@ -473,9 +644,6 @@
         private Guna.UI2.WinForms.Guna2DataGridView gunaVictimsTable;
         private Guna.UI.WinForms.GunaCheckBox gunaCopyStartUp;
         private Guna.UI.WinForms.GunaButton buildButton;
-        private Guna.UI.WinForms.GunaCheckBox gunaCombineFile;
-        private Guna.UI.WinForms.GunaButton gunaButton1;
-        private System.Windows.Forms.TextBox combinedFilePath;
         private Guna.UI.WinForms.GunaCheckBox gunaOpenFolder;
         private Guna.UI.WinForms.GunaTextBox gunaTextBox1;
         private Guna.UI.WinForms.GunaCheckBox gunaForwardedPorts;
@@ -488,6 +656,18 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn PC;
         private Guna.UI.WinForms.GunaCheckBox gunaHideConsole;
         private Guna.UI.WinForms.GunaDragControl gunaDragControl;
+        private Guna.UI.WinForms.GunaButton gunaFindBuild;
+        private System.Windows.Forms.Label label2;
+        private Guna.UI.WinForms.GunaButton gunaFindProj;
+        private Guna.UI.WinForms.GunaTextBox gunaProjPath;
+        private System.Windows.Forms.Label label3;
+        private Guna.UI.WinForms.GunaTextBox gunaBuildPath;
+        private Guna.UI.WinForms.GunaTextBox gunaHostPort;
+        private System.Windows.Forms.Label label5;
+        private Guna.UI.WinForms.GunaTextBox gunaHostIP;
+        private System.Windows.Forms.Label label4;
+        private Guna.UI.WinForms.GunaButton gunaGetMSBuild;
+        private System.Windows.Forms.ProgressBar buildDownloadProgressBar;
     }
 }
 
