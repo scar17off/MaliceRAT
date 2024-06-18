@@ -1,7 +1,0 @@
-{
-    "vscord.app.name": "Visual Studio Code",
-    "vscord.status.idle.check": false,
-    "vscord.status.problems.enabled": false,
-    "vscord.status.details.text.viewing": "In {workspace}",
-    "vscord.status.idle.enabled": false
-}
