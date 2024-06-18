@@ -313,6 +313,7 @@ namespace MaliceRAT
             gunaVictimsTable.MouseDown += (sender, e) => ContextMenuUtilities.GunaVictimsTable_MouseDown(sender, e, gunaVictimsTable);
         }
 
+        #region Victim context menu
         private void ViewScreen_Click(object sender, EventArgs e)
         {
             var id = GetSelectedId();
@@ -338,8 +339,9 @@ namespace MaliceRAT
             var id = GetSelectedId();
             if (id.HasValue)
             {
-                server.DisconnectClient(id.Value);
+                server.GetVictimById(id.Value).Disconnect();
             }
         }
+        #endregion
     }
 }

@@ -1,4 +1,5 @@
 .vs/
+.vscode/
 obj/
 .cursorignore
 packages/
@@ -7,3 +8,5 @@ bin/*
 !bin/Debug/
 bin/Debug/*
 !bin/Debug/flags/
+# RatClient/bin/
+RatClient/bin/

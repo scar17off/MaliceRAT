@@ -22,5 +22,10 @@ namespace MaliceRAT.RatServer
             PC = "N/A";
             User = "N/A";
         }
+
+        public void Disconnect()
+        {
+            TcpClient.Close();
+        }
     }
 }
