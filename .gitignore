@@ -3,10 +3,9 @@
 obj/
 .cursorignore
 packages/
-# bin/
 bin/*
 !bin/Debug/
 bin/Debug/*
 !bin/Debug/flags/
-# RatClient/bin/
-RatClient/bin/
+RatClient/bin/*
+RatClient/bin/Debug/*

