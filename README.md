@@ -6,7 +6,7 @@ MaliceRAT is a powerful remote access tool designed for covert surveillance and 
 
 ## Features
 - [x] Real-time data transfer
-- [] Remote Desktop
+- [ ] Remote Desktop
 - [ ] Webcam Control
 - [ ] Remote Shell
 - [ ] Remote Command Line
