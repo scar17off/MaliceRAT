@@ -186,13 +186,13 @@
             this.gunaVictimsTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(21)))), ((int)(((byte)(23)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.gunaVictimsTable.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.gunaVictimsTable.ColumnHeadersHeight = 15;
+            this.gunaVictimsTable.ColumnHeadersHeight = 30;
             this.gunaVictimsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
             this.LastActive,
@@ -203,7 +203,7 @@
             this.PC});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(27)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.Control;
@@ -216,7 +216,7 @@
             this.gunaVictimsTable.ReadOnly = true;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(19)))), ((int)(((byte)(21)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.Control;
@@ -241,14 +241,14 @@
             this.gunaVictimsTable.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
             this.gunaVictimsTable.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(21)))), ((int)(((byte)(23)))));
             this.gunaVictimsTable.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.gunaVictimsTable.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.gunaVictimsTable.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
             this.gunaVictimsTable.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.gunaVictimsTable.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.gunaVictimsTable.ThemeStyle.HeaderStyle.Height = 15;
+            this.gunaVictimsTable.ThemeStyle.HeaderStyle.Height = 30;
             this.gunaVictimsTable.ThemeStyle.ReadOnly = true;
             this.gunaVictimsTable.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(19)))), ((int)(((byte)(21)))));
             this.gunaVictimsTable.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.gunaVictimsTable.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.gunaVictimsTable.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
             this.gunaVictimsTable.ThemeStyle.RowsStyle.ForeColor = System.Drawing.SystemColors.Control;
             this.gunaVictimsTable.ThemeStyle.RowsStyle.Height = 22;
             this.gunaVictimsTable.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
@@ -326,9 +326,9 @@
             // 
             // buildDownloadProgressBar
             // 
-            this.buildDownloadProgressBar.Location = new System.Drawing.Point(353, 166);
+            this.buildDownloadProgressBar.Location = new System.Drawing.Point(365, 166);
             this.buildDownloadProgressBar.Name = "buildDownloadProgressBar";
-            this.buildDownloadProgressBar.Size = new System.Drawing.Size(200, 23);
+            this.buildDownloadProgressBar.Size = new System.Drawing.Size(200, 26);
             this.buildDownloadProgressBar.TabIndex = 23;
             this.buildDownloadProgressBar.Visible = false;
             // 
@@ -342,15 +342,15 @@
             this.gunaGetMSBuild.BorderSize = 1;
             this.gunaGetMSBuild.DialogResult = System.Windows.Forms.DialogResult.None;
             this.gunaGetMSBuild.FocusedColor = System.Drawing.Color.Empty;
-            this.gunaGetMSBuild.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.gunaGetMSBuild.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.gunaGetMSBuild.ForeColor = System.Drawing.SystemColors.Control;
             this.gunaGetMSBuild.Image = null;
             this.gunaGetMSBuild.ImageSize = new System.Drawing.Size(20, 20);
-            this.gunaGetMSBuild.Location = new System.Drawing.Point(322, 166);
+            this.gunaGetMSBuild.Location = new System.Drawing.Point(334, 166);
             this.gunaGetMSBuild.Name = "gunaGetMSBuild";
             this.gunaGetMSBuild.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
             this.gunaGetMSBuild.OnHoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.gunaGetMSBuild.OnHoverForeColor = System.Drawing.Color.White;
+            this.gunaGetMSBuild.OnHoverForeColor = System.Drawing.SystemColors.Control;
             this.gunaGetMSBuild.OnHoverImage = null;
             this.gunaGetMSBuild.OnPressedColor = System.Drawing.Color.Black;
             this.gunaGetMSBuild.Size = new System.Drawing.Size(25, 26);
@@ -370,7 +370,7 @@
             this.gunaHostPort.FocusedForeColor = System.Drawing.SystemColors.Control;
             this.gunaHostPort.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.gunaHostPort.ForeColor = System.Drawing.SystemColors.Control;
-            this.gunaHostPort.Location = new System.Drawing.Point(110, 35);
+            this.gunaHostPort.Location = new System.Drawing.Point(122, 41);
             this.gunaHostPort.Name = "gunaHostPort";
             this.gunaHostPort.PasswordChar = '\0';
             this.gunaHostPort.SelectedText = "";
@@ -381,10 +381,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Josefin Sans", 9F);
             this.label5.ForeColor = System.Drawing.SystemColors.Control;
-            this.label5.Location = new System.Drawing.Point(11, 42);
+            this.label5.Location = new System.Drawing.Point(11, 41);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 13);
+            this.label5.Size = new System.Drawing.Size(72, 19);
             this.label5.TabIndex = 20;
             this.label5.Text = "Host PORT:";
             // 
@@ -399,7 +400,7 @@
             this.gunaHostIP.FocusedForeColor = System.Drawing.SystemColors.Control;
             this.gunaHostIP.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.gunaHostIP.ForeColor = System.Drawing.SystemColors.Control;
-            this.gunaHostIP.Location = new System.Drawing.Point(110, 3);
+            this.gunaHostIP.Location = new System.Drawing.Point(122, 3);
             this.gunaHostIP.Name = "gunaHostIP";
             this.gunaHostIP.PasswordChar = '\0';
             this.gunaHostIP.SelectedText = "";
@@ -410,10 +411,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Josefin Sans", 9F);
             this.label4.ForeColor = System.Drawing.SystemColors.Control;
-            this.label4.Location = new System.Drawing.Point(11, 10);
+            this.label4.Location = new System.Drawing.Point(11, 8);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(45, 13);
+            this.label4.Size = new System.Drawing.Size(51, 19);
             this.label4.TabIndex = 18;
             this.label4.Text = "Host IP:";
             // 
@@ -431,7 +433,7 @@
             this.gunaFindProj.ForeColor = System.Drawing.SystemColors.Control;
             this.gunaFindProj.Image = null;
             this.gunaFindProj.ImageSize = new System.Drawing.Size(20, 20);
-            this.gunaFindProj.Location = new System.Drawing.Point(291, 198);
+            this.gunaFindProj.Location = new System.Drawing.Point(303, 196);
             this.gunaFindProj.Name = "gunaFindProj";
             this.gunaFindProj.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
             this.gunaFindProj.OnHoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
@@ -455,7 +457,7 @@
             this.gunaProjPath.FocusedForeColor = System.Drawing.SystemColors.Control;
             this.gunaProjPath.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.gunaProjPath.ForeColor = System.Drawing.SystemColors.Control;
-            this.gunaProjPath.Location = new System.Drawing.Point(110, 198);
+            this.gunaProjPath.Location = new System.Drawing.Point(122, 196);
             this.gunaProjPath.Name = "gunaProjPath";
             this.gunaProjPath.PasswordChar = '\0';
             this.gunaProjPath.ReadOnly = true;
@@ -466,10 +468,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Josefin Sans", 9F);
             this.label3.ForeColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(11, 205);
+            this.label3.Location = new System.Drawing.Point(11, 203);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 13);
+            this.label3.Size = new System.Drawing.Size(92, 19);
             this.label3.TabIndex = 15;
             this.label3.Text = "CSProject path:";
             // 
@@ -484,7 +487,7 @@
             this.gunaBuildPath.FocusedForeColor = System.Drawing.SystemColors.Control;
             this.gunaBuildPath.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.gunaBuildPath.ForeColor = System.Drawing.SystemColors.Control;
-            this.gunaBuildPath.Location = new System.Drawing.Point(110, 166);
+            this.gunaBuildPath.Location = new System.Drawing.Point(122, 166);
             this.gunaBuildPath.Name = "gunaBuildPath";
             this.gunaBuildPath.PasswordChar = '\0';
             this.gunaBuildPath.ReadOnly = true;
@@ -506,7 +509,7 @@
             this.gunaFindBuild.ForeColor = System.Drawing.SystemColors.Control;
             this.gunaFindBuild.Image = null;
             this.gunaFindBuild.ImageSize = new System.Drawing.Size(20, 20);
-            this.gunaFindBuild.Location = new System.Drawing.Point(291, 166);
+            this.gunaFindBuild.Location = new System.Drawing.Point(303, 166);
             this.gunaFindBuild.Name = "gunaFindBuild";
             this.gunaFindBuild.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
             this.gunaFindBuild.OnHoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
@@ -522,10 +525,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Josefin Sans", 9F);
             this.label2.ForeColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(11, 173);
+            this.label2.Location = new System.Drawing.Point(11, 171);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 13);
+            this.label2.Size = new System.Drawing.Size(105, 19);
             this.label2.TabIndex = 10;
             this.label2.Text = "MSBuild.exe path:";
             // 
@@ -535,6 +539,7 @@
             this.gunaHideConsole.CheckedOffColor = System.Drawing.Color.Gray;
             this.gunaHideConsole.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.gunaHideConsole.FillColor = System.Drawing.Color.White;
+            this.gunaHideConsole.Font = new System.Drawing.Font("Josefin Sans", 9F);
             this.gunaHideConsole.ForeColor = System.Drawing.SystemColors.Control;
             this.gunaHideConsole.Location = new System.Drawing.Point(11, 145);
             this.gunaHideConsole.Name = "gunaHideConsole";
@@ -548,6 +553,7 @@
             this.gunaForwardedPorts.CheckedOffColor = System.Drawing.Color.Gray;
             this.gunaForwardedPorts.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.gunaForwardedPorts.FillColor = System.Drawing.Color.White;
+            this.gunaForwardedPorts.Font = new System.Drawing.Font("Josefin Sans", 9F);
             this.gunaForwardedPorts.ForeColor = System.Drawing.SystemColors.Control;
             this.gunaForwardedPorts.Location = new System.Drawing.Point(11, 119);
             this.gunaForwardedPorts.Name = "gunaForwardedPorts";
@@ -561,6 +567,7 @@
             this.gunaOpenFolder.CheckedOffColor = System.Drawing.Color.Gray;
             this.gunaOpenFolder.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.gunaOpenFolder.FillColor = System.Drawing.Color.White;
+            this.gunaOpenFolder.Font = new System.Drawing.Font("Josefin Sans", 9F);
             this.gunaOpenFolder.ForeColor = System.Drawing.SystemColors.Control;
             this.gunaOpenFolder.Location = new System.Drawing.Point(11, 93);
             this.gunaOpenFolder.Name = "gunaOpenFolder";
@@ -578,7 +585,7 @@
             this.buildButton.BorderSize = 1;
             this.buildButton.DialogResult = System.Windows.Forms.DialogResult.None;
             this.buildButton.FocusedColor = System.Drawing.Color.Empty;
-            this.buildButton.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.buildButton.Font = new System.Drawing.Font("Josefin Sans", 9F);
             this.buildButton.ForeColor = System.Drawing.SystemColors.Control;
             this.buildButton.Image = null;
             this.buildButton.ImageSize = new System.Drawing.Size(20, 20);
@@ -601,6 +608,7 @@
             this.gunaCopyStartUp.CheckedOffColor = System.Drawing.Color.Gray;
             this.gunaCopyStartUp.CheckedOnColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.gunaCopyStartUp.FillColor = System.Drawing.Color.White;
+            this.gunaCopyStartUp.Font = new System.Drawing.Font("Josefin Sans", 9F);
             this.gunaCopyStartUp.ForeColor = System.Drawing.SystemColors.Control;
             this.gunaCopyStartUp.Location = new System.Drawing.Point(11, 67);
             this.gunaCopyStartUp.Name = "gunaCopyStartUp";
