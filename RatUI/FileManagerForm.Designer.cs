@@ -39,10 +39,10 @@
             this.titleLabel = new System.Windows.Forms.Label();
             this.gunadirPath = new Guna.UI.WinForms.GunaTextBox();
             this.gunaFilesTable = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.gunaDragControl = new Guna.UI.WinForms.GunaDragControl(this.components);
             this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gunaDragControl = new Guna.UI.WinForms.GunaDragControl(this.components);
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gunaFilesTable)).BeginInit();
             this.SuspendLayout();
@@ -178,10 +178,6 @@
             this.gunaFilesTable.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
             this.gunaFilesTable.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.SystemColors.Control;
             // 
-            // gunaDragControl
-            // 
-            this.gunaDragControl.TargetControl = this.titleLabel;
-            // 
             // columnName
             // 
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -202,6 +198,10 @@
             this.columnSize.HeaderText = "Size";
             this.columnSize.Name = "columnSize";
             this.columnSize.ReadOnly = true;
+            // 
+            // gunaDragControl
+            // 
+            this.gunaDragControl.TargetControl = this.titleLabel;
             // 
             // FileManagerForm
             // 

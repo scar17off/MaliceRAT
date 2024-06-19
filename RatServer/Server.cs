@@ -26,7 +26,6 @@ namespace MaliceRAT.RatServer
         public event Action<Victim, dynamic> MessageReceived;
         public event Action<Victim> ClientConnected;
         public event Action<Victim> ClientDisconnected;
-        public event Action<Victim, string> KeystrokeReceived;
         #endregion
 
         #region Variables
