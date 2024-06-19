@@ -34,20 +34,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.guna2TabControl1 = new Guna.UI2.WinForms.Guna2TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.gunaTextBox1 = new Guna.UI.WinForms.GunaTextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.gunaVictimsTable = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LastActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Flag = new System.Windows.Forms.DataGridViewImageColumn();
-            this.IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.OS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.User = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.buildDownloadProgressBar = new System.Windows.Forms.ProgressBar();
             this.gunaGetMSBuild = new Guna.UI.WinForms.GunaButton();
@@ -67,24 +59,22 @@
             this.buildButton = new Guna.UI.WinForms.GunaButton();
             this.gunaCopyStartUp = new Guna.UI.WinForms.GunaCheckBox();
             this.gunaDragControl = new Guna.UI.WinForms.GunaDragControl(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
+            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.gunaLAN = new Guna.UI.WinForms.GunaButton();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Flag = new System.Windows.Forms.DataGridViewImageColumn();
+            this.IP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.User = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.guna2TabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gunaVictimsTable)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // guna2PictureBox1
-            // 
-            this.guna2PictureBox1.Image = global::MaliceRAT.Properties.Resources.Logo;
-            this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(80, 200);
-            this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(226, 226);
-            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.guna2PictureBox1.TabIndex = 1;
-            this.guna2PictureBox1.TabStop = false;
             // 
             // label1
             // 
@@ -254,53 +244,10 @@
             this.gunaVictimsTable.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
             this.gunaVictimsTable.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.SystemColors.Control;
             // 
-            // ID
-            // 
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            // 
-            // LastActive
-            // 
-            this.LastActive.HeaderText = "Last Active";
-            this.LastActive.Name = "LastActive";
-            this.LastActive.ReadOnly = true;
-            // 
-            // Flag
-            // 
-            this.Flag.HeaderText = "Flag";
-            this.Flag.Name = "Flag";
-            this.Flag.ReadOnly = true;
-            this.Flag.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Flag.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // IP
-            // 
-            this.IP.HeaderText = "IP";
-            this.IP.Name = "IP";
-            this.IP.ReadOnly = true;
-            // 
-            // OS
-            // 
-            this.OS.HeaderText = "OS";
-            this.OS.Name = "OS";
-            this.OS.ReadOnly = true;
-            // 
-            // User
-            // 
-            this.User.HeaderText = "User";
-            this.User.Name = "User";
-            this.User.ReadOnly = true;
-            // 
-            // PC
-            // 
-            this.PC.HeaderText = "PC";
-            this.PC.Name = "PC";
-            this.PC.ReadOnly = true;
-            // 
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(19)))), ((int)(((byte)(21)))));
+            this.tabPage3.Controls.Add(this.gunaLAN);
             this.tabPage3.Controls.Add(this.buildDownloadProgressBar);
             this.tabPage3.Controls.Add(this.gunaGetMSBuild);
             this.tabPage3.Controls.Add(this.gunaHostPort);
@@ -406,7 +353,6 @@
             this.gunaHostIP.SelectedText = "";
             this.gunaHostIP.Size = new System.Drawing.Size(175, 26);
             this.gunaHostIP.TabIndex = 19;
-            this.gunaHostIP.Text = "0.0.0.0";
             // 
             // label4
             // 
@@ -620,6 +566,91 @@
             // 
             this.gunaDragControl.TargetControl = this.guna2TabControl1;
             // 
+            // guna2PictureBox1
+            // 
+            this.guna2PictureBox1.Image = global::MaliceRAT.Properties.Resources.Logo;
+            this.guna2PictureBox1.ImageRotate = 0F;
+            this.guna2PictureBox1.Location = new System.Drawing.Point(80, 200);
+            this.guna2PictureBox1.Name = "guna2PictureBox1";
+            this.guna2PictureBox1.Size = new System.Drawing.Size(226, 226);
+            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.guna2PictureBox1.TabIndex = 1;
+            this.guna2PictureBox1.TabStop = false;
+            // 
+            // gunaLAN
+            // 
+            this.gunaLAN.Animated = true;
+            this.gunaLAN.AnimationHoverSpeed = 0.07F;
+            this.gunaLAN.AnimationSpeed = 0.03F;
+            this.gunaLAN.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
+            this.gunaLAN.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.gunaLAN.BorderSize = 1;
+            this.gunaLAN.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.gunaLAN.FocusedColor = System.Drawing.Color.Empty;
+            this.gunaLAN.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.gunaLAN.ForeColor = System.Drawing.SystemColors.Control;
+            this.gunaLAN.Image = null;
+            this.gunaLAN.ImageSize = new System.Drawing.Size(20, 20);
+            this.gunaLAN.Location = new System.Drawing.Point(303, 3);
+            this.gunaLAN.Name = "gunaLAN";
+            this.gunaLAN.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
+            this.gunaLAN.OnHoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
+            this.gunaLAN.OnHoverForeColor = System.Drawing.Color.White;
+            this.gunaLAN.OnHoverImage = null;
+            this.gunaLAN.OnPressedColor = System.Drawing.Color.Black;
+            this.gunaLAN.Size = new System.Drawing.Size(32, 26);
+            this.gunaLAN.TabIndex = 24;
+            this.gunaLAN.Text = "LAN";
+            this.gunaLAN.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.gunaLAN.TextRenderingHint = Guna.UI.WinForms.DrawingTextRenderingHint.ClearTypeGridFit;
+            this.gunaLAN.Click += new System.EventHandler(this.gunaLAN_Click);
+            // 
+            // ID
+            // 
+            this.ID.FillWeight = 20F;
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            // 
+            // LastActive
+            // 
+            this.LastActive.HeaderText = "Last Active";
+            this.LastActive.Name = "LastActive";
+            this.LastActive.ReadOnly = true;
+            // 
+            // Flag
+            // 
+            this.Flag.FillWeight = 20F;
+            this.Flag.HeaderText = "Flag";
+            this.Flag.Name = "Flag";
+            this.Flag.ReadOnly = true;
+            this.Flag.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Flag.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // IP
+            // 
+            this.IP.HeaderText = "IP";
+            this.IP.Name = "IP";
+            this.IP.ReadOnly = true;
+            // 
+            // OS
+            // 
+            this.OS.HeaderText = "OS";
+            this.OS.Name = "OS";
+            this.OS.ReadOnly = true;
+            // 
+            // User
+            // 
+            this.User.HeaderText = "User";
+            this.User.Name = "User";
+            this.User.ReadOnly = true;
+            // 
+            // PC
+            // 
+            this.PC.HeaderText = "PC";
+            this.PC.Name = "PC";
+            this.PC.ReadOnly = true;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -631,13 +662,13 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
             this.Text = "MaliceRAT";
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             this.guna2TabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gunaVictimsTable)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -655,13 +686,6 @@
         private Guna.UI.WinForms.GunaCheckBox gunaOpenFolder;
         private Guna.UI.WinForms.GunaTextBox gunaTextBox1;
         private Guna.UI.WinForms.GunaCheckBox gunaForwardedPorts;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LastActive;
-        private System.Windows.Forms.DataGridViewImageColumn Flag;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IP;
-        private System.Windows.Forms.DataGridViewTextBoxColumn OS;
-        private System.Windows.Forms.DataGridViewTextBoxColumn User;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PC;
         private Guna.UI.WinForms.GunaCheckBox gunaHideConsole;
         private Guna.UI.WinForms.GunaDragControl gunaDragControl;
         private Guna.UI.WinForms.GunaButton gunaFindBuild;
@@ -676,6 +700,14 @@
         private System.Windows.Forms.Label label4;
         private Guna.UI.WinForms.GunaButton gunaGetMSBuild;
         private System.Windows.Forms.ProgressBar buildDownloadProgressBar;
+        private Guna.UI.WinForms.GunaButton gunaLAN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LastActive;
+        private System.Windows.Forms.DataGridViewImageColumn Flag;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn User;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PC;
     }
 }
 

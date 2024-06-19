@@ -156,9 +156,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RatServer\Features\Heartbeat.cs" />
     <Compile Include="RatServer\Features\ScreenViewer.cs" />
+    <Compile Include="RatServer\Features\SystemInformation.cs" />
     <Compile Include="RatServer\Victim.cs" />
     <Compile Include="RatServer\Server.cs" />
     <Compile Include="RatServer\Utilities.cs" />
+    <Compile Include="RatUI\FileManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RatUI\FileManagerForm.Designer.cs">
+      <DependentUpon>FileManagerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="RatUI\KeyLoggerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -184,6 +191,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RatUI\FileManagerForm.resx">
+      <DependentUpon>FileManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RatUI\KeyLoggerForm.resx">
       <DependentUpon>KeyLoggerForm.cs</DependentUpon>
     </EmbeddedResource>

