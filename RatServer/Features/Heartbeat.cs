@@ -46,9 +46,9 @@ namespace MaliceRAT.RatServer.Features
             heartbeatTimer.Stop();
         }
 
-        private void HandleMessage(Victim victim, dynamic jsonMessage)
+        private void HandleMessage(Victim victim, dynamic message)
         {
-            if (jsonMessage["type"] == "heartbeat")
+            if (message["type"] == "heartbeat")
             {
                 heartbeatReceived = true;
             }

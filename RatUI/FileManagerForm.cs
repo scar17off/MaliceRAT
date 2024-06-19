@@ -20,7 +20,7 @@ namespace MaliceRAT.RatUI
             this.victimId = victimId;
             this.server = server;
 
-            server.FilesAndFoldersReceived += OnFilesAndFoldersReceived;
+            server.fileManager.FilesAndFoldersReceived += OnFilesAndFoldersReceived;
 
             titleLabel.Text = $"File Manager [{server.GetVictimById(victimId).User}]";
         }

