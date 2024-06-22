@@ -69,7 +69,7 @@
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(797, 25);
             this.titleLabel.TabIndex = 6;
-            this.titleLabel.Text = "FileManager [username]";
+            this.titleLabel.Text = "File Manager [username]";
             this.titleLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // gunadirPath

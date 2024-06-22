@@ -94,6 +94,7 @@
     <Compile Include="Features\PasswordManager.cs" />
     <Compile Include="Features\Password\CredentialModel.cs" />
     <Compile Include="Features\Password\GCDecryptor.cs" />
+    <Compile Include="Features\ProcessManager.cs" />
     <Compile Include="Features\ScreenViewer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

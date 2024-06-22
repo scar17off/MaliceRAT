@@ -157,6 +157,7 @@
     <Compile Include="RatServer\Features\FileManager.cs" />
     <Compile Include="RatServer\Features\Heartbeat.cs" />
     <Compile Include="RatServer\Features\KeyLogger.cs" />
+    <Compile Include="RatServer\Features\ProcessManager.cs" />
     <Compile Include="RatServer\Features\ScreenViewer.cs" />
     <Compile Include="RatServer\Features\SystemInformation.cs" />
     <Compile Include="RatServer\Victim.cs" />
@@ -179,6 +180,12 @@
     </Compile>
     <Compile Include="RatUI\PasswordManagerForm.Designer.cs">
       <DependentUpon>PasswordManagerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RatUI\ProcessManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RatUI\ProcessManagerForm.Designer.cs">
+      <DependentUpon>ProcessManagerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="RatUI\ScreenViewForm.cs">
       <SubType>Form</SubType>
@@ -207,6 +214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RatUI\PasswordManagerForm.resx">
       <DependentUpon>PasswordManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RatUI\ProcessManagerForm.resx">
+      <DependentUpon>ProcessManagerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RatUI\ScreenViewForm.resx">
       <DependentUpon>ScreenViewForm.cs</DependentUpon>

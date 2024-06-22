@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -42,6 +43,7 @@
             this.columnSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.guna2TabControl1 = new Guna.UI2.WinForms.Guna2TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.gunaDragControl = new Guna.UI.WinForms.GunaDragControl(this.components);
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gunaPasswordsTable)).BeginInit();
             this.guna2TabControl1.SuspendLayout();
@@ -107,7 +109,7 @@
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gunaPasswordsTable.DefaultCellStyle = dataGridViewCellStyle4;
             this.gunaPasswordsTable.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
-            this.gunaPasswordsTable.Location = new System.Drawing.Point(5, 3);
+            this.gunaPasswordsTable.Location = new System.Drawing.Point(0, 0);
             this.gunaPasswordsTable.Margin = new System.Windows.Forms.Padding(0);
             this.gunaPasswordsTable.MultiSelect = false;
             this.gunaPasswordsTable.Name = "gunaPasswordsTable";
@@ -134,7 +136,7 @@
             this.gunaPasswordsTable.RowTemplate.ReadOnly = true;
             this.gunaPasswordsTable.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.gunaPasswordsTable.ShowCellToolTips = false;
-            this.gunaPasswordsTable.Size = new System.Drawing.Size(787, 379);
+            this.gunaPasswordsTable.Size = new System.Drawing.Size(796, 390);
             this.gunaPasswordsTable.TabIndex = 19;
             this.gunaPasswordsTable.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.SystemColors.Control;
             this.gunaPasswordsTable.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -220,6 +222,10 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Chrome";
             // 
+            // gunaDragControl
+            // 
+            this.gunaDragControl.TargetControl = this.titleLabel;
+            // 
             // PasswordManagerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -250,5 +256,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn columnSize;
         private Guna.UI2.WinForms.Guna2TabControl guna2TabControl1;
         private System.Windows.Forms.TabPage tabPage2;
+        private Guna.UI.WinForms.GunaDragControl gunaDragControl;
     }
 }

