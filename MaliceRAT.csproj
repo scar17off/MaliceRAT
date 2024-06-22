@@ -174,7 +174,9 @@
     <Compile Include="RatUI\KeyLoggerForm.Designer.cs">
       <DependentUpon>KeyLoggerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="RatUI\PasswordManagerForm.cs" />
+    <Compile Include="RatUI\PasswordManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="RatUI\PasswordManagerForm.Designer.cs">
       <DependentUpon>PasswordManagerForm.cs</DependentUpon>
     </Compile>

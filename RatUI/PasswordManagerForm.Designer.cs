@@ -228,6 +228,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.guna2TabControl1);
             this.Controls.Add(this.flowLayoutPanel2);
+            this.ForeColor = System.Drawing.SystemColors.Control;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PasswordManagerForm";
             this.Text = "PasswordManagerForm";

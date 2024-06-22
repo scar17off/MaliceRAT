@@ -33,8 +33,8 @@
             this.UpdateButton = new Guna.UI.WinForms.GunaButton();
             this.UpdateIntervalButton = new Guna.UI.WinForms.GunaButton();
             this.StopButton = new Guna.UI.WinForms.GunaButton();
-            this.pictureBox = new Guna.UI.WinForms.GunaPictureBox();
             this.intervalTextBox = new System.Windows.Forms.TextBox();
+            this.pictureBox = new Guna.UI.WinForms.GunaPictureBox();
             this.titleLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.gunaDragControl = new Guna.UI.WinForms.GunaDragControl(this.components);
@@ -138,16 +138,6 @@
             this.StopButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
-            // pictureBox
-            // 
-            this.pictureBox.BaseColor = System.Drawing.Color.Transparent;
-            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox.Location = new System.Drawing.Point(0, 29);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(799, 380);
-            this.pictureBox.TabIndex = 5;
-            this.pictureBox.TabStop = false;
-            // 
             // intervalTextBox
             // 
             this.intervalTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
@@ -163,6 +153,16 @@
             this.intervalTextBox.Text = "1000";
             this.intervalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.intervalTextBox.WordWrap = false;
+            // 
+            // pictureBox
+            // 
+            this.pictureBox.BaseColor = System.Drawing.Color.Transparent;
+            this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox.Location = new System.Drawing.Point(0, 29);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(799, 380);
+            this.pictureBox.TabIndex = 5;
+            this.pictureBox.TabStop = false;
             // 
             // titleLabel
             // 
@@ -203,6 +203,7 @@
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.flowLayoutPanel1);
+            this.ForeColor = System.Drawing.SystemColors.Control;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ScreenViewForm";
             this.Text = "Screen viewer";
