@@ -11,11 +11,11 @@ MaliceRAT is a powerful remote access tool designed for covert surveillance and 
 - [ ] Remote Shell
 - [ ] Remote Command Line
 - [ ] Registry Editor
-- [ ] Password Manager
+- [x] Password Manager
 - [ ] Remote Shutdown/Restart
 - [ ] Remote Clipboard
-- [ ] Process Manager
-- [ ] File Manager
+- [x] Process Manager
+- [x] File Manager
 
 ## Usage
 1. Start the server on a control machine.
