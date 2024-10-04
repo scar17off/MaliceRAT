@@ -177,6 +177,7 @@
             this.gunaFilesTable.ThemeStyle.RowsStyle.Height = 22;
             this.gunaFilesTable.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
             this.gunaFilesTable.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.SystemColors.Control;
+            this.gunaFilesTable.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gunaFilesTable_CellDoubleClick);
             // 
             // columnName
             // 
