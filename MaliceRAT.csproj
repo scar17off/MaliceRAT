@@ -163,6 +163,12 @@
     <Compile Include="RatServer\Victim.cs" />
     <Compile Include="RatServer\Server.cs" />
     <Compile Include="RatServer\Utilities.cs" />
+    <Compile Include="RatUI\ApplicationEnumeration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RatUI\ApplicationEnumeration.Designer.cs">
+      <DependentUpon>ApplicationEnumeration.cs</DependentUpon>
+    </Compile>
     <Compile Include="RatUI\FileManagerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -206,6 +212,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RatUI\ApplicationEnumeration.resx">
+      <DependentUpon>ApplicationEnumeration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RatUI\FileManagerForm.resx">
       <DependentUpon>FileManagerForm.cs</DependentUpon>
     </EmbeddedResource>

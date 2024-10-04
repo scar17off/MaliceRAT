@@ -327,6 +327,7 @@ namespace MaliceRAT
                 CreateMenuItem("File Manager", FileManager_Click),
                 CreateMenuItem("Password Manager", PasswordManager_Click),
                 CreateMenuItem("Process Manager", ProcessManager_Click),
+                CreateMenuItem("Application Enumeration", ApplicationEnumeration_Click),
                 CreateMenuItem("Disconnect", Disconnect_Click)
             };
 
@@ -345,6 +346,7 @@ namespace MaliceRAT
         private void FileManager_Click(object sender, EventArgs e) => OpenFormIfIdExists<FileManagerForm>(id => new FileManagerForm(id, server));
         private void PasswordManager_Click(object sender, EventArgs e) => OpenFormIfIdExists<PasswordManagerForm>(id => new PasswordManagerForm(id, server));
         private void ProcessManager_Click(object sender, EventArgs e) => OpenFormIfIdExists<ProcessManagerForm>(id => new ProcessManagerForm(id, server));
+        private void ApplicationEnumeration_Click(object sender, EventArgs e) => OpenFormIfIdExists<Application_Enumeration>(id => new Application_Enumeration(id, server));
         private void Disconnect_Click(object sender, EventArgs e)
         {
             var id = GetSelectedId();
