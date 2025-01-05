@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.gunaDragControl = new Guna.UI.WinForms.GunaDragControl(this.components);
+            this.gunaDragControl = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.titleLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel2.SuspendLayout();
@@ -98,7 +98,7 @@
         #endregion
 
         private System.Windows.Forms.TextBox textBox1;
-        private Guna.UI.WinForms.GunaDragControl gunaDragControl;
+        private Guna.UI2.WinForms.Guna2DragControl gunaDragControl;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Label titleLabel;
     }

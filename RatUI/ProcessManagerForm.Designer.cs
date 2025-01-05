@@ -36,7 +36,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.titleLabel = new System.Windows.Forms.Label();
-            this.gunaDragControl = new Guna.UI.WinForms.GunaDragControl(this.components);
+            this.gunaDragControl = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.gunaProcessTable = new Guna.UI2.WinForms.Guna2DataGridView();
             this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -192,7 +192,7 @@
         #endregion
 
         private System.Windows.Forms.Label titleLabel;
-        private Guna.UI.WinForms.GunaDragControl gunaDragControl;
+        private Guna.UI2.WinForms.Guna2DragControl gunaDragControl;
         private Guna.UI2.WinForms.Guna2DataGridView gunaProcessTable;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn DisplayName;

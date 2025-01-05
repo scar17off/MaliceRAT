@@ -30,14 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.UpdateButton = new Guna.UI.WinForms.GunaButton();
-            this.UpdateIntervalButton = new Guna.UI.WinForms.GunaButton();
-            this.StopButton = new Guna.UI.WinForms.GunaButton();
+            this.UpdateButton = new Guna.UI2.WinForms.Guna2Button();
+            this.UpdateIntervalButton = new Guna.UI2.WinForms.Guna2Button();
+            this.StopButton = new Guna.UI2.WinForms.Guna2Button();
             this.intervalTextBox = new System.Windows.Forms.TextBox();
-            this.pictureBox = new Guna.UI.WinForms.GunaPictureBox();
+            this.pictureBox = new Guna.UI2.WinForms.Guna2PictureBox();
             this.titleLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.gunaDragControl = new Guna.UI.WinForms.GunaDragControl(this.components);
+            this.gunaDragControl = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
@@ -60,11 +60,7 @@
             // UpdateButton
             // 
             this.UpdateButton.Animated = true;
-            this.UpdateButton.AnimationHoverSpeed = 0.07F;
-            this.UpdateButton.AnimationSpeed = 0.03F;
-            this.UpdateButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
             this.UpdateButton.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.UpdateButton.BorderSize = 1;
             this.UpdateButton.DialogResult = System.Windows.Forms.DialogResult.None;
             this.UpdateButton.FocusedColor = System.Drawing.Color.Empty;
             this.UpdateButton.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -73,11 +69,6 @@
             this.UpdateButton.ImageSize = new System.Drawing.Size(20, 20);
             this.UpdateButton.Location = new System.Drawing.Point(3, 3);
             this.UpdateButton.Name = "UpdateButton";
-            this.UpdateButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
-            this.UpdateButton.OnHoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.UpdateButton.OnHoverForeColor = System.Drawing.Color.White;
-            this.UpdateButton.OnHoverImage = null;
-            this.UpdateButton.OnPressedColor = System.Drawing.Color.Black;
             this.UpdateButton.Size = new System.Drawing.Size(60, 28);
             this.UpdateButton.TabIndex = 5;
             this.UpdateButton.Text = "Update";
@@ -87,11 +78,7 @@
             // UpdateIntervalButton
             // 
             this.UpdateIntervalButton.Animated = true;
-            this.UpdateIntervalButton.AnimationHoverSpeed = 0.07F;
-            this.UpdateIntervalButton.AnimationSpeed = 0.03F;
-            this.UpdateIntervalButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
             this.UpdateIntervalButton.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.UpdateIntervalButton.BorderSize = 1;
             this.UpdateIntervalButton.DialogResult = System.Windows.Forms.DialogResult.None;
             this.UpdateIntervalButton.FocusedColor = System.Drawing.Color.Empty;
             this.UpdateIntervalButton.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -100,11 +87,6 @@
             this.UpdateIntervalButton.ImageSize = new System.Drawing.Size(20, 20);
             this.UpdateIntervalButton.Location = new System.Drawing.Point(69, 3);
             this.UpdateIntervalButton.Name = "UpdateIntervalButton";
-            this.UpdateIntervalButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
-            this.UpdateIntervalButton.OnHoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.UpdateIntervalButton.OnHoverForeColor = System.Drawing.Color.White;
-            this.UpdateIntervalButton.OnHoverImage = null;
-            this.UpdateIntervalButton.OnPressedColor = System.Drawing.Color.Black;
             this.UpdateIntervalButton.Size = new System.Drawing.Size(97, 28);
             this.UpdateIntervalButton.TabIndex = 6;
             this.UpdateIntervalButton.Text = "Update interval";
@@ -114,11 +96,7 @@
             // StopButton
             // 
             this.StopButton.Animated = true;
-            this.StopButton.AnimationHoverSpeed = 0.07F;
-            this.StopButton.AnimationSpeed = 0.03F;
-            this.StopButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
             this.StopButton.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.StopButton.BorderSize = 1;
             this.StopButton.DialogResult = System.Windows.Forms.DialogResult.None;
             this.StopButton.FocusedColor = System.Drawing.Color.Empty;
             this.StopButton.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -127,11 +105,6 @@
             this.StopButton.ImageSize = new System.Drawing.Size(20, 20);
             this.StopButton.Location = new System.Drawing.Point(172, 3);
             this.StopButton.Name = "StopButton";
-            this.StopButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
-            this.StopButton.OnHoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.StopButton.OnHoverForeColor = System.Drawing.Color.White;
-            this.StopButton.OnHoverImage = null;
-            this.StopButton.OnPressedColor = System.Drawing.Color.Black;
             this.StopButton.Size = new System.Drawing.Size(97, 28);
             this.StopButton.TabIndex = 7;
             this.StopButton.Text = "Stop";
@@ -156,7 +129,6 @@
             // 
             // pictureBox
             // 
-            this.pictureBox.BaseColor = System.Drawing.Color.Transparent;
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox.Location = new System.Drawing.Point(0, 29);
             this.pictureBox.Name = "pictureBox";
@@ -219,13 +191,13 @@
 
         #endregion
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private Guna.UI.WinForms.GunaButton UpdateButton;
-        private Guna.UI.WinForms.GunaButton UpdateIntervalButton;
-        private Guna.UI.WinForms.GunaButton StopButton;
-        private Guna.UI.WinForms.GunaPictureBox pictureBox;
+        private Guna.UI2.WinForms.Guna2Button UpdateButton;
+        private Guna.UI2.WinForms.Guna2Button UpdateIntervalButton;
+        private Guna.UI2.WinForms.Guna2Button StopButton;
+        private Guna.UI2.WinForms.Guna2PictureBox pictureBox;
         private System.Windows.Forms.TextBox intervalTextBox;
         private System.Windows.Forms.Label titleLabel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private Guna.UI.WinForms.GunaDragControl gunaDragControl;
+        private Guna.UI2.WinForms.Guna2DragControl gunaDragControl;
     }
 }

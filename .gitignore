@@ -9,3 +9,4 @@ bin/Debug/*
 !bin/Debug/flags/
 RatClient/bin/*
 RatClient/bin/Debug/*
+GunaPatcher.exe

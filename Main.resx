@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="gunaTextBox1.Text" xml:space="preserve">
+  <data name="gunaTextBox1.DefaultText" xml:space="preserve">
     <value>This is THE FIRST RELEASE of MaliceRAT. 
 
 MaliceRAT is a REMOTE ACCESS TOOL (RAT) that enables attackers to gain unauthorized access to a victim's computer. It can be used to steal sensitive information, install malware, and carry out malicious activities. 

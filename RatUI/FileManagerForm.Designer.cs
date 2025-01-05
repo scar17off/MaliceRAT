@@ -37,12 +37,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.titleLabel = new System.Windows.Forms.Label();
-            this.gunadirPath = new Guna.UI.WinForms.GunaTextBox();
+            this.gunadirPath = new Guna.UI2.WinForms.Guna2TextBox();
             this.gunaFilesTable = new Guna.UI2.WinForms.Guna2DataGridView();
             this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gunaDragControl = new Guna.UI.WinForms.GunaDragControl(this.components);
+            this.gunaDragControl = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gunaFilesTable)).BeginInit();
             this.SuspendLayout();
@@ -74,13 +74,8 @@
             // 
             // gunadirPath
             // 
-            this.gunadirPath.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
             this.gunadirPath.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.gunadirPath.BorderSize = 1;
             this.gunadirPath.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.gunadirPath.FocusedBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
-            this.gunadirPath.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.gunadirPath.FocusedForeColor = System.Drawing.SystemColors.Control;
             this.gunadirPath.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.gunadirPath.ForeColor = System.Drawing.SystemColors.Control;
             this.gunadirPath.Location = new System.Drawing.Point(0, 25);
@@ -228,9 +223,9 @@
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Label titleLabel;
-        private Guna.UI.WinForms.GunaTextBox gunadirPath;
+        private Guna.UI2.WinForms.Guna2TextBox gunadirPath;
         private Guna.UI2.WinForms.Guna2DataGridView gunaFilesTable;
-        private Guna.UI.WinForms.GunaDragControl gunaDragControl;
+        private Guna.UI2.WinForms.Guna2DragControl gunaDragControl;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnType;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnSize;

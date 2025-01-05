@@ -37,8 +37,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.titleLabel = new System.Windows.Forms.Label();
-            this.gunaDragControl = new Guna.UI.WinForms.GunaDragControl(this.components);
-            this.exportAsCsvButton = new Guna.UI.WinForms.GunaButton();
+            this.gunaDragControl = new Guna.UI2.WinForms.Guna2DragControl(this.components);
+            this.exportAsCsvButton = new Guna.UI2.WinForms.Guna2Button();
             this.gunaProgramsTable = new Guna.UI2.WinForms.Guna2DataGridView();
             this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnVersion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,11 +80,7 @@
             // exportAsCsvButton
             // 
             this.exportAsCsvButton.Animated = true;
-            this.exportAsCsvButton.AnimationHoverSpeed = 0.07F;
-            this.exportAsCsvButton.AnimationSpeed = 0.03F;
-            this.exportAsCsvButton.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
             this.exportAsCsvButton.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.exportAsCsvButton.BorderSize = 1;
             this.exportAsCsvButton.DialogResult = System.Windows.Forms.DialogResult.None;
             this.exportAsCsvButton.FocusedColor = System.Drawing.Color.Empty;
             this.exportAsCsvButton.Font = new System.Drawing.Font("Josefin Sans", 9F);
@@ -93,11 +89,6 @@
             this.exportAsCsvButton.ImageSize = new System.Drawing.Size(20, 20);
             this.exportAsCsvButton.Location = new System.Drawing.Point(12, 415);
             this.exportAsCsvButton.Name = "exportAsCsvButton";
-            this.exportAsCsvButton.OnHoverBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(28)))));
-            this.exportAsCsvButton.OnHoverBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.exportAsCsvButton.OnHoverForeColor = System.Drawing.Color.White;
-            this.exportAsCsvButton.OnHoverImage = null;
-            this.exportAsCsvButton.OnPressedColor = System.Drawing.Color.Black;
             this.exportAsCsvButton.Size = new System.Drawing.Size(776, 28);
             this.exportAsCsvButton.TabIndex = 23;
             this.exportAsCsvButton.Text = "Export as CSV";
@@ -240,8 +231,8 @@
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Label titleLabel;
-        private Guna.UI.WinForms.GunaDragControl gunaDragControl;
-        private Guna.UI.WinForms.GunaButton exportAsCsvButton;
+        private Guna.UI2.WinForms.Guna2DragControl gunaDragControl;
+        private Guna.UI2.WinForms.Guna2Button exportAsCsvButton;
         private Guna.UI2.WinForms.Guna2DataGridView gunaProgramsTable;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnVersion;
