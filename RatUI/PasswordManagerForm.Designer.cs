@@ -78,7 +78,7 @@
             // titleLabel
             // 
             this.titleLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.titleLabel.Font = new System.Drawing.Font("Josefin Sans", 10F);
+            this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.titleLabel.ForeColor = System.Drawing.SystemColors.Control;
             this.titleLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.titleLabel.Location = new System.Drawing.Point(0, 0);
@@ -103,7 +103,7 @@
             this.gunaChromePasswordsTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(21)))), ((int)(((byte)(23)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -116,7 +116,7 @@
             this.columnSize});
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(27)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.Control;
@@ -130,7 +130,7 @@
             this.gunaChromePasswordsTable.ReadOnly = true;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(19)))), ((int)(((byte)(21)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.Control;
@@ -161,14 +161,14 @@
             this.gunaChromePasswordsTable.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
             this.gunaChromePasswordsTable.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(21)))), ((int)(((byte)(23)))));
             this.gunaChromePasswordsTable.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.gunaChromePasswordsTable.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
+            this.gunaChromePasswordsTable.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.gunaChromePasswordsTable.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.gunaChromePasswordsTable.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gunaChromePasswordsTable.ThemeStyle.HeaderStyle.Height = 30;
             this.gunaChromePasswordsTable.ThemeStyle.ReadOnly = true;
             this.gunaChromePasswordsTable.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(19)))), ((int)(((byte)(21)))));
             this.gunaChromePasswordsTable.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.gunaChromePasswordsTable.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
+            this.gunaChromePasswordsTable.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.gunaChromePasswordsTable.ThemeStyle.RowsStyle.ForeColor = System.Drawing.SystemColors.Control;
             this.gunaChromePasswordsTable.ThemeStyle.RowsStyle.Height = 22;
             this.gunaChromePasswordsTable.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
@@ -208,17 +208,17 @@
             this.guna2TabControl1.Size = new System.Drawing.Size(800, 380);
             this.guna2TabControl1.TabButtonHoverState.BorderColor = System.Drawing.Color.Empty;
             this.guna2TabControl1.TabButtonHoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(19)))), ((int)(((byte)(19)))));
-            this.guna2TabControl1.TabButtonHoverState.Font = new System.Drawing.Font("Josefin Sans", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.guna2TabControl1.TabButtonHoverState.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.guna2TabControl1.TabButtonHoverState.ForeColor = System.Drawing.Color.White;
             this.guna2TabControl1.TabButtonHoverState.InnerColor = System.Drawing.Color.Transparent;
             this.guna2TabControl1.TabButtonIdleState.BorderColor = System.Drawing.Color.Empty;
             this.guna2TabControl1.TabButtonIdleState.FillColor = System.Drawing.Color.Transparent;
-            this.guna2TabControl1.TabButtonIdleState.Font = new System.Drawing.Font("Josefin Sans", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.guna2TabControl1.TabButtonIdleState.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.guna2TabControl1.TabButtonIdleState.ForeColor = System.Drawing.Color.White;
             this.guna2TabControl1.TabButtonIdleState.InnerColor = System.Drawing.Color.Transparent;
             this.guna2TabControl1.TabButtonSelectedState.BorderColor = System.Drawing.Color.Empty;
             this.guna2TabControl1.TabButtonSelectedState.FillColor = System.Drawing.Color.Transparent;
-            this.guna2TabControl1.TabButtonSelectedState.Font = new System.Drawing.Font("Josefin Sans", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.guna2TabControl1.TabButtonSelectedState.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.guna2TabControl1.TabButtonSelectedState.ForeColor = System.Drawing.Color.White;
             this.guna2TabControl1.TabButtonSelectedState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.guna2TabControl1.TabButtonSize = new System.Drawing.Size(100, 30);
@@ -262,7 +262,7 @@
             this.gunaWCMPasswordsTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(21)))), ((int)(((byte)(23)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -275,7 +275,7 @@
             this.dataGridViewTextBoxColumn3});
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(27)))));
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
             dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.Control;
@@ -289,7 +289,7 @@
             this.gunaWCMPasswordsTable.ReadOnly = true;
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(19)))), ((int)(((byte)(21)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.Control;
@@ -320,14 +320,14 @@
             this.gunaWCMPasswordsTable.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
             this.gunaWCMPasswordsTable.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(21)))), ((int)(((byte)(23)))));
             this.gunaWCMPasswordsTable.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.gunaWCMPasswordsTable.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
+            this.gunaWCMPasswordsTable.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.gunaWCMPasswordsTable.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.gunaWCMPasswordsTable.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gunaWCMPasswordsTable.ThemeStyle.HeaderStyle.Height = 30;
             this.gunaWCMPasswordsTable.ThemeStyle.ReadOnly = true;
             this.gunaWCMPasswordsTable.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(19)))), ((int)(((byte)(21)))));
             this.gunaWCMPasswordsTable.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.gunaWCMPasswordsTable.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
+            this.gunaWCMPasswordsTable.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.gunaWCMPasswordsTable.ThemeStyle.RowsStyle.ForeColor = System.Drawing.SystemColors.Control;
             this.gunaWCMPasswordsTable.ThemeStyle.RowsStyle.Height = 22;
             this.gunaWCMPasswordsTable.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
@@ -356,24 +356,23 @@
             // 
             // gunaDragControl
             // 
+            this.gunaDragControl.DockIndicatorTransparencyValue = 0.6D;
             this.gunaDragControl.TargetControl = this.titleLabel;
+            this.gunaDragControl.UseTransparentDrag = true;
             // 
             // exportAsCsvButton
             // 
             this.exportAsCsvButton.Animated = true;
             this.exportAsCsvButton.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.exportAsCsvButton.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.exportAsCsvButton.FocusedColor = System.Drawing.Color.Empty;
-            this.exportAsCsvButton.Font = new System.Drawing.Font("Josefin Sans", 9F);
+            this.exportAsCsvButton.BorderThickness = 1;
+            this.exportAsCsvButton.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
+            this.exportAsCsvButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.exportAsCsvButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.exportAsCsvButton.Image = null;
-            this.exportAsCsvButton.ImageSize = new System.Drawing.Size(20, 20);
             this.exportAsCsvButton.Location = new System.Drawing.Point(12, 415);
             this.exportAsCsvButton.Name = "exportAsCsvButton";
             this.exportAsCsvButton.Size = new System.Drawing.Size(776, 28);
             this.exportAsCsvButton.TabIndex = 22;
             this.exportAsCsvButton.Text = "Export as CSV";
-            this.exportAsCsvButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.exportAsCsvButton.Click += new System.EventHandler(this.exportAsCsvButton_Click);
             // 
             // PasswordManagerForm

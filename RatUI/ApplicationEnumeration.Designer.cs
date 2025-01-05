@@ -62,7 +62,7 @@
             // titleLabel
             // 
             this.titleLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.titleLabel.Font = new System.Drawing.Font("Josefin Sans", 10F);
+            this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.titleLabel.ForeColor = System.Drawing.SystemColors.Control;
             this.titleLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.titleLabel.Location = new System.Drawing.Point(0, 0);
@@ -75,24 +75,23 @@
             // 
             // gunaDragControl
             // 
+            this.gunaDragControl.DockIndicatorTransparencyValue = 0.6D;
             this.gunaDragControl.TargetControl = this.titleLabel;
+            this.gunaDragControl.UseTransparentDrag = true;
             // 
             // exportAsCsvButton
             // 
             this.exportAsCsvButton.Animated = true;
             this.exportAsCsvButton.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.exportAsCsvButton.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.exportAsCsvButton.FocusedColor = System.Drawing.Color.Empty;
-            this.exportAsCsvButton.Font = new System.Drawing.Font("Josefin Sans", 9F);
+            this.exportAsCsvButton.BorderThickness = 1;
+            this.exportAsCsvButton.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
+            this.exportAsCsvButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.exportAsCsvButton.ForeColor = System.Drawing.SystemColors.Control;
-            this.exportAsCsvButton.Image = null;
-            this.exportAsCsvButton.ImageSize = new System.Drawing.Size(20, 20);
             this.exportAsCsvButton.Location = new System.Drawing.Point(12, 415);
             this.exportAsCsvButton.Name = "exportAsCsvButton";
             this.exportAsCsvButton.Size = new System.Drawing.Size(776, 28);
             this.exportAsCsvButton.TabIndex = 23;
             this.exportAsCsvButton.Text = "Export as CSV";
-            this.exportAsCsvButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.exportAsCsvButton.Click += new System.EventHandler(this.exportAsCsvButton_Click);
             // 
             // gunaProgramsTable
@@ -109,7 +108,7 @@
             this.gunaProgramsTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(21)))), ((int)(((byte)(23)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -123,7 +122,7 @@
             this.colunmInstallDate});
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(27)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.Control;
@@ -137,7 +136,7 @@
             this.gunaProgramsTable.ReadOnly = true;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(19)))), ((int)(((byte)(21)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.Control;
@@ -168,14 +167,14 @@
             this.gunaProgramsTable.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
             this.gunaProgramsTable.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(21)))), ((int)(((byte)(23)))));
             this.gunaProgramsTable.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.gunaProgramsTable.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
+            this.gunaProgramsTable.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.gunaProgramsTable.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.gunaProgramsTable.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gunaProgramsTable.ThemeStyle.HeaderStyle.Height = 30;
             this.gunaProgramsTable.ThemeStyle.ReadOnly = true;
             this.gunaProgramsTable.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(19)))), ((int)(((byte)(21)))));
             this.gunaProgramsTable.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.gunaProgramsTable.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
+            this.gunaProgramsTable.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.gunaProgramsTable.ThemeStyle.RowsStyle.ForeColor = System.Drawing.SystemColors.Control;
             this.gunaProgramsTable.ThemeStyle.RowsStyle.Height = 22;
             this.gunaProgramsTable.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));

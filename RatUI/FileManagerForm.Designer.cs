@@ -61,7 +61,7 @@
             // titleLabel
             // 
             this.titleLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.titleLabel.Font = new System.Drawing.Font("Josefin Sans", 10F);
+            this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.titleLabel.ForeColor = System.Drawing.SystemColors.Control;
             this.titleLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.titleLabel.Location = new System.Drawing.Point(0, 0);
@@ -76,16 +76,18 @@
             // 
             this.gunadirPath.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.gunadirPath.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.gunadirPath.DefaultText = "C:\\";
+            this.gunadirPath.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
             this.gunadirPath.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.gunadirPath.ForeColor = System.Drawing.SystemColors.Control;
             this.gunadirPath.Location = new System.Drawing.Point(0, 25);
             this.gunadirPath.Margin = new System.Windows.Forms.Padding(0);
             this.gunadirPath.Name = "gunadirPath";
             this.gunadirPath.PasswordChar = '\0';
+            this.gunadirPath.PlaceholderText = "";
             this.gunadirPath.SelectedText = "";
             this.gunadirPath.Size = new System.Drawing.Size(800, 26);
             this.gunadirPath.TabIndex = 17;
-            this.gunadirPath.Text = "C:\\";
             this.gunadirPath.TextChanged += new System.EventHandler(this.gunadirPath_TextChanged);
             // 
             // gunaFilesTable
@@ -102,7 +104,7 @@
             this.gunaFilesTable.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(21)))), ((int)(((byte)(23)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -115,7 +117,7 @@
             this.columnSize});
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(27)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.Control;
@@ -129,7 +131,7 @@
             this.gunaFilesTable.ReadOnly = true;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(19)))), ((int)(((byte)(21)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.Control;
@@ -160,14 +162,14 @@
             this.gunaFilesTable.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(140)))), ((int)(((byte)(140)))));
             this.gunaFilesTable.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(21)))), ((int)(((byte)(23)))));
             this.gunaFilesTable.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.gunaFilesTable.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
+            this.gunaFilesTable.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.gunaFilesTable.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
             this.gunaFilesTable.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gunaFilesTable.ThemeStyle.HeaderStyle.Height = 30;
             this.gunaFilesTable.ThemeStyle.ReadOnly = true;
             this.gunaFilesTable.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(19)))), ((int)(((byte)(21)))));
             this.gunaFilesTable.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.gunaFilesTable.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Josefin Sans", 8.25F);
+            this.gunaFilesTable.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.gunaFilesTable.ThemeStyle.RowsStyle.ForeColor = System.Drawing.SystemColors.Control;
             this.gunaFilesTable.ThemeStyle.RowsStyle.Height = 22;
             this.gunaFilesTable.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(27)))));
@@ -197,7 +199,9 @@
             // 
             // gunaDragControl
             // 
+            this.gunaDragControl.DockIndicatorTransparencyValue = 0.6D;
             this.gunaDragControl.TargetControl = this.titleLabel;
+            this.gunaDragControl.UseTransparentDrag = true;
             // 
             // FileManagerForm
             // 

@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "MaliceRAT.csproj",
+        "Action": "StartWithoutDebugging"
+      },
+      {
+        "Path": "RatClient\\RatClient.csproj",
+        "Action": "StartWithoutDebugging"
+      }
+    ]
+  }
+]

@@ -61,54 +61,45 @@
             // 
             this.UpdateButton.Animated = true;
             this.UpdateButton.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.UpdateButton.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.UpdateButton.FocusedColor = System.Drawing.Color.Empty;
+            this.UpdateButton.BorderThickness = 1;
+            this.UpdateButton.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
             this.UpdateButton.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.UpdateButton.ForeColor = System.Drawing.Color.White;
-            this.UpdateButton.Image = null;
-            this.UpdateButton.ImageSize = new System.Drawing.Size(20, 20);
             this.UpdateButton.Location = new System.Drawing.Point(3, 3);
             this.UpdateButton.Name = "UpdateButton";
-            this.UpdateButton.Size = new System.Drawing.Size(60, 28);
+            this.UpdateButton.Size = new System.Drawing.Size(69, 28);
             this.UpdateButton.TabIndex = 5;
             this.UpdateButton.Text = "Update";
-            this.UpdateButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.UpdateButton.Click += new System.EventHandler(this.UpdateButton_Click);
             // 
             // UpdateIntervalButton
             // 
             this.UpdateIntervalButton.Animated = true;
             this.UpdateIntervalButton.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.UpdateIntervalButton.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.UpdateIntervalButton.FocusedColor = System.Drawing.Color.Empty;
+            this.UpdateIntervalButton.BorderThickness = 1;
+            this.UpdateIntervalButton.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
             this.UpdateIntervalButton.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.UpdateIntervalButton.ForeColor = System.Drawing.Color.White;
-            this.UpdateIntervalButton.Image = null;
-            this.UpdateIntervalButton.ImageSize = new System.Drawing.Size(20, 20);
-            this.UpdateIntervalButton.Location = new System.Drawing.Point(69, 3);
+            this.UpdateIntervalButton.Location = new System.Drawing.Point(78, 3);
             this.UpdateIntervalButton.Name = "UpdateIntervalButton";
             this.UpdateIntervalButton.Size = new System.Drawing.Size(97, 28);
             this.UpdateIntervalButton.TabIndex = 6;
             this.UpdateIntervalButton.Text = "Update interval";
-            this.UpdateIntervalButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.UpdateIntervalButton.Click += new System.EventHandler(this.UpdateIntervalButton_Click);
             // 
             // StopButton
             // 
             this.StopButton.Animated = true;
             this.StopButton.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(18)))), ((int)(((byte)(18)))));
-            this.StopButton.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.StopButton.FocusedColor = System.Drawing.Color.Empty;
+            this.StopButton.BorderThickness = 1;
+            this.StopButton.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
             this.StopButton.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.StopButton.ForeColor = System.Drawing.Color.White;
-            this.StopButton.Image = null;
-            this.StopButton.ImageSize = new System.Drawing.Size(20, 20);
-            this.StopButton.Location = new System.Drawing.Point(172, 3);
+            this.StopButton.Location = new System.Drawing.Point(181, 3);
             this.StopButton.Name = "StopButton";
             this.StopButton.Size = new System.Drawing.Size(97, 28);
             this.StopButton.TabIndex = 7;
             this.StopButton.Text = "Stop";
-            this.StopButton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
             // intervalTextBox
@@ -116,7 +107,7 @@
             this.intervalTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(23)))), ((int)(((byte)(24)))));
             this.intervalTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.intervalTextBox.ForeColor = System.Drawing.SystemColors.Control;
-            this.intervalTextBox.Location = new System.Drawing.Point(275, 3);
+            this.intervalTextBox.Location = new System.Drawing.Point(284, 3);
             this.intervalTextBox.MaxLength = 4;
             this.intervalTextBox.Multiline = true;
             this.intervalTextBox.Name = "intervalTextBox";
@@ -130,6 +121,7 @@
             // pictureBox
             // 
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox.ImageRotate = 0F;
             this.pictureBox.Location = new System.Drawing.Point(0, 29);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(799, 380);
@@ -139,7 +131,7 @@
             // titleLabel
             // 
             this.titleLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.titleLabel.Font = new System.Drawing.Font("Josefin Sans", 10F);
+            this.titleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.titleLabel.ForeColor = System.Drawing.SystemColors.Control;
             this.titleLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
             this.titleLabel.Location = new System.Drawing.Point(0, 0);
@@ -163,7 +155,9 @@
             // 
             // gunaDragControl
             // 
+            this.gunaDragControl.DockIndicatorTransparencyValue = 0.6D;
             this.gunaDragControl.TargetControl = this.titleLabel;
+            this.gunaDragControl.UseTransparentDrag = true;
             // 
             // ScreenViewForm
             // 
